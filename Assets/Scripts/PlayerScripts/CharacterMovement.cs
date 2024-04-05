@@ -56,8 +56,13 @@ public class CharacterMovement: MonoBehaviour
     {
         // Cambia la dirección del personaje multiplicando la escala en el eje X por -1
         facingRight = !facingRight;
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        //Vector3 scale = transform.localScale;
+        //scale.x *= -1;
+        //transform.localScale = scale;
+
+        //cambiar rotacion del player
+        Vector3 currentRotation = transform.eulerAngles;
+        currentRotation.y += 180f;
+        transform.eulerAngles = currentRotation;
     }
 }

@@ -123,6 +123,57 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &226178912 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3336242206432462131, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+  m_PrefabInstance: {fileID: 3336242206807443907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &226178917 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 3336242206432462128, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+  m_PrefabInstance: {fileID: 3336242206807443907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &226178919 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3336242206432462134, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+  m_PrefabInstance: {fileID: 3336242206807443907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &226178920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226178912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac60cb99a41dcf14396815d3117f7be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveForce: 5
+  directionChangeSmoothness: 0.5
+  smoothBrakingFactor: 0.95
+  rb: {fileID: 226178917}
+--- !u!114 &226178921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226178912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a146f37dca34374eb7901e92d65d121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 5
+  groundCheck: {fileID: 226178919}
+  groundCheckRadius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  fallMultiplier: 2.5
+  maxJumpHeight: 2
 --- !u!1 &603280395
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019097396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.15, y: -1.84, z: 0}
+  m_LocalPosition: {x: 7.51, y: -1.84, z: 0}
   m_LocalScale: {x: 1.16, y: 3.83, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -592,6 +643,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3336242206432462128, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3336242206432462131, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: m_Name
       value: Player
@@ -654,7 +709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3336242206432462138, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: maxTongueDistance
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3336242206432462139, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
