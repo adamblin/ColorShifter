@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Obstacle
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -12,7 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
@@ -41,7 +41,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Tongue
-    uniqueID: 3059461315
     locked: 0
