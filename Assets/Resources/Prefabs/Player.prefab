@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 3336242206432462139}
   - component: {fileID: 3336242206432462138}
   - component: {fileID: 3336242206432462137}
+  - component: {fileID: -5593858733002335637}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -248,6 +249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tongueEnd: {fileID: 3336242205924660175}
   tongueOrigin: {fileID: 3336242206842478858}
+  maxTongueDistance: 0
+  detectionRadius: 0
 --- !u!120 &3336242206432462137
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -347,6 +350,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &-5593858733002335637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3336242206432462131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6435019ad619cc447a1335c921ea74df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3336242206842478859
 GameObject:
   m_ObjectHideFlags: 0

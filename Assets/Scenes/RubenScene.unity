@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 1736524232}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 2019097400}
   m_Layer: 0
   m_Name: Obstacle
-  m_TagString: Obstacle
+  m_TagString: PaintableObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -484,6 +484,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1419596924599824962, guid: 385a23239ebccfc4ebc56c3ed85ba793, type: 3}
+      propertyPath: waterColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419596924599824962, guid: 385a23239ebccfc4ebc56c3ed85ba793, type: 3}
+      propertyPath: strechColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419596924599824962, guid: 385a23239ebccfc4ebc56c3ed85ba793, type: 3}
       propertyPath: strechColor.b
       value: 0.19802772
       objectReference: {fileID: 0}
@@ -494,6 +502,10 @@ PrefabInstance:
     - target: {fileID: 1419596924599824962, guid: 385a23239ebccfc4ebc56c3ed85ba793, type: 3}
       propertyPath: strechColor.r
       value: 0.82641506
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419596924599824962, guid: 385a23239ebccfc4ebc56c3ed85ba793, type: 3}
+      propertyPath: elasticColor.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1419596924599824962, guid: 385a23239ebccfc4ebc56c3ed85ba793, type: 3}
       propertyPath: elasticColor.b
@@ -564,8 +576,28 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3336242205924660175, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336242205924660175, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336242205924660175, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336242205924660175, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3336242206432462131, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336242206432462131, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3336242206432462134, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
@@ -612,5 +644,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3336242206432462138, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: tongueSpeed
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336242206432462138, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: detectionRadius
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336242206432462138, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: maxTongueDistance
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3336242206432462139, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
