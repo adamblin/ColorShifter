@@ -17,8 +17,9 @@ public class TongueController : MonoBehaviour
     private int currentColorIndex = 0;
 
     private bool shootTongue = false;
-    private bool canShootagain = true;
-    private Vector3 shootDirection;
+    private bool canShootAgain = true;
+    private bool getDirectionAgain = true;
+    private Vector3 firstDirection;
 
     private LineRenderer lineRenderer;
     private ColorManager colorManager;
@@ -50,7 +51,7 @@ public class TongueController : MonoBehaviour
 
     private void ShootTongue() {
         if (shootTongue) {
-            shootDirection = GetShootingDirection();
+            Vector3 shootDirection = GetShootingDirection();
             tongueEnd.position += shootDirection * tongueSpeed;
         }
         else
@@ -61,15 +62,20 @@ public class TongueController : MonoBehaviour
             }
             else 
             {
-                canShootagain = true;
+                canShootAgain = true;
+                getDirectionAgain = true;
             }
         }
     }
 
     private Vector3 GetShootingDirection() {
-        //cal aplicar mes logica
+        if (getDirectionAgain) {
+            //IMPLEMENTAR LAS DISTINTAS DIRECCIONES QUE PUEDE TENER LA LENGUA
 
-        return transform.right;
+            firstDirection = transform.right;
+            getDirectionAgain = false;
+        }
+        return firstDirection;
     }
 
 
@@ -100,7 +106,6 @@ public class TongueController : MonoBehaviour
     private void CheckMaxTongueDistance()
     {
         float currentDistance = Vector3.Distance(tongueOrigin.position, tongueEnd.position);
-        Debug.Log(currentDistance);
 
         if (currentDistance >= maxTongueDistance || currentDistance <= -maxTongueDistance) {
             Debug.Log("PASSED MAX DISTANCE");
@@ -110,9 +115,9 @@ public class TongueController : MonoBehaviour
 
 
     private void setShootTongue() {
-        if (canShootagain) { 
+        if (canShootAgain) { 
             shootTongue = true;
-            canShootagain = false;
+            canShootAgain = false;
         }
     }
     
