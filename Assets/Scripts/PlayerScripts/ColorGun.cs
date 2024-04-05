@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 using UnityEngine;
@@ -40,7 +41,7 @@ public class ColorGun : MonoBehaviour
         }
 
         // Detectar la pulsación para disparar
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.G))
         {
             ShootCurrentColor();
         }
@@ -56,6 +57,7 @@ public class ColorGun : MonoBehaviour
     {
        IColorEffect currentProperty = colorManager.GetColorEffect(colorTypes[currentColorIndex]);
         ShootColor(currentProperty);
+        
     }
 
     private void ShootColor(IColorEffect colorEffect) // Cambio de IColorProperty a IColorEffect
