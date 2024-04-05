@@ -14,5 +14,6 @@ public class WaterEffect : IColorEffect
     {
         //aplicar la logica del efecte
         target.GetComponent<SpriteRenderer>().color = effectColor;
+        Debug.Log("APLICANDO EFECTO");
     }
 }
