@@ -9,7 +9,7 @@ public class ColorManager : MonoBehaviour
     [SerializeField] private Color elasticColor;
     [SerializeField] private Color strechColor;
 
-    private IColorEffect GetColorEffect(ColorType colorType)
+    public IColorEffect GetColorEffect(ColorType colorType)
     {
         switch (colorType){
 
