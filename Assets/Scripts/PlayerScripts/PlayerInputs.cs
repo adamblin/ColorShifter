@@ -29,7 +29,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(shootKey))
+        if (Input.GetKeyDown(shootKey) || Input.GetButtonDown("Fire1"))
             onShoot?.Invoke();
 
         if (Input.GetKeyDown(upKey))
@@ -44,7 +44,7 @@ public class PlayerInputs : MonoBehaviour
         if (Input.GetKeyUp(downKey))
             onShootDown?.Invoke();
 
-        if(Input.GetKeyDown(rightKey) || Input.GetKeyDown(leftKey))
+        if (Input.GetKeyDown(rightKey) || Input.GetKeyDown(leftKey))
             onShootStraight?.Invoke();
 
         if (Input.GetKeyUp(rightKey) || Input.GetKeyUp(leftKey))

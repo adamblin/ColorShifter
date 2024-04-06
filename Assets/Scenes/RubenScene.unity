@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac60cb99a41dcf14396815d3117f7be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
+  playerSpeed: 8
 --- !u!114 &226178921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5593858733002335637, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: shootKey
-      value: 323
+      value: 101
       objectReference: {fileID: 0}
     - target: {fileID: 3336242205924660175, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: m_LocalPosition.x
