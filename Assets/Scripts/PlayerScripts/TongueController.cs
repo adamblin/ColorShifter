@@ -19,7 +19,11 @@ public class TongueController : MonoBehaviour
     private bool shootTongue = false;
     private bool canShootAgain = true;
     private bool getDirectionAgain = true;
+
     private Vector3 firstDirection;
+    private bool pointingUp = false;
+    private bool pointingDown = false;
+    private bool pointingStraight = false; 
 
     private LineRenderer lineRenderer;
     private ColorManager colorManager;
@@ -51,6 +55,7 @@ public class TongueController : MonoBehaviour
 
     private void ShootTongue() {
         if (shootTongue) {
+            Debug.Log("Shooting tongue");
             Vector3 shootDirection = GetShootingDirection();
             tongueEnd.position += shootDirection * tongueSpeed;
         }
@@ -70,9 +75,22 @@ public class TongueController : MonoBehaviour
 
     private Vector3 GetShootingDirection() {
         if (getDirectionAgain) {
-            //IMPLEMENTAR LAS DISTINTAS DIRECCIONES QUE PUEDE TENER LA LENGUA
 
-            firstDirection = transform.right;
+            if (pointingUp && !pointingStraight && !pointingDown)
+                firstDirection = transform.up;
+
+            else if (pointingUp && pointingStraight && !pointingDown)
+                firstDirection = transform.up + transform.right;
+
+            else if (pointingDown && !pointingStraight && !pointingUp)
+                firstDirection = -transform.up;
+
+            else if (pointingDown && pointingStraight && !pointingUp)
+                firstDirection = -transform.up + transform.right;
+
+            else
+                firstDirection = transform.right;
+
             getDirectionAgain = false;
         }
         return firstDirection;
@@ -81,7 +99,6 @@ public class TongueController : MonoBehaviour
 
     private void CheckTongueCollisions() {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tongueEnd.position, detectionRadius);
-        Debug.Log("tongue colliding: " + hitColliders.Length);
 
         for (int i = 0; i < hitColliders.Length; i++) {
             if (hitColliders[i].gameObject.tag.Equals("Obstacle")) {
@@ -108,29 +125,50 @@ public class TongueController : MonoBehaviour
         float currentDistance = Vector3.Distance(tongueOrigin.position, tongueEnd.position);
 
         if (currentDistance >= maxTongueDistance || currentDistance <= -maxTongueDistance) {
-            Debug.Log("PASSED MAX DISTANCE");
             shootTongue = false;
         }
     }
 
 
     private void setShootTongue() {
+        Debug.Log("Shoot Tongue");
         if (canShootAgain) { 
             shootTongue = true;
             canShootAgain = false;
         }
     }
-    
+
+    private void setPointingUp(){
+        Debug.Log("W pressed");
+        pointingUp = !pointingUp;
+        Debug.Log(pointingUp);
+    }
+
+    private void setPointingDown(){
+        Debug.Log("S pressed");
+        pointingDown = !pointingDown;
+    }
+
+    private void setPointingStraight(){
+        pointingStraight = !pointingStraight;
+    }
+
 
 
     private void OnEnable()
     {
         PlayerInputs.onShoot += setShootTongue;
+        PlayerInputs.onShootUp += setPointingUp;
+        PlayerInputs.onShootDown += setPointingDown;
+        PlayerInputs.onShootStraight += setPointingStraight;
     }
 
     private void OnDisable()
     {
         PlayerInputs.onShoot -= setShootTongue;
+        PlayerInputs.onShootUp -= setPointingUp;
+        PlayerInputs.onShootDown -= setPointingDown;
+        PlayerInputs.onShootStraight -= setPointingStraight;
     }
 
 
