@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SnakeMovementController : MonoBehaviour
 {
+    private IMovement currentMovement;
+    private bool movingRight = true;
+
     void Start()
     {
         currentMovement = new MoveRight();
@@ -11,21 +14,25 @@ public class SnakeMovementController : MonoBehaviour
 
     void Update()
     {
-        currentMovement.Execute(this.gameObject);
+        currentMovement.Move(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Wall")
         {
-            if (currentMovement is MoveRight)
-            {
-                currentMovement = new MoveLeft();
-            }
-            else if (currentMovement is MoveLeft)
-            {
-                currentMovement = new MoveRight();
-            }
+            movingRight = !movingRight;
+            currentMovement = movingRight ? new MoveRight() : new MoveLeft();
+
+            Flip();
         }
     }
+
+    private void Flip()
+    {
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
 }
+

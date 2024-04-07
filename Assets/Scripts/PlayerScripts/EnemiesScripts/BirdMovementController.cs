@@ -4,27 +4,32 @@ using UnityEngine;
 
 public class BirdMovementController : MonoBehaviour
 {
-    private IMovement movementStrategy;
-    private bool facingRight = true;
+    private IMovement currentMovement;
+    private bool movingRight = true;
 
-    private void Start()
+    void Start()
     {
-        movementStrategy = new MoveHorizontal();
+        currentMovement = new MoveRight();
     }
 
-    private void Update()
+    void Update()
     {
-        movementStrategy.Execute(gameObject);
+        currentMovement.Move(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        facingRight = !facingRight;
+        movingRight = !movingRight;
+        currentMovement = movingRight ? new MoveRight() : new MoveLeft();
 
-        Vector3 localScale = gameObject.transform.localScale;
-        localScale.x *= -1;
-        gameObject.transform.localScale = localScale;
+        FlipSprite();
+    }
 
-        movementStrategy = new MoveHorizontal();
+    private void FlipSprite()
+    {
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
+

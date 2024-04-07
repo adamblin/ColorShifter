@@ -6,6 +6,6 @@ public class MoveRight : IMovement
 
     public void Move(GameObject gameObject)
     {
-        gameObject.transform.Translate(speed * Time.deltaTime, 0, 0);
+        gameObject.transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
 }

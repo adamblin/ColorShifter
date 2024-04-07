@@ -5,7 +5,8 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class CharacterMovement: MonoBehaviour
 {
-   
+   [SerializeField] private LayerMask groundLayer;
+
     private IMovement moveRight;
     private IMovement moveLeft;
     private IMovement currentMovement;
@@ -60,7 +61,7 @@ public class CharacterMovement: MonoBehaviour
 
     private void HandleJump()
     {
-        IMovement jumpMovement = new JumpMovement();
+        IMovement jumpMovement = new JumpMovement(groundLayer);
         jumpMovement.Move(gameObject);
     }
 

@@ -3,6 +3,14 @@ using UnityEngine;
 public class JumpMovement : IMovement
 {
     private float jumpForce = 7f;
+    private float groundCheckDistance = 0.1f;
+    private Vector2 groundCheckOffset = new Vector2(0, -0.5f);
+    private LayerMask groundLayer;
+
+    public JumpMovement(LayerMask groundLayer)
+    {
+        this.groundLayer = groundLayer;
+    }
 
     public void Move(GameObject gameObject)
     {
