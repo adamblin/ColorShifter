@@ -8,6 +8,7 @@ public class ElasticEffect : IColorEffect
     private ColorType colorType;
     private float minIntensity;
 
+
     public ElasticEffect(Color color, ColorType type, float intensity)
     {
         effectColor = color;
@@ -29,6 +30,7 @@ public class ElasticEffect : IColorEffect
 
     public void InitializeEffect(GameObject target)
     {
+
         //aplicar la logica del efecte
         target.GetComponent<SpriteRenderer>().color = effectColor;
         Debug.Log("APLICANDO EFECTO");
@@ -38,6 +40,7 @@ public class ElasticEffect : IColorEffect
     {
         return colorType;
     }
+
 }
     
 

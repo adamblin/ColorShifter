@@ -11,4 +11,5 @@ public interface IColorEffect {
     void ApplyEffect(GameObject target);
 
     ColorType getColorType();
+
 }
