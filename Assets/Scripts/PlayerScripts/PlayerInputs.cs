@@ -25,9 +25,9 @@ public class PlayerInputs : MonoBehaviour
     public static event Action onShootStraight;
 
     //Movimiento
-    public static event Action onStartMoveLeft;
+    public static event Action onMoveLeft;
     public static event Action onStopMoveLeft;
-    public static event Action onStartMoveRight;
+    public static event Action onMoveRight;
     public static event Action onStopMoveRight;
 
 
@@ -54,23 +54,22 @@ public class PlayerInputs : MonoBehaviour
         if (Input.GetKeyUp(rightKey) || Input.GetKeyUp(leftKey))
             onShootStraight?.Invoke();
         
+
         //Movement
         if (Input.GetKeyDown(leftKey))
         {
-            onStartMoveLeft?.Invoke();
+            onMoveLeft?.Invoke();
         }
-
-        if (Input.GetKeyUp(leftKey))
+        else if (Input.GetKeyUp(leftKey))
         {
             onStopMoveLeft?.Invoke();
         }
 
         if (Input.GetKeyDown(rightKey))
         {
-            onStartMoveRight?.Invoke();
+            onMoveRight?.Invoke();
         }
-        
-        if (Input.GetKeyUp(rightKey))
+        else if (Input.GetKeyUp(rightKey))
         {
             onStopMoveRight?.Invoke();
         }
