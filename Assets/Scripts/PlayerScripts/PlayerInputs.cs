@@ -61,30 +61,23 @@ public class PlayerInputs : MonoBehaviour
 
         //Movement
         if (Input.GetKeyDown(leftKey))
-        {
             onMoveLeft?.Invoke();
-        }
-        else if (Input.GetKeyUp(leftKey))
-        {
+    
+       if (Input.GetKeyUp(leftKey))
             onStopMoveLeft?.Invoke();
-        }
+        
 
         if (Input.GetKeyDown(rightKey))
-        {
             onMoveRight?.Invoke();
-        }
-        else if (Input.GetKeyUp(rightKey))
-        {
+    
+        if (Input.GetKeyUp(rightKey))
             onStopMoveRight?.Invoke();
-        }
 
         if (Input.GetKeyDown(jumpKey))
-        {
             onJump?.Invoke();
-        }
-        else if (Input.GetKeyUp(jumpKey))
-        {
+       
+       if (Input.GetKeyUp(jumpKey))
             onJump?.Invoke();
-        }
+            
     }
 }

@@ -2,70 +2,46 @@ using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-
-public class CharacterMovement: MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
-   [SerializeField] private LayerMask groundLayer;
-
-    private IMovement moveRight;
-    private IMovement moveLeft;
-    private IMovement currentMovement;
-
+    [SerializeField] private float jumpForce = 7f;
     private Rigidbody2D rb;
+    private float speed = 5f;
     private bool facingRight = true;
-    private bool canRotate = true;
+    private bool isGrounded;
 
-    private void OnEnable()
-    {
-        PlayerInputs.onMoveRight += HandleMoveRight;
-        PlayerInputs.onMoveLeft += HandleMoveLeft;
-        TongueController.onShootingTonge += ToggleCanRotate;
-
-    }
-
-    private void OnDisable()
-    {
-        PlayerInputs.onMoveRight -= HandleMoveRight;
-        PlayerInputs.onMoveLeft -= HandleMoveLeft;
-        TongueController.onShootingTonge -= ToggleCanRotate;
-
-    }
-
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        moveRight = new MoveRight();
-        moveLeft = new MoveLeft();
     }
 
     private void Update()
     {
-        if (currentMovement != null)
+        HandleInput();
+    }
+
+    private void HandleInput()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        
+        if (moveHorizontal != 0)
         {
-            currentMovement.Move(gameObject);
-            FlipPlayerIfNeeded();
+            Vector2 movement = new Vector2(moveHorizontal, 0);
+            rb.velocity = new Vector2(movement.x * speed, rb.velocity.y);
+
+            if ((moveHorizontal > 0 && !facingRight) || (moveHorizontal < 0 && facingRight))
+            {
+                Flip();
+            }
+        }
+
+        if (isGrounded && Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
-    private void HandleMoveRight()
-    {
-        if (canRotate && !facingRight) FlipPlayer();
-        currentMovement = moveRight;
-    }
-
-    private void HandleMoveLeft()
-    {
-        if (canRotate && facingRight) FlipPlayer();
-        currentMovement = moveLeft;
-    }
-
-    private void HandleJump()
-    {
-        IMovement jumpMovement = new JumpMovement(groundLayer);
-        jumpMovement.Move(gameObject);
-    }
-
-    private void FlipPlayer()
+    private void Flip()
     {
         facingRight = !facingRight;
         Vector3 theScale = transform.localScale;
@@ -73,17 +49,20 @@ public class CharacterMovement: MonoBehaviour
         transform.localScale = theScale;
     }
 
-    private void FlipPlayerIfNeeded()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        bool shouldFaceRight = currentMovement == moveRight;
-        if (shouldFaceRight != facingRight)
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            FlipPlayer();
+            isGrounded = true;
         }
     }
 
-    private void ToggleCanRotate()
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        canRotate = !canRotate;
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }
+
