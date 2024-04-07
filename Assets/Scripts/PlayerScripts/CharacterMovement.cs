@@ -64,11 +64,6 @@ public class CharacterMovement: MonoBehaviour
         transform.localScale = theScale;
     }
 
-    private void ToggleCanRotate()
-    {
-        canRotate = !canRotate;
-    }
-
     private void FlipPlayerIfNeeded()
     {
         bool shouldFaceRight = currentMovement == moveRight;
@@ -76,5 +71,10 @@ public class CharacterMovement: MonoBehaviour
         {
             FlipPlayer();
         }
+    }
+
+    private void ToggleCanRotate()
+    {
+        canRotate = !canRotate;
     }
 }
