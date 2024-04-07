@@ -11,7 +11,7 @@ public class ElasticEffect : IColorEffect
         effectColor = color;
     }
 
-    public void ApplyEffect(GameObject target)
+    public void InitializeEffect(GameObject target)
     {
         //aplicar la logica del efecte
         target.GetComponent<SpriteRenderer>().color = effectColor;
