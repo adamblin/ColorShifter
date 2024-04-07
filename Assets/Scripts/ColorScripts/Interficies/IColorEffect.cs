@@ -6,5 +6,4 @@ public interface IColorEffect {
 
     void ApplyEffect(GameObject target);
 
-    void
 }
