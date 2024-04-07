@@ -12,6 +12,14 @@ public class CharacterMovement: MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private IMovement moveRight;
+    private IMovement moveLeft;
+    private IMovement currentMovement;
+
+    private Rigidbody2D rb;
+    private bool facingRight = true;
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -56,6 +64,7 @@ public class CharacterMovement: MonoBehaviour
     {
         TongueController.onShootingTonge -= setCanRotate;
     }
+    
 }
 
 
@@ -63,13 +72,13 @@ public class CharacterMovement: MonoBehaviour
 //CODIGO ANTIGUO
 
 //public float moveForce = 5f; // Fuerza de movimiento
-//public float directionChangeSmoothness = 0.5f; // Suavidad en el cambio de dirección
+//public float directionChangeSmoothness = 0.5f; // Suavidad en el cambio de direcciï¿½n
 //public float smoothBrakingFactor = 0.95f; // Factor de frenado suave, cerca pero menor a 1
 //public Rigidbody2D rb; // Referencia al Rigidbody2D
 
 //private Vector2 movement; // Vector de movimiento
-//private Vector2 currentDirection = Vector2.zero; // Dirección actual de movimiento
-//private bool facingRight = true; // Indica si el personaje está mirando hacia la derecha
+//private Vector2 currentDirection = Vector2.zero; // Direcciï¿½n actual de movimiento
+//private bool facingRight = true; // Indica si el personaje estï¿½ mirando hacia la derecha
 
 //void Update()
 //{
@@ -77,15 +86,15 @@ public class CharacterMovement: MonoBehaviour
 //    movement.x = Input.GetAxisRaw("Horizontal");
 //    movement.y = Input.GetAxisRaw("Vertical");
 
-//    // Ajusta la dirección actual basándose en el input, para un cambio suave
+//    // Ajusta la direcciï¿½n actual basï¿½ndose en el input, para un cambio suave
 //    if (movement != Vector2.zero)
 //    {
 //        currentDirection = Vector2.Lerp(currentDirection, movement, directionChangeSmoothness);
 
-//        // Verifica si hay cambio de dirección
+//        // Verifica si hay cambio de direcciï¿½n
 //        if ((movement.x > 0 && !facingRight) || (movement.x < 0 && facingRight))
 //        {
-//            // Cambia la dirección del personaje
+//            // Cambia la direcciï¿½n del personaje
 //            Flip();
 //        }
 //    }
@@ -95,7 +104,7 @@ public class CharacterMovement: MonoBehaviour
 //{
 //    if (movement != Vector2.zero)
 //    {
-//        // Aplica la fuerza de movimiento suavizada hacia la dirección actual
+//        // Aplica la fuerza de movimiento suavizada hacia la direcciï¿½n actual
 //        rb.AddForce(currentDirection.normalized * moveForce - rb.velocity * directionChangeSmoothness, ForceMode2D.Impulse);
 //    }
 //    else
@@ -107,13 +116,13 @@ public class CharacterMovement: MonoBehaviour
 
 //void SmoothBraking()
 //{
-//    // Aplica un factor de frenado suave a la velocidad, reduciéndola gradualmente
+//    // Aplica un factor de frenado suave a la velocidad, reduciï¿½ndola gradualmente
 //    rb.velocity *= smoothBrakingFactor;
 //}
 
 //void Flip()
 //{
-//    // Cambia la dirección del personaje multiplicando la escala en el eje X por -1
+//    // Cambia la direcciï¿½n del personaje multiplicando la escala en el eje X por -1
 //    facingRight = !facingRight;
 //    //Vector3 scale = transform.localScale;
 //    //scale.x *= -1;
