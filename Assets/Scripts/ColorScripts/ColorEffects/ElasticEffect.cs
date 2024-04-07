@@ -18,5 +18,5 @@ public class ElasticEffect : IColorEffect
         Debug.Log("APLICANDO EFECTO");
     }
 }
-    
+    dvdsvv
 
