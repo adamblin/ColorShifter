@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IMovement
 {
-    void Move();
+    void Move(GameObject gameObject);
 }
