@@ -82,5 +82,9 @@ public class PlayerInputs : MonoBehaviour
         {
             onJump?.Invoke();
         }
+        else if (Input.GetKeyUp(jumpKey))
+        {
+            onJump?.Invoke();
+        }
     }
 }
