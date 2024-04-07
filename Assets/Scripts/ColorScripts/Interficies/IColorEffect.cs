@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IColorEffect {
 
-    void ApplyEffect(GameObject target);
+    void InitializeEffect(GameObject target);
 }
