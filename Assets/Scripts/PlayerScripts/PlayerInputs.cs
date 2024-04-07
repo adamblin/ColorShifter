@@ -10,6 +10,7 @@ public class PlayerInputs : MonoBehaviour
     [SerializeField] private KeyCode downKey;
     [SerializeField] private KeyCode leftKey;
     [SerializeField] private KeyCode rightKey;
+    [SerializeField] private KeyCode jumpKey;
 
 
     //Tecla para disparar
@@ -29,6 +30,9 @@ public class PlayerInputs : MonoBehaviour
     public static event Action onStopMoveLeft;
     public static event Action onMoveRight;
     public static event Action onStopMoveRight;
+
+    public static event Action onJump;
+
 
 
     private void Update()
@@ -72,6 +76,11 @@ public class PlayerInputs : MonoBehaviour
         else if (Input.GetKeyUp(rightKey))
         {
             onStopMoveRight?.Invoke();
+        }
+
+        if (Input.GetKeyDown(jumpKey))
+        {
+            onJump?.Invoke();
         }
     }
 }

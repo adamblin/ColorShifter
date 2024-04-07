@@ -18,6 +18,7 @@ public class CharacterMovement: MonoBehaviour
     {
         PlayerInputs.onMoveRight += HandleMoveRight;
         PlayerInputs.onMoveLeft += HandleMoveLeft;
+        PlayerInputs.onJump += HandleJump;
         TongueController.onShootingTongue += ToggleCanRotate;
     }
 
@@ -25,6 +26,7 @@ public class CharacterMovement: MonoBehaviour
     {
         PlayerInputs.onMoveRight -= HandleMoveRight;
         PlayerInputs.onMoveLeft -= HandleMoveLeft;
+        PlayerInputs.onJump -= HandleJump;
         TongueController.onShootingTongue -= ToggleCanRotate;
     }
 
@@ -54,6 +56,12 @@ public class CharacterMovement: MonoBehaviour
     {
         if (canRotate && facingRight) FlipPlayer();
         currentMovement = moveLeft;
+    }
+
+    private void HandleJump()
+    {
+        IMovement jumpMovement = new JumpMovement();
+        jumpMovement.Move(gameObject);
     }
 
     private void FlipPlayer()
