@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 using UnityEngine.UIElements;
 
 public class TongueController : MonoBehaviour
@@ -23,7 +24,9 @@ public class TongueController : MonoBehaviour
     private Vector3 firstDirection;
     private bool pointingUp = false;
     private bool pointingDown = false;
-    private bool pointingStraight = false; 
+    private bool pointingStraight = false;
+
+    public static event Action onShootingTonge;
 
     private LineRenderer lineRenderer;
     private ColorManager colorManager;
@@ -93,6 +96,7 @@ public class TongueController : MonoBehaviour
 
             getDirectionAgain = false;
         }
+
         return firstDirection;
     }
 
@@ -131,10 +135,10 @@ public class TongueController : MonoBehaviour
 
 
     private void setShootTongue() {
-        Debug.Log("Shoot Tongue");
         if (canShootAgain) { 
             shootTongue = true;
             canShootAgain = false;
+            onShootingTonge?.Invoke();
         }
     }
 
