@@ -68,4 +68,13 @@ public class CharacterMovement: MonoBehaviour
     {
         canRotate = !canRotate;
     }
+
+    private void FlipPlayerIfNeeded()
+    {
+        bool shouldFaceRight = currentMovement == moveRight;
+        if (shouldFaceRight != facingRight)
+        {
+            FlipPlayer();
+        }
+    }
 }
