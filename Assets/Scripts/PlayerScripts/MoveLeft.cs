@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MoveLeft : IMovement
 {
-    private float speed = 5f;
+     private float speed = 5f;
 
     public void Move(GameObject gameObject)
     {
