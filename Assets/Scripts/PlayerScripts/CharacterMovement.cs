@@ -18,16 +18,16 @@ public class CharacterMovement: MonoBehaviour
     {
         PlayerInputs.onMoveRight += HandleMoveRight;
         PlayerInputs.onMoveLeft += HandleMoveLeft;
-        PlayerInputs.onJump += HandleJump;
-        TongueController.onShootingTongue += ToggleCanRotate;
+        TongueController.onShootingTonge += ToggleCanRotate;
+
     }
 
     private void OnDisable()
     {
         PlayerInputs.onMoveRight -= HandleMoveRight;
         PlayerInputs.onMoveLeft -= HandleMoveLeft;
-        PlayerInputs.onJump -= HandleJump;
-        TongueController.onShootingTongue -= ToggleCanRotate;
+        TongueController.onShootingTonge -= ToggleCanRotate;
+
     }
 
     private void Start()
