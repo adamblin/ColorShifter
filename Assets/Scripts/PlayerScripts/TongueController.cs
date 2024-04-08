@@ -78,27 +78,42 @@ public class TongueController : MonoBehaviour
 
     private Vector3 GetShootingDirection() {
         if (getDirectionAgain) {
+            CharacterMovement characterMovement = GetComponentInParent<CharacterMovement>() ?? GetComponent<CharacterMovement>();
 
-            if (pointingUp && !pointingStraight && !pointingDown)
-                firstDirection = transform.up;
+            // Inicializa la dirección con el vector nulo.
+            Vector3 direction = Vector3.zero;
 
-            else if (pointingUp && pointingStraight && !pointingDown)
-                firstDirection = transform.up + transform.right;
+            // Determina la dirección basada en las entradas verticales.
+            if (pointingUp) {
+                direction += Vector3.up;
+            } else if (pointingDown) {
+                direction += Vector3.down;
+            }
 
-            else if (pointingDown && !pointingStraight && !pointingUp)
-                firstDirection = -transform.up;
+            // Añade la dirección horizontal solo si pointingStraight está activo.
+            // Esto permite disparos directamente hacia arriba o abajo sin inclinarse hacia los lados.
+            if (pointingStraight) {
+                Vector3 horizontalDirection = characterMovement.FacingRight ? Vector3.right : Vector3.left;
+                direction += horizontalDirection;
+            }
 
-            else if (pointingDown && pointingStraight && !pointingUp)
-                firstDirection = -transform.up + transform.right;
+            // Si no se detectó ninguna entrada (o solo pointingStraight sin up/down),
+            // entonces dispara en la dirección horizontal basada en hacia dónde está mirando el personaje.
+            if (direction == Vector3.zero || (pointingStraight && !pointingUp && !pointingDown)) {
+                Vector3 horizontalDirection = characterMovement.FacingRight ? Vector3.right : Vector3.left;
+                direction = horizontalDirection;
+            }
 
-            else
-                firstDirection = transform.right;
-
+            firstDirection = direction.normalized;
             getDirectionAgain = false;
         }
 
         return firstDirection;
     }
+
+
+
+
 
 
     private void CheckTongueCollisions() {

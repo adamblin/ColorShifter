@@ -8,6 +8,7 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody2D rb;
     private float speed = 5f;
     private bool facingRight = true;
+    public bool FacingRight => facingRight;
     private bool isGrounded;
 
     private void Awake()
@@ -43,6 +44,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Flip()
     {
+        Debug.Log("Volteando personaje.");
         facingRight = !facingRight;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
@@ -63,6 +65,11 @@ public class CharacterMovement : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    public void SetPosition(Vector2 newPosition)
+    {
+        rb.position = newPosition;
     }
 }
 
