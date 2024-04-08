@@ -78,6 +78,7 @@ public class TongueController : MonoBehaviour
 
     private Vector3 GetShootingDirection() {
         if (getDirectionAgain) {
+<<<<<<< Updated upstream
             CharacterMovement characterMovement = GetComponentInParent<CharacterMovement>() ?? GetComponent<CharacterMovement>();
             Vector3 direction = Vector3.zero;
 
@@ -96,8 +97,23 @@ public class TongueController : MonoBehaviour
                 Vector3 horizontalDirection = characterMovement.FacingRight ? Vector3.right : Vector3.left;
                 direction = horizontalDirection;
             }
+=======
+            if (pointingUp && !pointingStraight && !pointingDown)
+                firstDirection = transform.up;
 
-            firstDirection = direction.normalized;
+            else if (pointingUp && pointingStraight && !pointingDown)
+                firstDirection = transform.up + transform.right;
+
+            else if (pointingDown && !pointingStraight && !pointingUp)
+                firstDirection = -transform.up;
+
+            else if (pointingDown && pointingStraight && !pointingUp)
+                firstDirection = -transform.up + transform.right;
+
+            else
+                firstDirection = transform.right;
+>>>>>>> Stashed changes
+
             getDirectionAgain = false;
         }
 

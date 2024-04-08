@@ -6,9 +6,8 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private float jumpForce = 7f;
     private Rigidbody2D rb;
-    private float speed = 5f;
+    [SerializeField] private float speed = 5f;
     private bool facingRight = true;
-    public bool FacingRight => facingRight;
     private bool isGrounded;
 
     private void Awake()
@@ -46,9 +45,10 @@ public class CharacterMovement : MonoBehaviour
     {
         Debug.Log("Volteando personaje.");
         facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
+
+        Quaternion currentRotation = transform.rotation;
+        Quaternion newRotation = Quaternion.Euler(currentRotation.eulerAngles.x, currentRotation.eulerAngles.y + 180f, currentRotation.eulerAngles.z);
+        transform.rotation = newRotation;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
