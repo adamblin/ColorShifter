@@ -13,7 +13,7 @@ public class ObstacleEffectLogic : MonoBehaviour
         }
 
         currentColorEffect = colorEffect;
-        currentColorEffect.ApplyEffect(gameObject);
+        currentColorEffect.InitializeEffect(gameObject);
     }
     
     void Start()
