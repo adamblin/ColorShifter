@@ -23,6 +23,7 @@ public class TongueController : MonoBehaviour
     private bool pointingStraight = false;
 
     public static event Action onShootingTongue;
+    public static event Action onNotMovingTongue;
 
     private LineRenderer lineRenderer;
     private ColorManager colorManager;
@@ -68,7 +69,7 @@ public class TongueController : MonoBehaviour
             {
                 canShootAgain = true;
                 getDirectionAgain = true;
-
+                onNotMovingTongue?.Invoke();
             }
         }
     }
