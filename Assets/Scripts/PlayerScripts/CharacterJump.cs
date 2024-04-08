@@ -13,7 +13,7 @@ public class CharacterJump : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded; // Indica si el personaje está tocando el suelo
-    private bool canJump; // Indica si el personaje puede saltar
+    private bool canJump = true; // Indica si el personaje puede saltar
 
     public float maxJumpHeight = 2f; // Altura máxima del salto
     private float jumpStartHeight; // Altura al iniciar el salto
@@ -22,23 +22,33 @@ public class CharacterJump : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        canJump = true; // Inicialmente el personaje puede saltar
     }
 
     void Update()
     {
         // Verifica si el personaje está en el suelo
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        Collider2D[] collisions = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius);
+
+        if (collisions.Length != 0) {
+            CheckIfCollidingGround(collisions);
+        }
 
         if (isGrounded && !canJump)
         {
             canJump = true; // Permite saltar nuevamente una vez que toca el suelo
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded && canJump)
+        if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.C)) && canJump)
         {
             // Aplica la fuerza de salto
             Jump();
+        }
+    }
+
+    private void CheckIfCollidingGround(Collider2D[] collisions) {
+        for (int i = 0; i < collisions.Length; i++) {
+            if (collisions[i].gameObject.CompareTag("Ground"))
+                isGrounded = true;
         }
     }
 
@@ -63,6 +73,7 @@ public class CharacterJump : MonoBehaviour
 
     void Jump()
     {
+        Debug.Log("JUMPING");
         jumpStartHeight = transform.position.y; // Almacena la altura al iniciar el salto
         rb.velocity = new Vector2(rb.velocity.x, 0f); // Restablece la velocidad vertical
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // Aplica la fuerza de salto
@@ -75,6 +86,8 @@ public class CharacterJump : MonoBehaviour
         // Dibuja el chequeo de suelo en el editor para facilitar la configuración
         if (groundCheck != null)
         {
+            Debug.Log("Printing");
+            Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }

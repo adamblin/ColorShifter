@@ -25,10 +25,11 @@ public class CharacterMovement: MonoBehaviour
     }
 
     private void ApplyMovement() {
-        rb.velocity = new Vector2(movementDirection.x * playerSpeed, 0);
+        rb.AddForce(new Vector2(movementDirection.x * playerSpeed * Time.deltaTime, 0));    
     }
 
     private void FlipPlayer(){
+        
         if (canFlip) {
             if ((movementDirection.x > 0 && !facingRight) || (movementDirection.x < 0 && facingRight))
             {

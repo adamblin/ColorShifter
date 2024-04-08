@@ -102,7 +102,7 @@ public class TongueController : MonoBehaviour
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tongueEnd.position, detectionRadius);
 
         for (int i = 0; i < hitColliders.Length; i++) {
-            if (hitColliders[i].gameObject.tag.Equals("Obstacle")) {
+            if (hitColliders[i].gameObject.tag.Equals("Ground")) {
                 shootTongue = false;
                 break;
             }

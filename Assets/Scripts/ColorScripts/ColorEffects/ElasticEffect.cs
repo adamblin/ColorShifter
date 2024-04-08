@@ -8,6 +8,8 @@ public class ElasticEffect : IColorEffect
     private ColorType colorType;
     private float minImpulse;
 
+    private Color previousColor;
+
     public ElasticEffect(Color color, ColorType colorType, float minImpulse)
     {
         effectColor = color;
@@ -18,19 +20,31 @@ public class ElasticEffect : IColorEffect
 
     public void InitializeEffect(GameObject target)
     {
+        previousColor = target.GetComponent<SpriteRenderer>().color;
         target.GetComponent<SpriteRenderer>().color = effectColor;
         Debug.Log("APLICANDO EFECTO");
     }
 
-    public void ApplyEffect()
+    public void ApplyEffect(GameObject target)
     {
-        throw new System.NotImplementedException();
+        Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
+        Debug.Log(target);
+        
+
+    }
+
+    public IColorEffect RemoveEffect(GameObject target)
+    {
+        target.GetComponent<SpriteRenderer>().color = previousColor;
+        return null;
     }
 
     public ColorType getColorType()
     {
         return colorType;
     }
+
+    
 }
     
 
