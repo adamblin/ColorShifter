@@ -7,6 +7,7 @@ public class CharacterMovement: MonoBehaviour
 {
     [SerializeField] private float playerSpeed = 5f;
     private bool facingRight = true;
+    private bool canFlip = true;
     private Vector2 movementDirection;
 
     private Rigidbody2D rb;
@@ -28,13 +29,31 @@ public class CharacterMovement: MonoBehaviour
     }
 
     private void FlipPlayer(){
-        if ((movementDirection.x > 0 && !facingRight) || (movementDirection.x < 0 && facingRight)) {
-            facingRight = !facingRight;
+        if (canFlip) {
+            if ((movementDirection.x > 0 && !facingRight) || (movementDirection.x < 0 && facingRight))
+            {
+                facingRight = !facingRight;
 
-            Vector3 currentRotation = transform.eulerAngles;
-            currentRotation.y += 180f;
-            transform.eulerAngles = currentRotation;
+                Vector3 currentRotation = transform.eulerAngles;
+                currentRotation.y += 180f;
+                transform.eulerAngles = currentRotation;
+            }
         }
+    }
+
+    private void setCanFlip() { 
+        canFlip = !canFlip;
+    }
+
+
+    private void OnEnable()
+    {
+        TongueController.onShootingTongue += setCanFlip;
+    }
+
+    private void OnDisable()
+    {
+        TongueController.onShootingTongue -= setCanFlip;
     }
 }
 

@@ -639,6 +639,10 @@ PrefabInstance:
       propertyPath: shootKey
       value: 101
       objectReference: {fileID: 0}
+    - target: {fileID: 3336242205924660174, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3336242205924660175, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
