@@ -16,6 +16,7 @@ public class TongueController : MonoBehaviour
     private bool shootTongue = false;
     private bool canShootAgain = true;
     private bool getDirectionAgain = true;
+    private bool canCheckCollisions = true;
 
     private Vector3 firstDirection;
     private bool pointingUp = false;
@@ -69,6 +70,7 @@ public class TongueController : MonoBehaviour
             {
                 canShootAgain = true;
                 getDirectionAgain = true;
+                canCheckCollisions = true;
                 onNotMovingTongue?.Invoke();
             }
         }
@@ -99,16 +101,20 @@ public class TongueController : MonoBehaviour
 
 
     private void CheckTongueCollisions() {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tongueEnd.position, detectionRadius);
+        if (canCheckCollisions) { 
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tongueEnd.position, detectionRadius);
 
-        for (int i = 0; i < hitColliders.Length; i++) {
-            if (hitColliders[i].gameObject.tag.Equals("Ground")) {
-                shootTongue = false;
-                break;
-            }
-            else if (hitColliders[i].gameObject.tag.Equals("PaintableObstacle")) {
-                shootTongue = false;
-                ChangeObjectEffect(hitColliders[i].gameObject);
+            for (int i = 0; i < hitColliders.Length; i++) {
+                if (hitColliders[i].gameObject.tag.Equals("Ground")) {
+                    shootTongue = false;
+                    canCheckCollisions = false;
+                    break;
+                }
+                else if (hitColliders[i].gameObject.tag.Equals("PaintableObstacle")) {
+                    shootTongue = false;
+                    canCheckCollisions = false;
+                    ChangeObjectEffect(hitColliders[i].gameObject);
+                }
             }
         }
     }

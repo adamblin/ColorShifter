@@ -1,14 +1,22 @@
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 
 public class CharacterMovement: MonoBehaviour
 {
+    [Header("Moviment")]
+    //PLAYER MOVEMENT
     [SerializeField] private float playerSpeed = 5f;
     private bool facingRight = true;
     private bool canFlip = true;
     private Vector2 movementDirection;
+
+    [Header("Jump")]
+    //PLAYER JUMP
+    [SerializeField] private float jumpForce = 5f;
+    private bool isGrounded;
+    public Transform groundCheck;
+    public float checkRadius;
+    public LayerMask whatIsGorunded;
 
     private Rigidbody2D rb;
 
@@ -20,8 +28,10 @@ public class CharacterMovement: MonoBehaviour
     private void FixedUpdate()
     {
         movementDirection.x = Input.GetAxisRaw("Horizontal");
+        
         ApplyMovement();
         FlipPlayer();
+        CheckJumpingLogic();
     }
 
     private void ApplyMovement() {
@@ -42,6 +52,19 @@ public class CharacterMovement: MonoBehaviour
         }
     }
 
+    private void CheckJumpingLogic() { 
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGorunded);
+
+    }
+
+    private void PlayerJump() {
+
+        if (isGrounded) {
+            Debug.Log("JUMPING");
+            rb.AddForce(Vector2.up * jumpForce);
+        }
+    }
+
     private void CanNotFlip() {
         canFlip = false;
     }
@@ -55,11 +78,13 @@ public class CharacterMovement: MonoBehaviour
     {
         TongueController.onShootingTongue += CanNotFlip;
         TongueController.onNotMovingTongue += CanFlip;
+        PlayerInputs.onJump += PlayerJump;
     }
 
     private void OnDisable()
     {
         TongueController.onShootingTongue -= CanNotFlip;
         TongueController.onNotMovingTongue -= CanFlip;
+        PlayerInputs.onJump -= PlayerJump;
     }
 }

@@ -10,6 +10,7 @@ public class PlayerInputs : MonoBehaviour
     [SerializeField] private KeyCode downKey;
     [SerializeField] private KeyCode leftKey;
     [SerializeField] private KeyCode rightKey;
+    [SerializeField] private KeyCode jumpKey;
 
 
     //Tecla para disparar
@@ -25,6 +26,7 @@ public class PlayerInputs : MonoBehaviour
     public static event Action onShootStraight;
 
     //Movimiento
+    public static event Action onJump;
 
 
     private void Update()
@@ -49,5 +51,8 @@ public class PlayerInputs : MonoBehaviour
 
         if (Input.GetKeyUp(rightKey) || Input.GetKeyUp(leftKey))
             onShootStraight?.Invoke();
+
+        if(Input.GetKeyDown(jumpKey))
+            onJump?.Invoke();
     }
 }
