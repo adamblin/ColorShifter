@@ -13,10 +13,13 @@ public class CharacterMovement: MonoBehaviour
     [Header("Jump")]
     //PLAYER JUMP
     [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float acelerationRate = 0.2f;
+    [SerializeField] private float startGravity = 10;
     private bool isGrounded;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGorunded;
+    private Vector3 lastJumpPosition;
 
     private Rigidbody2D rb;
 
@@ -28,7 +31,7 @@ public class CharacterMovement: MonoBehaviour
     private void FixedUpdate()
     {
         movementDirection.x = Input.GetAxisRaw("Horizontal");
-        
+
         ApplyMovement();
         FlipPlayer();
         CheckJumpingLogic();
@@ -55,13 +58,19 @@ public class CharacterMovement: MonoBehaviour
     private void CheckJumpingLogic() { 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGorunded);
 
+        if (!isGrounded) { 
+            rb.drag -= acelerationRate;
+        }
+        else { 
+            rb.drag = startGravity;
+        }
     }
 
     private void PlayerJump() {
 
         if (isGrounded) {
-            Debug.Log("JUMPING");
             rb.AddForce(Vector2.up * jumpForce);
+            lastJumpPosition = transform.position;
         }
     }
 
@@ -86,5 +95,9 @@ public class CharacterMovement: MonoBehaviour
         TongueController.onShootingTongue -= CanNotFlip;
         TongueController.onNotMovingTongue -= CanFlip;
         PlayerInputs.onJump -= PlayerJump;
+    }
+
+    public Vector3 getLastJumpPosition() { 
+        return lastJumpPosition;
     }
 }

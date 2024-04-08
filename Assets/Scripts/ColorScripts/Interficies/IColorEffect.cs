@@ -6,9 +6,7 @@ public interface IColorEffect {
 
     void InitializeEffect(GameObject target);
 
-    void ApplyEffect(GameObject target);
-
-    IColorEffect RemoveEffect(GameObject target);
+    void RemoveEffect(GameObject target);
 
     ColorType getColorType();
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StrechEffect : IColorEffect
+public class StrechEffect : IStrechEffect
 {
     private Color effectColor;
     private ColorType colorType;
@@ -24,7 +24,7 @@ public class StrechEffect : IColorEffect
         Debug.Log("APLICANDO EFECTO");
     }
 
-    public void ApplyEffect(GameObject target)
+    public void ApplyEffect()
     {
         throw new System.NotImplementedException();
     }
@@ -34,9 +34,8 @@ public class StrechEffect : IColorEffect
         return colorType;
     }
 
-    public IColorEffect RemoveEffect(GameObject target)
+    public void RemoveEffect(GameObject target)
     {
         target.GetComponent<SpriteRenderer>().color = previousColor;
-        return null;
     }
 }

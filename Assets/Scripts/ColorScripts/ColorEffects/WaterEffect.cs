@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterEffect : IColorEffect
+public class WaterEffect : IWaterEffect
 {
     private Color effectColor;
     private ColorType colorType;
@@ -23,7 +23,7 @@ public class WaterEffect : IColorEffect
         Debug.Log("APLICANDO EFECTO");
     }
 
-    public void ApplyEffect(GameObject target)
+    public void ApplyEffect()
     {
         throw new System.NotImplementedException();
     }
@@ -33,9 +33,8 @@ public class WaterEffect : IColorEffect
         return colorType;
     }
 
-    public IColorEffect RemoveEffect(GameObject target)
+    public void RemoveEffect(GameObject target)
     {
         target.GetComponent<SpriteRenderer>().color = previousColor;
-        return null;
     }
 }

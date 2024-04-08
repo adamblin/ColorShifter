@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
-public class ElasticEffect : IColorEffect
+public class ElasticEffect : IElasticEffect
 {
     private Color effectColor;
     private ColorType colorType;
     private float minImpulse;
-
     private Color previousColor;
+
+    private GameObject obstacle;
 
     public ElasticEffect(Color color, ColorType colorType, float minImpulse)
     {
@@ -20,23 +22,29 @@ public class ElasticEffect : IColorEffect
 
     public void InitializeEffect(GameObject target)
     {
+        obstacle = target;
         previousColor = target.GetComponent<SpriteRenderer>().color;
         target.GetComponent<SpriteRenderer>().color = effectColor;
-        Debug.Log("APLICANDO EFECTO");
     }
 
-    public void ApplyEffect(GameObject target)
+    public void ApplyEffect(GameObject player)
     {
-        Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
-        Debug.Log(target);
-        
+        //MEDIANTE ADDFORCE
 
+
+        //MEDIANTE MATERIAL BOUNCE 
+        //float newBounciness = obstacle.transform.position.y - player.GetComponent<CharacterMovement>().getLastJumpPosition().y;
+
+        //PhysicsMaterial2D newMaterial = new PhysicsMaterial2D();
+        //newMaterial.bounciness = math.abs(newBounciness);
+
+        //obstacle.GetComponent<Rigidbody2D>().sharedMaterial = newMaterial;
     }
 
-    public IColorEffect RemoveEffect(GameObject target)
+    public void RemoveEffect(GameObject target)
     {
         target.GetComponent<SpriteRenderer>().color = previousColor;
-        return null;
+        obstacle.GetComponent<Rigidbody2D>().sharedMaterial = null;
     }
 
     public ColorType getColorType()

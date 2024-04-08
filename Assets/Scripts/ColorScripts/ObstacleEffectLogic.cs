@@ -11,7 +11,8 @@ public class ObstacleEffectLogic : MonoBehaviour
     public void ApplyEffect(IColorEffect colorEffect) {
         if (currentColorEffect != null)
         {
-            currentColorEffect = currentColorEffect.RemoveEffect(gameObject);
+            currentColorEffect.RemoveEffect(gameObject);
+            currentColorEffect = null;
         }
         else 
         {
@@ -34,8 +35,9 @@ public class ObstacleEffectLogic : MonoBehaviour
     {
         if (currentColorEffect != null)
             if (currentColorEffect.getColorType() == ColorType.Elastic && collision.gameObject.CompareTag("Player")) {
-            
-                currentColorEffect.ApplyEffect(collision.gameObject);
+
+                IElasticEffect effect = currentColorEffect as IElasticEffect;
+                effect.ApplyEffect(collision.gameObject);
         }
     }
 }
