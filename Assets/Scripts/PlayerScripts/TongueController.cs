@@ -79,26 +79,19 @@ public class TongueController : MonoBehaviour
     private Vector3 GetShootingDirection() {
         if (getDirectionAgain) {
             CharacterMovement characterMovement = GetComponentInParent<CharacterMovement>() ?? GetComponent<CharacterMovement>();
-
-            // Inicializa la dirección con el vector nulo.
             Vector3 direction = Vector3.zero;
 
-            // Determina la dirección basada en las entradas verticales.
             if (pointingUp) {
                 direction += Vector3.up;
             } else if (pointingDown) {
                 direction += Vector3.down;
             }
 
-            // Añade la dirección horizontal solo si pointingStraight está activo.
-            // Esto permite disparos directamente hacia arriba o abajo sin inclinarse hacia los lados.
             if (pointingStraight) {
                 Vector3 horizontalDirection = characterMovement.FacingRight ? Vector3.right : Vector3.left;
                 direction += horizontalDirection;
             }
 
-            // Si no se detectó ninguna entrada (o solo pointingStraight sin up/down),
-            // entonces dispara en la dirección horizontal basada en hacia dónde está mirando el personaje.
             if (direction == Vector3.zero || (pointingStraight && !pointingUp && !pointingDown)) {
                 Vector3 horizontalDirection = characterMovement.FacingRight ? Vector3.right : Vector3.left;
                 direction = horizontalDirection;
@@ -110,11 +103,6 @@ public class TongueController : MonoBehaviour
 
         return firstDirection;
     }
-
-
-
-
-
 
     private void CheckTongueCollisions() {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tongueEnd.position, detectionRadius);

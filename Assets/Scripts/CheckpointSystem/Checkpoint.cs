@@ -27,8 +27,7 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        CharacterMovement player = other.GetComponent<CharacterMovement>();
-        if (player != null)
+        if (other.CompareTag("Player") && !checkpointActivated)
         {
             Activate();
             system.CheckpointActivated(checkpointIndex);
@@ -40,13 +39,16 @@ public class Checkpoint : MonoBehaviour
         checkpointActivated = true;
         objectActivated.SetActive(checkpointActivated);
         objectDeactivated.SetActive(!checkpointActivated);
+        Debug.Log($"Checkpoint {checkpointIndex} activado.");
     }
+
 
     public void Deactivate()
     {
         checkpointActivated = false;
         objectActivated.SetActive(checkpointActivated);
         objectDeactivated.SetActive(!checkpointActivated);
+        Debug.Log($"Checkpoint {checkpointIndex} desactivado.");
     }
 
     public void SetIndex(int i)

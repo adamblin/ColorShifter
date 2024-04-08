@@ -41,16 +41,10 @@ public class CheckpointSystem : MonoBehaviour
 
     void LoadData()
     {
-        string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        Debug.Log("Cargando datos para la escena: " + sceneName);
-        currentCheckpointIndex = PlayerPrefs.GetInt(sceneName, -1);
+        currentCheckpointIndex = PlayerPrefs.GetInt(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, -1);
         if (currentCheckpointIndex > -1)
         {
-            for (int i = 0; i < currentCheckpointIndex; i++)
-            {
-                checkpoints[i].Activate();
-            }
-
+            checkpoints[currentCheckpointIndex].Activate();
             CharacterMovement player = FindObjectOfType<CharacterMovement>();
             player.SetPosition(checkpoints[currentCheckpointIndex].GetCheckpointPosition());
         }

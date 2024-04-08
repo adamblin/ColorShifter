@@ -71,5 +71,27 @@ public class CharacterMovement : MonoBehaviour
     {
         rb.position = newPosition;
     }
+
+    public void ResetToCheckpoint()
+    {
+        CheckpointSystem checkpointSystem = FindObjectOfType<CheckpointSystem>();
+        if (checkpointSystem != null && checkpointSystem.CheckpointAvailable())
+        {
+            Vector3 checkpointPosition = checkpointSystem.GetCurrentCheckpointPosition();
+            Debug.Log($"Moviendo al jugador al checkpoint en {checkpointPosition}.");
+            transform.position = checkpointPosition;
+        }
+        else
+        {
+            Debug.LogError("No se encontró un sistema de checkpoint o no hay checkpoints disponibles.");
+        }
+    }
+
+    public void PlayerDies()
+    {
+        Debug.Log("El jugador ha muerto, reiniciando en el último checkpoint.");
+        ResetToCheckpoint();
+    }
+
 }
 
