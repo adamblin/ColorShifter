@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 
@@ -13,19 +14,20 @@ public class CharacterMovement: MonoBehaviour
     [Header("Jump")]
     //PLAYER JUMP
     [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float acelerationRate = 0.2f;
-    [SerializeField] private float startGravity = 10;
+    [SerializeField] private float fallMultiplier;
     private bool isGrounded;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGorunded;
     private Vector3 lastJumpPosition;
+    Vector2 vecGravity;
 
     private Rigidbody2D rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        vecGravity = new Vector2(0, -Physics2D.gravity.y);
     }
 
     private void FixedUpdate()
@@ -38,7 +40,8 @@ public class CharacterMovement: MonoBehaviour
     }
 
     private void ApplyMovement() {
-        rb.AddForce(new Vector2(movementDirection.x * playerSpeed * Time.deltaTime, 0));    
+        //rb.AddForce(new Vector2(movementDirection.x * playerSpeed * Time.deltaTime, 0));
+        rb.velocity = new Vector2(movementDirection.x * playerSpeed, rb.velocity.y);
     }
 
     private void FlipPlayer(){
@@ -55,22 +58,34 @@ public class CharacterMovement: MonoBehaviour
         }
     }
 
-    private void CheckJumpingLogic() { 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGorunded);
+    private void CheckJumpingLogic() {
+        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGorunded);
 
-        if (!isGrounded) { 
-            rb.drag -= acelerationRate;
+        Collider2D collider = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGorunded);
+
+        if (collider == null)
+        {
+            isGrounded = false;
         }
-        else { 
-            rb.drag = startGravity;
+        else {
+            if (collider.gameObject.layer == 6) //gorund layer
+            {
+                isGrounded = true;
+                lastJumpPosition = transform.position;
+            }
         }
+
+        if (rb.velocity.y < 0) {
+            rb.velocity -= vecGravity * fallMultiplier * Time.deltaTime;
+        }
+        
     }
 
     private void PlayerJump() {
 
         if (isGrounded) {
-            rb.AddForce(Vector2.up * jumpForce);
-            lastJumpPosition = transform.position;
+            //rb.AddForce(Vector2.up * jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
 

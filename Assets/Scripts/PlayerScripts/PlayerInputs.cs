@@ -12,6 +12,9 @@ public class PlayerInputs : MonoBehaviour
     [SerializeField] private KeyCode rightKey;
     [SerializeField] private KeyCode jumpKey;
 
+    [SerializeField] private KeyCode ElasticKey;
+    [SerializeField] private KeyCode WaterKey;
+    [SerializeField] private KeyCode StrechKey;
 
     //Tecla para disparar
     public static event Action onShoot;
@@ -27,6 +30,9 @@ public class PlayerInputs : MonoBehaviour
 
     //Movimiento
     public static event Action onJump;
+
+    //Cambiar Colores
+    public static event Action<int> onChangeColor;
 
 
     private void Update()
@@ -54,5 +60,15 @@ public class PlayerInputs : MonoBehaviour
 
         if(Input.GetKeyDown(jumpKey))
             onJump?.Invoke();
+
+        //COLORS
+        if (Input.GetKeyDown(ElasticKey)) 
+            onChangeColor?.Invoke(0);
+
+        if (Input.GetKeyDown(WaterKey))
+            onChangeColor?.Invoke(1);
+
+        if (Input.GetKeyDown(StrechKey))
+            onChangeColor?.Invoke(2);
     }
 }

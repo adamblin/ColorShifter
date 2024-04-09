@@ -28,6 +28,7 @@ public class TongueController : MonoBehaviour
 
     private LineRenderer lineRenderer;
     private ColorManager colorManager;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
@@ -41,6 +42,9 @@ public class TongueController : MonoBehaviour
         lineRenderer.positionCount = 2;
 
         colorManager = FindAnyObjectByType<ColorManager>(); 
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        ChangePlayerColor(currentColorIndex);
     }
 
     private void FixedUpdate()
@@ -136,6 +140,11 @@ public class TongueController : MonoBehaviour
         }
     }
 
+    private void ChangePlayerColor(int changeIndex) {
+        currentColorIndex = changeIndex;
+        spriteRenderer.color = colorManager.GetColor(colorTypes[currentColorIndex]);
+    }
+
 
     private void setShootTongue() {
         Debug.Log("Shoot Tongue");
@@ -147,13 +156,11 @@ public class TongueController : MonoBehaviour
     }
 
     private void setPointingUp(){
-        Debug.Log("W pressed");
         pointingUp = !pointingUp;
         Debug.Log(pointingUp);
     }
 
     private void setPointingDown(){
-        Debug.Log("S pressed");
         pointingDown = !pointingDown;
     }
 
@@ -169,6 +176,7 @@ public class TongueController : MonoBehaviour
         PlayerInputs.onShootUp += setPointingUp;
         PlayerInputs.onShootDown += setPointingDown;
         PlayerInputs.onShootStraight += setPointingStraight;
+        PlayerInputs.onChangeColor += ChangePlayerColor;
     }
 
     private void OnDisable()
@@ -177,6 +185,7 @@ public class TongueController : MonoBehaviour
         PlayerInputs.onShootUp -= setPointingUp;
         PlayerInputs.onShootDown -= setPointingDown;
         PlayerInputs.onShootStraight -= setPointingStraight;
+        PlayerInputs.onChangeColor -= ChangePlayerColor;
     }
 
 

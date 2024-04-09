@@ -8,15 +8,17 @@ public class ElasticEffect : IElasticEffect
     private Color effectColor;
     private ColorType colorType;
     private float minImpulse;
-    private Color previousColor;
+    private float hightMultiplier;
 
+    private Color previousColor;
     private GameObject obstacle;
 
-    public ElasticEffect(Color color, ColorType colorType, float minImpulse)
+    public ElasticEffect(Color color, ColorType colorType, float minImpulse, float hightMultiplier)
     {
         effectColor = color;
         this.colorType = colorType;
         this.minImpulse = minImpulse;
+        this.hightMultiplier = hightMultiplier;
     }
 
 
@@ -29,16 +31,21 @@ public class ElasticEffect : IElasticEffect
 
     public void ApplyEffect(GameObject player)
     {
-        //MEDIANTE ADDFORCE
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+
+        Vector2 direction = -(obstacle.transform.position - player.transform.position).normalized;
+        float jumpHeight = Mathf.Abs(player.GetComponent<CharacterMovement>().getLastJumpPosition().y - obstacle.transform.position.y);
+
+        float totalForce = minImpulse + (jumpHeight * hightMultiplier);
+
+        //FALTA OBTENER EL VECTOR EN EL QUE APLCAR LA FUERZA
+
+        Debug.Log(direction);
+        //rb.velocity = new Vector2(0, totalForce);
+        rb.velocity = direction * totalForce;
+        Debug.Log("result: " + direction * totalForce);
 
 
-        //MEDIANTE MATERIAL BOUNCE 
-        //float newBounciness = obstacle.transform.position.y - player.GetComponent<CharacterMovement>().getLastJumpPosition().y;
-
-        //PhysicsMaterial2D newMaterial = new PhysicsMaterial2D();
-        //newMaterial.bounciness = math.abs(newBounciness);
-
-        //obstacle.GetComponent<Rigidbody2D>().sharedMaterial = newMaterial;
     }
 
     public void RemoveEffect(GameObject target)
