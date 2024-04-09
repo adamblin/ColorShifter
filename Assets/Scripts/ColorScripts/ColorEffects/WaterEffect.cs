@@ -20,12 +20,13 @@ public class WaterEffect : IWaterEffect
     {
         previousColor = target.GetComponent<SpriteRenderer>().color;
         target.GetComponent<SpriteRenderer>().color = effectColor;
+        target.GetComponent<BoxCollider2D>().isTrigger = true;
         Debug.Log("APLICANDO EFECTO");
     }
 
     public void ApplyEffect()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public ColorType getColorType()
@@ -36,5 +37,6 @@ public class WaterEffect : IWaterEffect
     public void RemoveEffect(GameObject target)
     {
         target.GetComponent<SpriteRenderer>().color = previousColor;
+        target.GetComponent<BoxCollider2D>().isTrigger = false;
     }
 }

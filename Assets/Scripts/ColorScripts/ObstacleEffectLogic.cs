@@ -33,6 +33,7 @@ public class ObstacleEffectLogic : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Collided");
         if (currentColorEffect != null)
             if (currentColorEffect.getColorType() == ColorType.Elastic && collision.gameObject.CompareTag("Player")) {
 
