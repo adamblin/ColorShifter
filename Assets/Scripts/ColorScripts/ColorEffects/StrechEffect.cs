@@ -31,6 +31,9 @@ public class StrechEffect : IStrechEffect
         initialScale = target.transform.localScale;
         boxCollider = target.GetComponent<BoxCollider2D>();
 
+        Debug.Log("initialScale"+initialScale);
+        Debug.Log("boxCollider" + boxCollider.size);
+
         //Ajustamos el collider para tener en cuenta el estiramiento
         if (boxCollider != null)
         {
@@ -38,6 +41,8 @@ public class StrechEffect : IStrechEffect
             Vector2 colliderOffset = new Vector2(boxCollider.offset.x, boxCollider.offset.y * stretchAmount);
             boxCollider.size = newColliderSize;
             boxCollider.offset = colliderOffset;
+
+            Debug.Log("boxCollider" + boxCollider.size);
         }
         Debug.Log("APLICANDO EFECTO");
     }
