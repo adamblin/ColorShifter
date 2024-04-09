@@ -9,7 +9,7 @@ public class StrechEffect : IStrechEffect
     private float stretchAmount;
     
     private Color previousColor;
-    private GameObject target;
+    private GameObject obstacle;
     private Vector3 initialScale;
     private BoxCollider2D boxCollider;
 
@@ -25,7 +25,7 @@ public class StrechEffect : IStrechEffect
 
     public void InitializeEffect(GameObject target)
     {
-        this.target = target;
+        this.obstacle = target;
         previousColor = target.GetComponent<SpriteRenderer>().color;
         target.GetComponent<SpriteRenderer>().color = effectColor;
         initialScale = target.transform.localScale;
@@ -45,7 +45,7 @@ public class StrechEffect : IStrechEffect
     public void ApplyEffect()
     {
         //Aplicamos el efecto para aumentar la altura
-         target.transform.localScale = new Vector3(initialScale.x, initialScale.y * stretchAmount, initialScale.z);
+        obstacle.transform.localScale = new Vector3(initialScale.x, initialScale.y * stretchAmount, initialScale.z);
     }
 
     public ColorType getColorType()
