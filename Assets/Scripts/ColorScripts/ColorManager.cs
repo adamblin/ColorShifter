@@ -9,8 +9,12 @@ public class ColorManager : MonoBehaviour
     [SerializeField] private Color elasticColor;
     [SerializeField] private Color strechColor;
 
+    //Elastic
     [SerializeField] private float elasticMinImpulse;
     [SerializeField] private float elasticHeightMultiplier;
+
+    //Stretch
+    [SerializeField] private float stretchMultiplier;
 
     public IColorEffect GetColorEffect(ColorType colorType)
     {
@@ -23,7 +27,7 @@ public class ColorManager : MonoBehaviour
                 return new WaterEffect(waterColor, ColorType.Water);
 
             case ColorType.Strech:
-                return new StrechEffect(strechColor, ColorType.Strech);
+                return new StrechEffect(strechColor, ColorType.Strech,stretchMultiplier);
 
             default:
                 throw new ArgumentException("Color no soportado", nameof(colorType));

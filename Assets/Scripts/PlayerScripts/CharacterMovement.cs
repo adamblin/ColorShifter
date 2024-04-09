@@ -68,7 +68,7 @@ public class CharacterMovement: MonoBehaviour
             isGrounded = false;
         }
         else {
-            if (collider.gameObject.layer == 6) //gorund layer
+            if (collider.gameObject.layer == 6 || collider.gameObject.layer == 7) //gorund layer
             {
                 isGrounded = true;
                 lastJumpPosition = transform.position;
