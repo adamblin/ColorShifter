@@ -14,6 +14,8 @@ public class ColorManager : MonoBehaviour
     private bool waterAssigned = false;
     private bool strechAssigned = false;
 
+    private IColorEffect DefaultObject;
+
     //Elastic
     [SerializeField] private float elasticMinImpulse;
     [SerializeField] private float elasticHeightMultiplier;
@@ -21,31 +23,36 @@ public class ColorManager : MonoBehaviour
     //Stretch
     [SerializeField] private float stretchMultiplier;
 
+    private void Start()
+    {
+        DefaultObject = new DefaultEffect(Color.white, ColorType.Default);
+    }
+
     public IColorEffect GetColorEffect(ColorType colorType)
     {
         switch (colorType){
 
             case ColorType.Elastic:
                 if (elasticAssigned)
-                    return new DefaultEffect(Color.white, ColorType.Default);
+                    return DefaultObject;
                 elasticAssigned = true;
                 return new ElasticEffect(elasticColor, ColorType.Elastic, elasticMinImpulse, elasticHeightMultiplier);
 
             case ColorType.Water:
                 if (waterAssigned)
-                    return new DefaultEffect(Color.white, ColorType.Default);
+                    return DefaultObject;
                 waterAssigned = true;
                 return new WaterEffect(waterColor, ColorType.Water);
 
             case ColorType.Strech:
                 if (strechAssigned)
-                    return new DefaultEffect(Color.white, ColorType.Default);
+                    return DefaultObject;
                 strechAssigned = true;
                 return new StrechEffect(strechColor, ColorType.Strech,stretchMultiplier);
 
             case ColorType.Default:
                 //return null;
-                return new DefaultEffect(Color.white, ColorType.Default);
+                return DefaultObject;
 
             default:
                 throw new ArgumentException("Color no soportado", nameof(colorType));

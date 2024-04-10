@@ -67,7 +67,7 @@ public class TongueController : MonoBehaviour
             {
                 canShootAgain = true;
                 getDirectionAgain = true;
-                canCheckCollisions = true;
+                canCheckCollisions = false;
                 onNotMovingTongue?.Invoke();
             }
         }
@@ -98,7 +98,7 @@ public class TongueController : MonoBehaviour
 
 
     private void CheckTongueCollisions() {
-        if (canCheckCollisions) { 
+        if (canCheckCollisions) {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tongueEnd.position, detectionRadius);
 
             for (int i = 0; i < hitColliders.Length; i++) {
@@ -145,6 +145,7 @@ public class TongueController : MonoBehaviour
         if (canShootAgain) { 
             shootTongue = true;
             canShootAgain = false;
+            canCheckCollisions = true;
             onShootingTongue?.Invoke();
         }
     }
