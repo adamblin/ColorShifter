@@ -22,6 +22,19 @@ public class CharacterMovement: MonoBehaviour
     private Vector3 lastJumpPosition;
     Vector2 vecGravity;
 
+
+    [Header("Water")] 
+    private bool inWater = false;
+    [SerializeField]
+    private float swimSpeed = 2.5f;
+    private float speed = 2.0f;
+    private float gravity = 2.0f;
+    private float speedMultiplier = 1f;
+    
+
+
+
+
     private Rigidbody2D rb;
 
     private void Start()
@@ -34,9 +47,26 @@ public class CharacterMovement: MonoBehaviour
     {
         movementDirection.x = Input.GetAxisRaw("Horizontal");
 
-        ApplyMovement();
+        if(inWater)
+            ApplyMovementInWater();
+        else
+            ApplyMovement();
+
         FlipPlayer();
         CheckJumpingLogic();
+    }
+
+    private void ApplyMovementInWater()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, swimSpeed); // Nada hacia arriba
+        }
+        else
+        {
+            rb.velocity += Vector2.down * gravity * Time.deltaTime;
+        }
+        
     }
 
     private void ApplyMovement() {

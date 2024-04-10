@@ -14,14 +14,11 @@ public class WaterEffect : IWaterEffect
         this.colorType = colorType; 
     }
 
-
-
     public void InitializeEffect(GameObject target)
     {
         previousColor = target.GetComponent<SpriteRenderer>().color;
         target.GetComponent<SpriteRenderer>().color = effectColor;
         target.GetComponent<BoxCollider2D>().isTrigger = true;
-        Debug.Log("APLICANDO EFECTO");
     }
 
     public void ApplyEffect()
