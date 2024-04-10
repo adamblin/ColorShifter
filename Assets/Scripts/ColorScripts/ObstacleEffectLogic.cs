@@ -75,12 +75,22 @@ public class ObstacleEffectLogic : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collided");
-        if (currentColorEffect != null)
-            if (currentColorType == ColorType.Elastic && collision.gameObject.CompareTag("Player")) {
-
+        if (currentColorEffect != null) {
+            if (currentColorType == ColorType.Elastic && collision.gameObject.CompareTag("Player"))
+            {
                 IElasticEffect effect = currentColorEffect as IElasticEffect;
                 effect.ApplyEffect(collision.gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (currentColorEffect != null) {
+            if (currentColorType == ColorType.Water && collision.gameObject.CompareTag("Player")) { 
+                IWaterEffect effect = currentColorEffect as IWaterEffect;
+                effect.ApplyEffect();
+            }
         }
     }
 
