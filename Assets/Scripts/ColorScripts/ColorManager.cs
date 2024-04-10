@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
+    [Header("GENERAL")]
     [SerializeField] private Color waterColor;
     [SerializeField] private Color elasticColor;
     [SerializeField] private Color strechColor;
@@ -17,11 +18,14 @@ public class ColorManager : MonoBehaviour
     private IColorEffect DefaultObject;
 
     //Elastic
+    [Header("ELASTIC")]
     [SerializeField] private float elasticMinImpulse;
     [SerializeField] private float elasticHeightMultiplier;
 
     //Stretch
+    [Header("STRECH")]
     [SerializeField] private float stretchMultiplier;
+    [SerializeField] private LayerMask strechLayerMask;
 
     private void Start()
     {
@@ -48,7 +52,7 @@ public class ColorManager : MonoBehaviour
                 if (strechAssigned)
                     return DefaultObject;
                 strechAssigned = true;
-                return new StrechEffect(strechColor, ColorType.Strech,stretchMultiplier);
+                return new StrechEffect(strechColor, ColorType.Strech, stretchMultiplier, strechLayerMask);
 
             case ColorType.Default:
                 //return null;

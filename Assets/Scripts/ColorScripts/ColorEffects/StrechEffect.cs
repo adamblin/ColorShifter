@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StrechEffect : IStrechEffect
@@ -7,6 +8,7 @@ public class StrechEffect : IStrechEffect
     private Color effectColor;
     private ColorType colorType;
     private float stretchAmount;
+    private LayerMask layerMask;
     
     private Color previousColor;
     private GameObject obstacle;
@@ -15,11 +17,12 @@ public class StrechEffect : IStrechEffect
     private bool doneRevertingEffect = false;
     private bool revertedColor = false;
     
-    public StrechEffect(Color color, ColorType colorType, float multiplier)
+    public StrechEffect(Color color, ColorType colorType, float multiplier, LayerMask layerMask)
     {
         effectColor = color;
         this.colorType = colorType;
         stretchAmount = multiplier;
+        this.layerMask = layerMask;
     }
 
 
@@ -34,8 +37,12 @@ public class StrechEffect : IStrechEffect
 
     public void ApplyEffect()
     {
-        obstacle.transform.position = new Vector2(obstacle.transform.position.x, obstacle.transform.position.y + (stretchAmount / 2));
-        obstacle.transform.localScale = new Vector2(obstacle.transform.localScale.x, obstacle.transform.localScale.y + stretchAmount);
+        RaycastHit2D hit = Physics2D.Raycast(obstacle.transform.position, Vector2.up, obstacle.transform.localScale.y / 2, layerMask);
+        Debug.Log(hit.collider);
+        if (hit.collider == null) {
+            obstacle.transform.position = new Vector2(obstacle.transform.position.x, obstacle.transform.position.y + (stretchAmount / 2));
+            obstacle.transform.localScale = new Vector2(obstacle.transform.localScale.x, obstacle.transform.localScale.y + stretchAmount);
+        }
     }
 
     public ColorType getColorType()
@@ -69,4 +76,5 @@ public class StrechEffect : IStrechEffect
     public bool getRevertingEffect() {
         return doneRevertingEffect;    
     }
+
 }
