@@ -32,7 +32,7 @@ public class StrechEffect : IStrechEffect
         obstacle = target;
         previousColor = target.GetComponent<SpriteRenderer>().color;
         target.GetComponent<SpriteRenderer>().color = effectColor;
-        initialScale = target.transform.localScale;
+        initialScale = target.GetComponent<ObstacleEffectLogic>().getInitialScale();
     }
 
     public void ApplyEffect()
