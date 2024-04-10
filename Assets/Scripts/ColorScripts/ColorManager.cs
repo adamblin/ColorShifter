@@ -29,6 +29,9 @@ public class ColorManager : MonoBehaviour
             case ColorType.Strech:
                 return new StrechEffect(strechColor, ColorType.Strech,stretchMultiplier);
 
+            case ColorType.Default:
+                return null;
+
             default:
                 throw new ArgumentException("Color no soportado", nameof(colorType));
         }
@@ -46,6 +49,9 @@ public class ColorManager : MonoBehaviour
 
             case ColorType.Strech:
                 return strechColor;
+
+            case ColorType.Default:
+                return Color.white;
 
             default:
                 throw new ArgumentException("Color no soportado", nameof(colorType));

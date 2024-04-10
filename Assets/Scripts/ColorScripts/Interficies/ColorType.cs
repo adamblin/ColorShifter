@@ -6,5 +6,6 @@ public enum ColorType
 {
     Elastic,
     Water,
-    Strech
+    Strech,
+    Default
 }

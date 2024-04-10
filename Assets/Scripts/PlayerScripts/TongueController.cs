@@ -10,8 +10,7 @@ public class TongueController : MonoBehaviour
     [SerializeField] private float maxTongueDistance;
     [SerializeField] private float detectionRadius;
 
-    private ColorType[] colorTypes;
-    private int currentColorIndex = 0;
+    private ColorType currentColorType;
 
     private bool shootTongue = false;
     private bool canShootAgain = true;
@@ -32,19 +31,13 @@ public class TongueController : MonoBehaviour
 
     private void Start()
     {
-        colorTypes = new ColorType[] {
-            ColorType.Elastic,
-            ColorType.Water,
-            ColorType.Strech
-        };
-
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
 
         colorManager = FindAnyObjectByType<ColorManager>(); 
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        ChangePlayerColor(currentColorIndex);
+        ChangePlayerColor(ColorType.Default);
     }
 
     private void FixedUpdate()
@@ -125,9 +118,12 @@ public class TongueController : MonoBehaviour
 
 
     private void ChangeObjectEffect(GameObject target) {
-        IColorEffect currentEffect = colorManager.GetColorEffect(colorTypes[currentColorIndex]);
-        ObstacleEffectLogic colorableObject = target.GetComponent<ObstacleEffectLogic>();
-        colorableObject.ApplyEffect(currentEffect);
+        IColorEffect currentEffect = colorManager.GetColorEffect(currentColorType);
+        if(currentEffect != null){
+            ObstacleEffectLogic colorableObject = target.GetComponent<ObstacleEffectLogic>();
+            colorableObject.ApplyEffect(currentEffect);
+        }
+        
     }
 
 
@@ -140,9 +136,9 @@ public class TongueController : MonoBehaviour
         }
     }
 
-    private void ChangePlayerColor(int changeIndex) {
-        currentColorIndex = changeIndex;
-        spriteRenderer.color = colorManager.GetColor(colorTypes[currentColorIndex]);
+    private void ChangePlayerColor(ColorType colorType) {
+        currentColorType = colorType;
+        spriteRenderer.color = colorManager.GetColor(currentColorType);
     }
 
 

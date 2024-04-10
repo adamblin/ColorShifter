@@ -32,7 +32,7 @@ public class PlayerInputs : MonoBehaviour
     public static event Action onJump;
 
     //Cambiar Colores
-    public static event Action<int> onChangeColor;
+    public static event Action<ColorType> onChangeColor;
 
 
     private void Update()
@@ -63,12 +63,12 @@ public class PlayerInputs : MonoBehaviour
 
         //COLORS
         if (Input.GetKeyDown(ElasticKey)) 
-            onChangeColor?.Invoke(0);
+            onChangeColor?.Invoke(ColorType.Elastic);
 
         if (Input.GetKeyDown(WaterKey))
-            onChangeColor?.Invoke(1);
+            onChangeColor?.Invoke(ColorType.Water);
 
         if (Input.GetKeyDown(StrechKey))
-            onChangeColor?.Invoke(2);
+            onChangeColor?.Invoke(ColorType.Strech);
     }
 }

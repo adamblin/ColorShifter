@@ -11,46 +11,36 @@ public class StrechEffect : IStrechEffect
     private Color previousColor;
     private GameObject obstacle;
     private Vector3 initialScale;
-    private BoxCollider2D boxCollider;
 
+    private bool doneRevertingEffect = false;
+    private bool revertedColor = false;
     
     public StrechEffect(Color color, ColorType colorType, float multiplier)
     {
         effectColor = color;
         this.colorType = colorType;
-        this.stretchAmount = multiplier;
+        stretchAmount = multiplier;
     }
 
 
 
     public void InitializeEffect(GameObject target)
     {
-        this.obstacle = target;
+        obstacle = target;
         previousColor = target.GetComponent<SpriteRenderer>().color;
         target.GetComponent<SpriteRenderer>().color = effectColor;
         initialScale = target.transform.localScale;
-        boxCollider = target.GetComponent<BoxCollider2D>();
 
         Debug.Log("initialScale"+initialScale);
-        Debug.Log("boxCollider" + boxCollider.size);
-
-        //Ajustamos el collider para tener en cuenta el estiramiento
-        if (boxCollider != null)
-        {
-            Vector2 newColliderSize = new Vector2(boxCollider.size.x, boxCollider.size.y * stretchAmount);
-            Vector2 colliderOffset = new Vector2(boxCollider.offset.x, boxCollider.offset.y * stretchAmount);
-            boxCollider.size = newColliderSize;
-            boxCollider.offset = colliderOffset;
-
-            Debug.Log("boxCollider" + boxCollider.size);
-        }
+        
         Debug.Log("APLICANDO EFECTO");
     }
 
     public void ApplyEffect()
     {
-        //Aplicamos el efecto para aumentar la altura
-        obstacle.transform.localScale = new Vector3(initialScale.x, initialScale.y * stretchAmount, initialScale.z);
+        Debug.Log("Streching");
+        obstacle.transform.position = new Vector2(obstacle.transform.position.x, obstacle.transform.position.y + (stretchAmount / 2));
+        obstacle.transform.localScale = new Vector2(obstacle.transform.localScale.x, obstacle.transform.localScale.y + stretchAmount);
     }
 
     public ColorType getColorType()
@@ -61,14 +51,26 @@ public class StrechEffect : IStrechEffect
     public void RemoveEffect(GameObject target)
     {
         //Restauramos el color y la altura originales
-        target.GetComponent<SpriteRenderer>().color = previousColor;
-        target.transform.localScale = initialScale;
 
-        // Restauramos tambien el collider
-        if (boxCollider != null)
-        {
-            boxCollider.size = new Vector2(boxCollider.size.x, boxCollider.size.y / stretchAmount);
-            boxCollider.offset = new Vector2(boxCollider.offset.x, boxCollider.offset.y / stretchAmount);
+        if (!revertedColor) {
+            target.GetComponent<SpriteRenderer>().color = previousColor;
+            revertedColor = true;
         }
+
+        Debug.Log(target.transform.localScale + " intital Scale: " + initialScale);
+
+        if (target.transform.localScale.y > initialScale.y)
+        {
+            obstacle.transform.position = new Vector2(obstacle.transform.position.x, obstacle.transform.position.y - (stretchAmount / 2));
+            obstacle.transform.localScale = new Vector2(obstacle.transform.localScale.x, obstacle.transform.localScale.y - stretchAmount);
+        }
+        else {
+            doneRevertingEffect = true;
+        }
+    }
+
+
+    public bool getRevertingEffect() {
+        return doneRevertingEffect;    
     }
 }
