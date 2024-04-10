@@ -14,6 +14,7 @@ public class ObstacleEffectLogic : MonoBehaviour
 
     //LOGICA STRECH
     private IStrechEffect lastStrechEffect;
+    private Vector3 initialScale;
 
     public void ApplyEffect(IColorEffect colorEffect) {
 
@@ -22,6 +23,7 @@ public class ObstacleEffectLogic : MonoBehaviour
             currentColorEffect = colorEffect;
             currentColorEffect.InitializeEffect(gameObject);
             currentColorType = currentColorEffect.getColorType();
+            lastStrechEffect = null;
 
         } else {
             if (currentColorType == ColorType.Strech) {
@@ -43,6 +45,7 @@ public class ObstacleEffectLogic : MonoBehaviour
     void Start()
     {
         currentColorType = ColorType.Default;
+        initialScale = transform.localScale;
     }
 
     void Update()
@@ -79,5 +82,9 @@ public class ObstacleEffectLogic : MonoBehaviour
                 IElasticEffect effect = currentColorEffect as IElasticEffect;
                 effect.ApplyEffect(collision.gameObject);
         }
+    }
+
+    public Vector3 getInitialScale() { 
+        return initialScale;
     }
 }
