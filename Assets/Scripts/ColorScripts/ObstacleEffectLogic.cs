@@ -10,29 +10,36 @@ public class ObstacleEffectLogic : MonoBehaviour
     private IColorEffect currentColorEffect;
     private ColorType currentColorType;
 
+    public static event Action<ColorType> onChangeEffect;
+
     //LOGICA STRECH
     private IStrechEffect lastStrechEffect;
 
     public void ApplyEffect(IColorEffect colorEffect) {
-        if (currentColorEffect != null)
-        {
-            if (currentColorType == ColorType.Strech) { 
-                IStrechEffect effect = currentColorEffect as IStrechEffect; 
-                lastStrechEffect = effect;
-            }
 
-            currentColorEffect.RemoveEffect(gameObject);
-            currentColorEffect = null;
-            currentColorType = ColorType.Default;
-        }
-        else 
+        if (currentColorType == ColorType.Default)
         {
             currentColorEffect = colorEffect;
             currentColorEffect.InitializeEffect(gameObject);
             currentColorType = currentColorEffect.getColorType();
+
+        } else {
+            if (currentColorType == ColorType.Strech) {
+                IStrechEffect effect = currentColorEffect as IStrechEffect;
+                lastStrechEffect = effect;
+            }
+
+            if (colorEffect.getColorType() != ColorType.Default) {
+                onChangeEffect?.Invoke(colorEffect.getColorType());
+            }
+
+            onChangeEffect?.Invoke(currentColorType);
+            currentColorEffect.RemoveEffect(gameObject);
+            currentColorEffect = null;
+            currentColorType = ColorType.Default;
         }
     }
-    
+
     void Start()
     {
         currentColorType = ColorType.Default;

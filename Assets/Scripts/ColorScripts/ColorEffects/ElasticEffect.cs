@@ -51,7 +51,6 @@ public class ElasticEffect : IElasticEffect
     public void RemoveEffect(GameObject target)
     {
         target.GetComponent<SpriteRenderer>().color = previousColor;
-        obstacle.GetComponent<Rigidbody2D>().sharedMaterial = null;
     }
 
     public ColorType getColorType()

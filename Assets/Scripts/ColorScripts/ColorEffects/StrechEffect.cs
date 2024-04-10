@@ -52,7 +52,8 @@ public class StrechEffect : IStrechEffect
     {
         //Restauramos el color y la altura originales
 
-        if (!revertedColor) {
+        if (!revertedColor)
+        {
             target.GetComponent<SpriteRenderer>().color = previousColor;
             revertedColor = true;
         }
