@@ -44,6 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a51093e617b0114488911563497cdaa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterColor: {r: 0.064044006, g: 0.67265624, b: 0.96981126, a: 0}
-  ElasticColor: {r: 0.12053394, g: 0.645283, b: 0.15161575, a: 0}
-  StrechColor: {r: 0.81886786, g: 0.81816554, b: 0.15295827, a: 0}
+  waterColor: {r: 0.064044006, g: 0.67265624, b: 0.96981126, a: 1}
+  elasticColor: {r: 0.26663578, g: 0.82641506, b: 0.2839933, a: 1}
+  strechColor: {r: 0.82641506, g: 0.8215438, b: 0.19802772, a: 1}
+  elasticMinImpulse: 5
+  elasticHeightMultiplier: 5
+  stretchMultiplier: 0.01
+  strechLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
