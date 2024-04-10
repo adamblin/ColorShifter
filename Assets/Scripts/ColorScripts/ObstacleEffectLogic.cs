@@ -94,6 +94,18 @@ public class ObstacleEffectLogic : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (currentColorEffect != null)
+        {
+            if (currentColorType == ColorType.Water && collision.gameObject.CompareTag("Player"))
+            {
+                IWaterEffect effect = currentColorEffect as IWaterEffect;
+                effect.ApplyEffect();
+            }
+        }
+    }
+
     public Vector3 getInitialScale() { 
         return initialScale;
     }

@@ -7,6 +7,7 @@ public class CharacterMovement: MonoBehaviour
     [Header("Moviment")]
     //PLAYER MOVEMENT
     [SerializeField] private float playerSpeed = 5f;
+    [SerializeField] private float initialGravityScale;
     private bool facingRight = true;
     private bool canFlip = true;
     private Vector2 movementDirection;
@@ -25,12 +26,13 @@ public class CharacterMovement: MonoBehaviour
 
     [Header("Water")] 
     private bool inWater = false;
-    [SerializeField]
-    private float swimSpeed = 2.5f;
-    private float speed = 2.0f;
-    private float gravity = 2.0f;
-    private float speedMultiplier = 1f;
-    
+    [SerializeField] private float speedInWater = 10f;
+    [SerializeField] private float jumpForceInWater = 10f;
+    [SerializeField] private float linearDrag = 10f;
+    //[SerializeField] private float gravityInWater = 0.5f;
+
+
+
 
 
 
@@ -58,15 +60,9 @@ public class CharacterMovement: MonoBehaviour
 
     private void ApplyMovementInWater()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            rb.velocity = new Vector2(rb.velocity.x, swimSpeed); // Nada hacia arriba
-        }
-        else
-        {
-            rb.velocity += Vector2.down * gravity * Time.deltaTime;
-        }
-        
+        rb.drag = linearDrag;
+        rb.gravityScale = 0;
+        rb.AddForce(new Vector2(movementDirection.x * speedInWater * Time.deltaTime, 0));
     }
 
     private void ApplyMovement() {
@@ -105,16 +101,29 @@ public class CharacterMovement: MonoBehaviour
             }
         }
 
-        if (rb.velocity.y < 0) {
-            rb.velocity -= vecGravity * fallMultiplier * Time.deltaTime;
+        if (inWater) {
+            //aplicar gravedad hacia abajo
+        } 
+        else
+        {
+            if (rb.velocity.y < 0)
+            {
+                rb.velocity -= vecGravity * fallMultiplier * Time.deltaTime;
+            }
         }
     }
 
     private void PlayerJump() {
 
-        if (isGrounded) {
+        if (isGrounded && !inWater)
+        {
             //rb.AddForce(Vector2.up * jumpForce);
+            rb.gravityScale = initialGravityScale;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        } 
+        else if (inWater)
+        {
+            rb.AddForce(Vector2.up * jumpForceInWater);
         }
     }
 
@@ -126,12 +135,17 @@ public class CharacterMovement: MonoBehaviour
         canFlip = true;
     }
 
+    private void InWater() {
+        inWater = !inWater;
+    }
+
 
     private void OnEnable()
     {
         TongueController.onShootingTongue += CanNotFlip;
         TongueController.onNotMovingTongue += CanFlip;
         PlayerInputs.onJump += PlayerJump;
+        WaterEffect.onWater += InWater;
     }
 
     private void OnDisable()
@@ -139,6 +153,7 @@ public class CharacterMovement: MonoBehaviour
         TongueController.onShootingTongue -= CanNotFlip;
         TongueController.onNotMovingTongue -= CanFlip;
         PlayerInputs.onJump -= PlayerJump;
+        WaterEffect.onWater -= InWater;
     }
 
     public Vector3 getLastJumpPosition() { 

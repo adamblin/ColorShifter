@@ -27,7 +27,7 @@ public class WaterEffect : IWaterEffect
 
     public void ApplyEffect()
     {
-        
+        onWater?.Invoke();
     }
 
     public ColorType getColorType()
