@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class WaterEffect : IWaterEffect
@@ -8,6 +10,8 @@ public class WaterEffect : IWaterEffect
     private ColorType colorType;
 
     private Color previousColor;
+
+    public static event Action onWater;
 
     public WaterEffect(Color color, ColorType colorType) { 
         effectColor = color;
