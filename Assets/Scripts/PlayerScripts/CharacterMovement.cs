@@ -61,6 +61,7 @@ public class CharacterMovement: MonoBehaviour
     }
 
     private void ApplyMovement() {
+        rb.gravityScale = initialGravityScale;
         rb.velocity = new Vector2(movementDirection.x * playerSpeed, rb.velocity.y);
     }
 
@@ -86,10 +87,16 @@ public class CharacterMovement: MonoBehaviour
             isGrounded = false;
         }
         else {
-            if (collider.gameObject.layer == 6 || collider.gameObject.layer == 7) //gorund layer
+            if (collider.gameObject.layer == 6) //gorund layer
             {
                 isGrounded = true;
                 lastJumpPosition = transform.position;
+            }
+            else if (collider.gameObject.layer == 7) //obstacles
+            { 
+                isGrounded = true;
+                if (collider.gameObject.GetComponent<ObstacleEffectLogic>().getCurrentColorType() != ColorType.Elastic)
+                    lastJumpPosition = transform.position;
             }
         }
 
@@ -109,7 +116,6 @@ public class CharacterMovement: MonoBehaviour
 
         if (isGrounded && !inWater)
         {
-            rb.gravityScale = initialGravityScale;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         } 
         else if (inWater)

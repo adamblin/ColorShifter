@@ -23,6 +23,17 @@ public class WaterEffect : IWaterEffect
         previousColor = target.GetComponent<SpriteRenderer>().color;
         target.GetComponent<SpriteRenderer>().color = effectColor;
         target.GetComponent<BoxCollider2D>().isTrigger = true;
+
+        //COMPROBEN QUE AL INICIALITZAR EL JUGADOR NO ESTIGUI A SOBRE
+        Collider2D[] collider = Physics2D.OverlapBoxAll(target.transform.position, target.transform.localScale, 0f);
+
+        for (int i = 0; i < collider.Length; i++)
+        {
+            if (collider[i].gameObject.CompareTag("Player"))
+            {
+                onWater?.Invoke();
+            }
+        }
     }
 
     public void ApplyEffect()
@@ -42,7 +53,6 @@ public class WaterEffect : IWaterEffect
         for (int i = 0; i < collider.Length; i++) {
             if (collider[i].gameObject.CompareTag("Player")) {
                 onWater?.Invoke();
-                Debug.Log("PLAYER IN ");
             }
         }
         target.GetComponent<SpriteRenderer>().color = previousColor;

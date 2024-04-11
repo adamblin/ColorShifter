@@ -64,6 +64,7 @@ public class ColorManager : MonoBehaviour
     }
 
     public Color GetColor(ColorType colorType) {
+        Debug.Log("CHANGED COLOR");
         switch (colorType)
         {
 
@@ -92,6 +93,7 @@ public class ColorManager : MonoBehaviour
 
     private void ChangeAssigneds(ColorType colorType)
     {
+        Debug.Log("CHANGED BOOLEAN");
         switch (colorType) { 
             case ColorType.Elastic:
                 elasticAssigned = false;

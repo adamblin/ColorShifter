@@ -120,8 +120,7 @@ public class TongueController : MonoBehaviour
 
     private void ChangeObjectEffect(GameObject target) {
         IColorEffect currentEffect = colorManager.GetColorEffect(currentColorType);
-        ObstacleEffectLogic colorableObject = target.GetComponent<ObstacleEffectLogic>();
-        colorableObject.ApplyEffect(currentEffect);
+        target.GetComponent<ObstacleEffectLogic>().ApplyEffect(currentEffect);
         ChangePlayerColor(currentEffect.getColorType());
     }
 

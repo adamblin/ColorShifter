@@ -25,7 +25,7 @@ public class ObstacleEffectLogic : MonoBehaviour
             currentColorType = currentColorEffect.getColorType();
 
         } else {
-            if (currentColorType == ColorType.Strech) {
+            if (currentColorType == ColorType.Strech) { //STRECH LOGIC
                 IStrechEffect effect = currentColorEffect as IStrechEffect;
                 lastStrechEffect = effect;
             }
@@ -53,6 +53,8 @@ public class ObstacleEffectLogic : MonoBehaviour
         RevertStrechEffect();
     }
 
+    //STRECH LOGIC
+
     private void StrechEffect() {
         if (currentColorType == ColorType.Strech) { 
             IStrechEffect effect = currentColorEffect as IStrechEffect;
@@ -72,9 +74,8 @@ public class ObstacleEffectLogic : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("COLLIDED");
+    private void OnCollisionEnter2D(Collision2D collision) //ELASTIC LOGIC
+    { 
         if (currentColorEffect != null) {
             if (currentColorType == ColorType.Elastic && collision.gameObject.CompareTag("Player"))
             {
@@ -83,6 +84,8 @@ public class ObstacleEffectLogic : MonoBehaviour
             }
         }
     }
+
+    //WATER LOGIC
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -108,5 +111,9 @@ public class ObstacleEffectLogic : MonoBehaviour
 
     public Vector3 getInitialScale() { 
         return initialScale;
+    }
+
+    public ColorType getCurrentColorType() {
+        return currentColorType;
     }
 }

@@ -260,10 +260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94366827db836084781891519791a159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 536233231}
-  smoothSpeed: 0.5
-  offset: {x: 0, y: 0, z: 0}
-  desiredPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &603280401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,7 +408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7884690054672578055, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: linearDrag
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7884690054672578055, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: speedInWater
@@ -424,7 +420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7884690054672578055, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: jumpForceInWater
-      value: 500
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 7884690054672578055, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: initialGravityScale
