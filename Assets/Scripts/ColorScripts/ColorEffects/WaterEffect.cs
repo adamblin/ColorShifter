@@ -37,6 +37,14 @@ public class WaterEffect : IWaterEffect
 
     public void RemoveEffect(GameObject target)
     {
+        Collider2D[] collider = Physics2D.OverlapBoxAll(target.transform.position, target.transform.localScale, 0f);
+
+        for (int i = 0; i < collider.Length; i++) {
+            if (collider[i].gameObject.CompareTag("Player")) {
+                onWater?.Invoke();
+                Debug.Log("PLAYER IN ");
+            }
+        }
         target.GetComponent<SpriteRenderer>().color = previousColor;
         target.GetComponent<BoxCollider2D>().isTrigger = false;
     }

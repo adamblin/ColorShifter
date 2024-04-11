@@ -38,7 +38,6 @@ public class StrechEffect : IStrechEffect
     public void ApplyEffect()
     {
         RaycastHit2D hit = Physics2D.Raycast(obstacle.transform.position, Vector2.up, obstacle.transform.localScale.y / 2, layerMask);
-        Debug.Log(hit.collider);
         if (hit.collider == null) {
             obstacle.transform.position = new Vector2(obstacle.transform.position.x, obstacle.transform.position.y + (stretchAmount / 2));
             obstacle.transform.localScale = new Vector2(obstacle.transform.localScale.x, obstacle.transform.localScale.y + stretchAmount);
@@ -60,7 +59,6 @@ public class StrechEffect : IStrechEffect
             revertedColor = true;
         }
 
-        Debug.Log(target.transform.localScale + " intital Scale: " + initialScale);
 
         if (target.transform.localScale.y > initialScale.y)
         {
