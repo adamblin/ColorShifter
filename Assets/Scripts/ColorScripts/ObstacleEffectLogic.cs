@@ -23,7 +23,6 @@ public class ObstacleEffectLogic : MonoBehaviour
             currentColorEffect = colorEffect;
             currentColorEffect.InitializeEffect(gameObject);
             currentColorType = currentColorEffect.getColorType();
-            lastStrechEffect = null;
 
         } else {
             if (currentColorType == ColorType.Strech) {
@@ -62,7 +61,7 @@ public class ObstacleEffectLogic : MonoBehaviour
     }
 
     private void RevertStrechEffect() {
-        if (lastStrechEffect != null) {
+        if (lastStrechEffect != null && currentColorType != ColorType.Strech) {
             if (!lastStrechEffect.getRevertingEffect())
             {
                 lastStrechEffect.RemoveEffect(gameObject);
