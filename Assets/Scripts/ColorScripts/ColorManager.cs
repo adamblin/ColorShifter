@@ -16,6 +16,7 @@ public class ColorManager : MonoBehaviour
     private bool strechAssigned = false;
 
     private IColorEffect DefaultObject;
+    public static event Action<ColorType> onGetColorBack;
 
     //Elastic
     [Header("ELASTIC")]
@@ -55,7 +56,12 @@ public class ColorManager : MonoBehaviour
                 return new StrechEffect(strechColor, ColorType.Strech, stretchMultiplier, strechLayerMask);
 
             case ColorType.Default:
-                //return null;
+                if (strechAssigned)
+                    onGetColorBack?.Invoke(ColorType.Strech);
+                if (waterAssigned)
+                    onGetColorBack?.Invoke(ColorType.Water);
+                if (elasticAssigned)
+                    onGetColorBack?.Invoke(ColorType.Elastic);
                 return DefaultObject;
 
             default:

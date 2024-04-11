@@ -121,7 +121,10 @@ public class TongueController : MonoBehaviour
     private void ChangeObjectEffect(GameObject target) {
         IColorEffect currentEffect = colorManager.GetColorEffect(currentColorType);
         target.GetComponent<ObstacleEffectLogic>().ApplyEffect(currentEffect);
-        ChangePlayerColor(currentEffect.getColorType());
+
+        if (currentEffect.getColorType() != ColorType.Default) {
+            ChangePlayerColor(currentEffect.getColorType());
+        }
     }
 
 
@@ -176,6 +179,7 @@ public class TongueController : MonoBehaviour
         PlayerInputs.onShootStraight += setPointingStraight;
         PlayerInputs.onChangeColor += ChangePlayerColor;
         WaterEffect.onWater += InWater;
+        ColorManager.onGetColorBack += ChangePlayerColor;
     }
 
     private void OnDisable()
@@ -186,6 +190,7 @@ public class TongueController : MonoBehaviour
         PlayerInputs.onShootStraight -= setPointingStraight;
         PlayerInputs.onChangeColor -= ChangePlayerColor;
         WaterEffect.onWater -= InWater;
+        ColorManager.onGetColorBack -= ChangePlayerColor;
     }
 
 
