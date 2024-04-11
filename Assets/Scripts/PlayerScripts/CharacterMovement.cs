@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterMovement: MonoBehaviour
 {
-    [Header("Moviment")]
+    [Header("MOVEMENT")]
     //PLAYER MOVEMENT
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float initialGravityScale;
@@ -12,7 +12,7 @@ public class CharacterMovement: MonoBehaviour
     private bool canFlip = true;
     private Vector2 movementDirection;
 
-    [Header("Jump")]
+    [Header("JUMP")]
     //PLAYER JUMP
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float fallMultiplier;
@@ -24,12 +24,12 @@ public class CharacterMovement: MonoBehaviour
     Vector2 vecGravity;
 
 
-    [Header("Water")] 
-    private bool inWater = false;
+    [Header("UNDER WATER")] 
     [SerializeField] private float speedInWater = 10f;
     [SerializeField] private float jumpForceInWater = 10f;
     [SerializeField] private float linearDrag = 10f;
     [SerializeField] private float gravityInWater = 0.5f;
+    private bool inWater = false;
 
 
     private Rigidbody2D rb;
