@@ -16,6 +16,7 @@ public class TongueController : MonoBehaviour
     private bool canShootAgain = true;
     private bool getDirectionAgain = true;
     private bool canCheckCollisions = true;
+    private bool inWater = false;
 
     private Vector3 firstDirection;
     private bool pointingUp = false;
@@ -142,7 +143,7 @@ public class TongueController : MonoBehaviour
 
     private void setShootTongue() {
         Debug.Log("Shoot Tongue");
-        if (canShootAgain) { 
+        if (canShootAgain && !inWater) { 
             shootTongue = true;
             canShootAgain = false;
             canCheckCollisions = true;
@@ -163,6 +164,9 @@ public class TongueController : MonoBehaviour
         pointingStraight = !pointingStraight;
     }
 
+    private void InWater() {
+        inWater = !inWater;
+    }
 
 
     private void OnEnable()
@@ -172,6 +176,7 @@ public class TongueController : MonoBehaviour
         PlayerInputs.onShootDown += setPointingDown;
         PlayerInputs.onShootStraight += setPointingStraight;
         PlayerInputs.onChangeColor += ChangePlayerColor;
+        WaterEffect.onWater += InWater;
     }
 
     private void OnDisable()
@@ -181,6 +186,7 @@ public class TongueController : MonoBehaviour
         PlayerInputs.onShootDown -= setPointingDown;
         PlayerInputs.onShootStraight -= setPointingStraight;
         PlayerInputs.onChangeColor -= ChangePlayerColor;
+        WaterEffect.onWater -= InWater;
     }
 
 
