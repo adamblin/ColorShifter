@@ -29,12 +29,7 @@ public class CharacterMovement: MonoBehaviour
     [SerializeField] private float speedInWater = 10f;
     [SerializeField] private float jumpForceInWater = 10f;
     [SerializeField] private float linearDrag = 10f;
-    //[SerializeField] private float gravityInWater = 0.5f;
-
-
-
-
-
+    [SerializeField] private float gravityInWater = 0.5f;
 
 
     private Rigidbody2D rb;
@@ -61,12 +56,11 @@ public class CharacterMovement: MonoBehaviour
     private void ApplyMovementInWater()
     {
         rb.drag = linearDrag;
-        rb.gravityScale = 0;
+        rb.gravityScale = gravityInWater;
         rb.AddForce(new Vector2(movementDirection.x * speedInWater * Time.deltaTime, 0));
     }
 
     private void ApplyMovement() {
-        //rb.AddForce(new Vector2(movementDirection.x * playerSpeed * Time.deltaTime, 0));
         rb.velocity = new Vector2(movementDirection.x * playerSpeed, rb.velocity.y);
     }
 
@@ -85,8 +79,6 @@ public class CharacterMovement: MonoBehaviour
     }
 
     private void CheckJumpingLogic() {
-        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGorunded);
-
         Collider2D collider = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGorunded);
 
         if (collider == null)
@@ -102,8 +94,8 @@ public class CharacterMovement: MonoBehaviour
         }
 
         if (inWater) {
-            //aplicar gravedad hacia abajo
-        } 
+            rb.AddForce(-vecGravity * fallMultiplier * Time.deltaTime);
+        }
         else
         {
             if (rb.velocity.y < 0)
@@ -117,7 +109,6 @@ public class CharacterMovement: MonoBehaviour
 
         if (isGrounded && !inWater)
         {
-            //rb.AddForce(Vector2.up * jumpForce);
             rb.gravityScale = initialGravityScale;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         } 
