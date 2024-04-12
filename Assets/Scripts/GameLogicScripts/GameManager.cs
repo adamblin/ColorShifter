@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void MoveToCheckPoint() {
+    public void MoveToCheckPoint() {
         GameObject player = GameObject.Find("Player");
         player.transform.position = checkPoints[currentIndex].transform.position;
     }

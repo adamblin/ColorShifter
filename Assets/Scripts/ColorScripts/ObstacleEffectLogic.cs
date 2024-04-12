@@ -116,4 +116,19 @@ public class ObstacleEffectLogic : MonoBehaviour
     public ColorType getCurrentColorType() {
         return currentColorType;
     }
+
+    private void RemoveAllEffects() { 
+        currentColorEffect = null;
+    }
+
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
+    }
 }
