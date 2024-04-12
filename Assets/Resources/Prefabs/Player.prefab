@@ -376,7 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 10
   initialGravityScale: 5
-  jumpForce: 15
+  jumpForce: 20
   fallMultiplier: 3.5
   groundCheck: {fileID: 4437298614734752185}
   checkRadius: 0.5
