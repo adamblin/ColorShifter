@@ -62,6 +62,7 @@ public class CharacterMovement: MonoBehaviour
 
     private void ApplyMovement() {
         rb.gravityScale = initialGravityScale;
+        rb.drag = 0;
         rb.velocity = new Vector2(movementDirection.x * playerSpeed, rb.velocity.y);
     }
 

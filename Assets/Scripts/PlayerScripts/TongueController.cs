@@ -50,6 +50,7 @@ public class TongueController : MonoBehaviour
         ShootTongue();
         CheckTongueCollisions();
         CheckMaxTongueDistance();
+        ChangePlayerColor(currentColorType);
     }
 
     private void ShootTongue() {
@@ -121,10 +122,6 @@ public class TongueController : MonoBehaviour
     private void ChangeObjectEffect(GameObject target) {
         IColorEffect currentEffect = colorManager.GetColorEffect(currentColorType);
         target.GetComponent<ObstacleEffectLogic>().ApplyEffect(currentEffect);
-
-        if (currentEffect.getColorType() != ColorType.Default) {
-            ChangePlayerColor(currentEffect.getColorType());
-        }
     }
 
 

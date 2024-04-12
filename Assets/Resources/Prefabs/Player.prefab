@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 3336242206432462137}
   - component: {fileID: -5593858733002335637}
   - component: {fileID: 7884690054672578055}
+  - component: {fileID: 661089726}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -194,7 +195,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 5
   m_Material: {fileID: 6200000, guid: 8643b9307a511e647ad0952510ffdcf3, type: 2}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -205,7 +206,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3336242206432462131}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -374,6 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
+  initialGravityScale: 5
   jumpForce: 15
   fallMultiplier: 3.5
   groundCheck: {fileID: 4437298614734752185}
@@ -381,6 +383,26 @@ MonoBehaviour:
   whatIsGorunded:
     serializedVersion: 2
     m_Bits: 192
+  speedInWater: 1000
+  jumpForceInWater: 800
+  linearDrag: 5
+  gravityInWater: 2.5
+--- !u!70 &661089726
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3336242206432462131}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!1 &3336242206842478859
 GameObject:
   m_ObjectHideFlags: 0
