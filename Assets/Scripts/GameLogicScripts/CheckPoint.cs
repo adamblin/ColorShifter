@@ -17,8 +17,10 @@ public class CheckPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        spriteRenderer.color = Color.green;
-        onCheckPoint?.Invoke(gameObject);
-        Destroy(GetComponent<Collider2D>());
+        if (collision.gameObject.CompareTag("Player")) {
+            spriteRenderer.color = Color.green;
+            onCheckPoint?.Invoke(gameObject);
+            Destroy(GetComponent<Collider2D>());
+        } 
     }
 }
