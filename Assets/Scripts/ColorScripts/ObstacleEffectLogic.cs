@@ -117,18 +117,18 @@ public class ObstacleEffectLogic : MonoBehaviour
         return currentColorType;
     }
 
-    private void RemoveAllEffects() { 
-        currentColorEffect = null;
+    private void RemoveAllEffects(ColorType colorType) {
+        ApplyEffect(FindAnyObjectByType<ColorManager>().GetColorEffect(colorType));
     }
 
 
     private void OnEnable()
     {
-        
+        PlayerSquashed.onPlayerDeath += RemoveAllEffects;
     }
 
     private void OnDisable()
     {
-        
+        PlayerSquashed.onPlayerDeath -= RemoveAllEffects;
     }
 }

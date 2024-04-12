@@ -5,6 +5,12 @@ using System;
 
 public class PlayerInputs : MonoBehaviour
 {
+    [Header("BLOQUEAR EFECTOS ESCENAS")]
+    [SerializeField] private bool cantUseStrech = false;
+    [SerializeField] private bool cantUseElastic = false;
+    [SerializeField] private bool cantUseWater = false;
+
+    [Header("CONTROLES")]
     [SerializeField] private KeyCode shootKey;
     [SerializeField] private KeyCode upKey;
     [SerializeField] private KeyCode downKey;
@@ -62,13 +68,13 @@ public class PlayerInputs : MonoBehaviour
             onJump?.Invoke();
 
         //COLORS
-        if (Input.GetKeyDown(ElasticKey)) 
+        if (Input.GetKeyDown(ElasticKey) && !cantUseElastic) 
             onChangeColor?.Invoke(ColorType.Elastic);
 
-        if (Input.GetKeyDown(WaterKey))
+        if (Input.GetKeyDown(WaterKey) && !cantUseWater)
             onChangeColor?.Invoke(ColorType.Water);
 
-        if (Input.GetKeyDown(StrechKey))
+        if (Input.GetKeyDown(StrechKey) && !cantUseStrech)
             onChangeColor?.Invoke(ColorType.Strech);
     }
 }

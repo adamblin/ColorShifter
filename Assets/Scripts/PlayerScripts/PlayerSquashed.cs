@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerSquashed : MonoBehaviour
 {
     [SerializeField] private float xSize, ySize;
     [SerializeField] private LayerMask layerMask;
+
+    public static event Action<ColorType> onPlayerDeath;
 
     private void Update()
     {
@@ -14,8 +17,10 @@ public class PlayerSquashed : MonoBehaviour
 
     private void CheckIfPlayerSquished() {
         Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(xSize, ySize), 0, layerMask);
-        if (colliders.Length == 2)
+        if (colliders.Length == 2) { 
             FindAnyObjectByType<GameManager>().MoveToCheckPoint();
+            onPlayerDeath.Invoke(ColorType.Default);
+        }
     }
 
     private void OnDrawGizmos()
