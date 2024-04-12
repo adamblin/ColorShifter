@@ -12,6 +12,9 @@ public class CameraScript : MonoBehaviour
 
     [SerializeField] 
     private float forward;
+
+    [SerializeField] 
+    private float smoothing;
     
 
     private void Start()
@@ -32,6 +35,6 @@ public class CameraScript : MonoBehaviour
             targetPosition = new Vector3(targetPosition.x - forward, targetPosition.y, transform.position.z);
         }
 
-        transform.position = targetPosition;
+        transform.position = Vector3.Lerp(transform.position,targetPosition,smoothing * Time.deltaTime);
     }
 }
