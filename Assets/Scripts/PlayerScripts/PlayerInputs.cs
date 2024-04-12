@@ -37,7 +37,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(shootKey) || Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(shootKey) || Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Mouse0))
             onShoot?.Invoke();
 
         if (Input.GetKeyDown(upKey))
