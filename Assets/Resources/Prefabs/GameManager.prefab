@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eccb6cefa5fa8fd4089e6c3d966c252d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkPoints: []
 --- !u!114 &1419596924599824962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,8 +62,8 @@ MonoBehaviour:
   elasticColor: {r: 0.26663578, g: 0.82641506, b: 0.2839933, a: 1}
   strechColor: {r: 0.82641506, g: 0.8215438, b: 0.19802772, a: 1}
   elasticMinImpulse: 5
-  elasticHeightMultiplier: 5
-  stretchMultiplier: 0.01
+  elasticHeightMultiplier: 9
+  stretchMultiplier: 0.04
   strechLayerMask:
     serializedVersion: 2
     m_Bits: 64
