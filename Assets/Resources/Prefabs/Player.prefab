@@ -240,7 +240,7 @@ MonoBehaviour:
   tongueEnd: {fileID: 3336242205924660175}
   tongueOrigin: {fileID: 3336242206842478858}
   tongueSpeed: 0.4
-  maxTongueDistance: 8
+  maxTongueDistance: 10
   detectionRadius: 0.25
 --- !u!120 &3336242206432462137
 LineRenderer:
@@ -353,6 +353,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6435019ad619cc447a1335c921ea74df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cantUseStrech: 0
+  cantUseElastic: 0
+  cantUseWater: 0
   shootKey: 101
   upKey: 119
   downKey: 115
@@ -399,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d15a65ff49eb44c8eb6a6ddbaf9672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 0.3
+  xSize: 0.52
   ySize: 1.53
   layerMask:
     serializedVersion: 2
