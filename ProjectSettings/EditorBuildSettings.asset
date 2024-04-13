@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/TutorialStretch.unity
     guid: b025b6418a4005f42986fff91fd1fedf
   - enabled: 1
-    path: Assets/Scenes/Levels/TutorialAgua.unity
+    path: Assets/Scenes/Levels/TutorialWater.unity
     guid: 858815be5e56b0f4fad36a980ea777ae
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 84a631710b67ef7499f0558c4bd5a2a3, type: 2}
