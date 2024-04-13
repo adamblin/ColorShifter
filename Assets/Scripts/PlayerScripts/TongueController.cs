@@ -56,7 +56,6 @@ public class TongueController : MonoBehaviour
 
     private void ShootTongue() {
         if (shootTongue) {
-            Debug.Log("Shooting tongue");
             Vector3 shootDirection = GetShootingDirection();
             tongueEnd.position += shootDirection * tongueSpeed;
         }
@@ -140,7 +139,6 @@ public class TongueController : MonoBehaviour
 
 
     private void setShootTongue() {
-        Debug.Log("Shoot Tongue");
         if (canShootAgain && !inWater) { 
             shootTongue = true;
             canShootAgain = false;
