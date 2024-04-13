@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2d0b9e136a4474191d989543594be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorHits: 3
+  doorHits: 1
   nextLevelName: Tutorial
 --- !u!61 &426513708971474926
 BoxCollider2D:
