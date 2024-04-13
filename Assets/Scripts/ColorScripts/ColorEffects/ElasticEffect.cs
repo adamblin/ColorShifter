@@ -33,7 +33,7 @@ public class ElasticEffect : IElasticEffect
     {
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
 
-        Vector2 direction = -(obstacle.transform.position - player.transform.position).normalized;
+        //Vector2 direction = -(obstacle.transform.position - player.transform.position).normalized;
         float jumpHeight = Mathf.Abs(player.GetComponent<CharacterMovement>().getLastJumpPosition().y 
             - (obstacle.transform.position.y + obstacle.transform.localScale.y / 2));
 
@@ -41,9 +41,7 @@ public class ElasticEffect : IElasticEffect
 
         float totalForce = minImpulse + (jumpHeight * hightMultiplier);
 
-        //FALTA OBTENER EL VECTOR EN EL QUE APLCAR LA FUERZA
-
-        rb.velocity = direction * totalForce;
+        rb.velocity = player.transform.up * totalForce;
 
 
     }

@@ -51,7 +51,13 @@ public class ObstacleEffectLogic : MonoBehaviour
     {
         StrechEffect();
         RevertStrechEffect();
+        CheckPlayerDistance();
     }
+
+    private void CheckPlayerDistance() { 
+        //Si el jugador esta muy lejos, devolvemos el color
+    }
+
 
     //STRECH LOGIC
 
