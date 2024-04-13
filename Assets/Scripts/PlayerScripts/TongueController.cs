@@ -114,6 +114,7 @@ public class TongueController : MonoBehaviour
                     canCheckCollisions = false;
                     ChangeObjectEffect(hitColliders[i].gameObject);
                 }
+                
             }
         }
     }
