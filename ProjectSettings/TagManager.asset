@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - PaintableObstacle
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Ground
   - PaintableObstacle
-  - 
+  - Door
   - 
   - 
   - 

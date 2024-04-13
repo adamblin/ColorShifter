@@ -15,10 +15,9 @@ public class NextLevelDoor : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.color = Color.red;
     }
 
-    private void DoorCollided()
+    public void DoorCollided()
     {
         doorHits--;
 
