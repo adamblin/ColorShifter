@@ -1848,6 +1848,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NextLevelDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 426513708971474927, guid: 5b455cd4e282cf44b83adac97975589b, type: 3}
+      propertyPath: nextLevelName
+      value: TutorialAgua
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b455cd4e282cf44b83adac97975589b, type: 3}
 --- !u!1001 &791733668
@@ -4320,7 +4324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6420849012949836124, guid: 6b696a4cd7eea5b4cbcda7824ac83d44, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.10904026
+      value: 0.10904074
       objectReference: {fileID: 0}
     - target: {fileID: 6420849012949836124, guid: 6b696a4cd7eea5b4cbcda7824ac83d44, type: 3}
       propertyPath: m_LocalPosition.z
