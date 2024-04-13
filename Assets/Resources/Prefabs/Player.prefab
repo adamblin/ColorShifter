@@ -242,6 +242,9 @@ MonoBehaviour:
   tongueSpeed: 0.4
   maxTongueDistance: 10
   detectionRadius: 0.25
+  tongueCanCollide:
+    serializedVersion: 2
+    m_Bits: 448
 --- !u!120 &3336242206432462137
 LineRenderer:
   m_ObjectHideFlags: 0

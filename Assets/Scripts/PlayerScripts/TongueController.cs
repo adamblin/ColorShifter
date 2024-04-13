@@ -9,6 +9,7 @@ public class TongueController : MonoBehaviour
     [SerializeField] private float tongueSpeed;
     [SerializeField] private float maxTongueDistance;
     [SerializeField] private float detectionRadius;
+    [SerializeField] private LayerMask tongueCanCollide;
 
     private ColorType currentColorType;
 
@@ -101,19 +102,17 @@ public class TongueController : MonoBehaviour
 
     private void CheckTongueCollisions() {
         if (canCheckCollisions) {
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tongueEnd.position, detectionRadius);
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tongueEnd.position, detectionRadius, tongueCanCollide);
 
             for (int i = 0; i < hitColliders.Length; i++) {
-                if (hitColliders[i].gameObject.tag.Equals("Ground")) {
-                    shootTongue = false;
-                    canCheckCollisions = false;
-                    break;
+                if (hitColliders[i].gameObject.tag.Equals("Door")) {
+                    hitColliders[i].gameObject.GetComponent<NextLevelDoor>().DoorCollided();
                 }
                 else if (hitColliders[i].gameObject.tag.Equals("PaintableObstacle")) {
-                    shootTongue = false;
-                    canCheckCollisions = false;
                     ChangeObjectEffect(hitColliders[i].gameObject);
                 }
+                shootTongue = false;
+                canCheckCollisions = false;
             }
         }
     }

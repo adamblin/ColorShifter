@@ -7,14 +7,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> checkPoints;
     private int currentIndex = 0;
 
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-            MoveToCheckPoint();
-    }
-
-
     public void MoveToCheckPoint() {
         GameObject player = GameObject.Find("Player");
         player.transform.position = checkPoints[currentIndex].transform.position;
