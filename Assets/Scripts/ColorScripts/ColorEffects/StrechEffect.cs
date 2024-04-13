@@ -25,8 +25,6 @@ public class StrechEffect : IStrechEffect
         this.layerMask = layerMask;
     }
 
-
-
     public void InitializeEffect(GameObject target)
     {
         obstacle = target;
@@ -37,16 +35,28 @@ public class StrechEffect : IStrechEffect
 
     public void ApplyEffect()
     {
-        RaycastHit2D hit = Physics2D.Raycast(obstacle.transform.position, Vector2.up, obstacle.transform.localScale.y / 2, layerMask);
-        if (hit.collider == null) {
-            obstacle.transform.position = new Vector2(obstacle.transform.position.x, obstacle.transform.position.y + (stretchAmount / 2));
-            obstacle.transform.localScale = new Vector2(obstacle.transform.localScale.x, obstacle.transform.localScale.y + stretchAmount);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(obstacle.transform.position, Vector2.up, obstacle.transform.localScale.y / 2, layerMask);
+
+        if (hits.Length == 1) {
+            StrechObject(false);
         }
     }
 
     public ColorType getColorType()
     {
         return colorType;
+    }
+
+    private void StrechObject(bool inverted) {
+        int obstacleRotation = (int)obstacle.transform.rotation.z;
+
+        if (obstacleRotation == 90) { 
+            
+        }
+
+
+        obstacle.transform.position = new Vector2(obstacle.transform.position.x, obstacle.transform.position.y + (stretchAmount / 2));
+        obstacle.transform.localScale = new Vector2(obstacle.transform.localScale.x, obstacle.transform.localScale.y + stretchAmount);
     }
 
     public void RemoveEffect(GameObject target)

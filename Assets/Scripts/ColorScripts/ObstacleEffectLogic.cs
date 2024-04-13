@@ -124,11 +124,11 @@ public class ObstacleEffectLogic : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerSquashed.onPlayerDeath += RemoveAllEffects;
+        GameManager.onPlayerDeath += RemoveAllEffects;
     }
 
     private void OnDisable()
     {
-        PlayerSquashed.onPlayerDeath -= RemoveAllEffects;
+        GameManager.onPlayerDeath -= RemoveAllEffects;
     }
 }

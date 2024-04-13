@@ -8,7 +8,6 @@ public class PlayerSquashed : MonoBehaviour
     [SerializeField] private float xSize, ySize;
     [SerializeField] private LayerMask layerMask;
 
-    public static event Action<ColorType> onPlayerDeath;
 
     private void Update()
     {
@@ -19,7 +18,6 @@ public class PlayerSquashed : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(xSize, ySize), 0, layerMask);
         if (colliders.Length == 2) { 
             FindAnyObjectByType<GameManager>().MoveToCheckPoint();
-            onPlayerDeath.Invoke(ColorType.Default);
         }
     }
 
