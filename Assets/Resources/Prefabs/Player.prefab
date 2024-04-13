@@ -360,7 +360,7 @@ MonoBehaviour:
   cantUseStrech: 0
   cantUseElastic: 0
   cantUseWater: 0
-  shootKey: 101
+  shootKey: 13
   upKey: 119
   downKey: 115
   leftKey: 97
