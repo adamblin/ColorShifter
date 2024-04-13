@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eccb6cefa5fa8fd4089e6c3d966c252d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkPoints: []
+  checkPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1419596924599824962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,4 +69,4 @@ MonoBehaviour:
   stretchMultiplier: 0.04
   strechLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 448
