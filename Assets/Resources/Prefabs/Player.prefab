@@ -239,8 +239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tongueEnd: {fileID: 3336242205924660175}
   tongueOrigin: {fileID: 3336242206842478858}
-  tongueSpeed: 0.6
-  maxTongueDistance: 11
+  tongueSpeed: 0.8
+  maxTongueDistance: 15
   detectionRadius: 0.25
   tongueCanCollide:
     serializedVersion: 2
@@ -357,8 +357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cantUseStrech: 0
-  cantUseElastic: 0
-  cantUseWater: 0
+  cantUseElastic: 1
+  cantUseWater: 1
   shootKey: 101
   upKey: 119
   downKey: 115
@@ -380,10 +380,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac60cb99a41dcf14396815d3117f7be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 10
-  initialGravityScale: 5
-  jumpForce: 20
-  fallMultiplier: 3.5
+  playerSpeed: 12
+  initialGravityScale: 7
+  jumpForce: 25
+  fallMultiplier: 5
   groundCheck: {fileID: 4437298614734752185}
   checkRadius: 0.5
   whatIsGorunded:
