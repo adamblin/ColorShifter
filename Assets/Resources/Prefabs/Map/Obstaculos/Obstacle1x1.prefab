@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22be843ed493d5a41b60dda3415bbb85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxPlayerDistance: 50
 --- !u!61 &6420849012949836114
 BoxCollider2D:
   m_ObjectHideFlags: 0
