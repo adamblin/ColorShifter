@@ -7,8 +7,11 @@ using System;
 
 public class ObstacleEffectLogic : MonoBehaviour
 {
+    [SerializeField] private float maxPlayerDistance;
+
     private IColorEffect currentColorEffect;
     private ColorType currentColorType;
+    private GameObject player;
 
     public static event Action<ColorType> onChangeEffect;
 
@@ -41,10 +44,12 @@ public class ObstacleEffectLogic : MonoBehaviour
         }
     }
 
-    void Start()
+    void Awake()
     {
         currentColorType = ColorType.Default;
         initialScale = transform.localScale;
+
+        player = GameObject.Find("Player");
     }
 
     void Update()
@@ -54,8 +59,22 @@ public class ObstacleEffectLogic : MonoBehaviour
         CheckPlayerDistance();
     }
 
-    private void CheckPlayerDistance() { 
+    private void CheckPlayerDistance() {
         //Si el jugador esta muy lejos, devolvemos el color
+        if (currentColorType != ColorType.Default) {
+            if (Vector3.Distance(transform.position, player.transform.position) >= maxPlayerDistance){
+                RemoveAllEffects(ColorType.Default);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (currentColorType != ColorType.Default && player != null) {
+            Gizmos.color = Color.black;
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+            Gizmos.DrawLine(transform.position, transform.position + direction * maxPlayerDistance);
+        }
     }
 
 

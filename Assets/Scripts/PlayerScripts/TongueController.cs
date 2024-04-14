@@ -65,7 +65,7 @@ public class TongueController : MonoBehaviour
             {
                 tongueEnd.position = Vector3.MoveTowards(tongueEnd.position, tongueOrigin.position, tongueSpeed);
             }
-            else 
+            else    
             {
                 canShootAgain = true;
                 getDirectionAgain = true;
