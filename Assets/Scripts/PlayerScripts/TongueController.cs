@@ -56,7 +56,6 @@ public class TongueController : MonoBehaviour
         if (shootTongue) {
             Vector3 shootDirection = GetShootingDirection();
             tongueEnd.position += shootDirection * tongueSpeed * Time.fixedDeltaTime;
-            //tongueEnd.position = Vector3.MoveTowards(tongueEnd.position, tongueOrigin.position+ shootDirection*maxTongueDistance, tongueSpeed * Time.fixedDeltaTime);
         }
         else
         {
@@ -114,7 +113,7 @@ public class TongueController : MonoBehaviour
     {
         float currentDistance = Vector3.Distance(tongueOrigin.position, tongueEnd.position);
 
-        if (currentDistance >= maxTongueDistance/* || currentDistance <= -maxTongueDistance*/) {
+        if (currentDistance >= maxTongueDistance) {
             shootTongue = false;
         }
     }

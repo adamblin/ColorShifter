@@ -55,13 +55,13 @@ public class CharacterMovement: MonoBehaviour
     {
         rb.drag = linearDrag;
         rb.gravityScale = gravityInWater;
-        rb.AddForce(new Vector2(movementDirection.x * speedInWater * Time.deltaTime, 0));
+        rb.AddForce(new Vector2(movementDirection.x * speedInWater * Time.fixedDeltaTime, 0));
     }
 
     private void ApplyMovement() {
         rb.gravityScale = initialGravityScale;
         rb.drag = 0;
-        rb.velocity = new Vector2(movementDirection.x * playerSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(movementDirection.x * playerSpeed * Time.fixedDeltaTime, rb.velocity.y);
     }
 
     private void FlipPlayer(){
