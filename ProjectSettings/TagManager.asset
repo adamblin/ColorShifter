@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - PaintableObstacle
   - Door
+  - Enemy
   layers:
   - Default
   - TransparentFX
