@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd581bb69f194042a2aa61f8e7ee4fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1629737116110616755, guid: f6df4e37f62592a40826f95ba4f6fdd2, type: 3}
   tongueEnd: {fileID: 3336242205924660175}
   tongueOrigin: {fileID: 3336242206842478858}
   tongueSpeed: 0.8

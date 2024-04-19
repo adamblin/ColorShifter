@@ -3,9 +3,11 @@ using System;
 
 public class TongueController : MonoBehaviour
 {
+    [Header("OTHER GAMEOBJECTS")]
     [SerializeField] private Transform tongueEnd;
     [SerializeField] private Transform tongueOrigin;
 
+    [Header("TONGUE PARAMETERS")]
     [SerializeField] private float tongueSpeed;
     [SerializeField] private float maxTongueDistance;
     [SerializeField] private float detectionRadius;
@@ -20,9 +22,6 @@ public class TongueController : MonoBehaviour
     private bool inWater = false;
 
     private Vector3 firstDirection;
-    private bool pointingUp = false;
-    private bool pointingDown = false;
-    private bool pointingStraight = false;
 
     public static event Action onShootingTongue;
     public static event Action onNotMovingTongue;
@@ -44,7 +43,6 @@ public class TongueController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //assignar posiciones al line renderer
         lineRenderer.SetPosition(0, tongueOrigin.position);
         lineRenderer.SetPosition(1, tongueEnd.position);
 
@@ -77,25 +75,11 @@ public class TongueController : MonoBehaviour
 
     private Vector3 GetShootingDirection() {
         if (getDirectionAgain) {
-
-            if (pointingUp && !pointingStraight && !pointingDown)
-                firstDirection = transform.up;
-
-            else if (pointingUp && pointingStraight && !pointingDown)
-                firstDirection = transform.up + transform.right;
-
-            else if (pointingDown && !pointingStraight && !pointingUp)
-                firstDirection = -transform.up;
-
-            else if (pointingDown && pointingStraight && !pointingUp)
-                firstDirection = -transform.up + transform.right;
-
-            else
-                firstDirection = transform.right;
-
+            Vector3 mousePositionWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            firstDirection = mousePositionWorld - transform.position;
             getDirectionAgain = false;
         }
-        return firstDirection;
+        return firstDirection.normalized;
     }
 
 
@@ -104,7 +88,7 @@ public class TongueController : MonoBehaviour
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tongueEnd.position, detectionRadius, tongueCanCollide);
 
             for (int i = 0; i < hitColliders.Length; i++) {
-                if (hitColliders[i].gameObject.tag.Equals("Door")) {
+;               if (hitColliders[i].gameObject.tag.Equals("Door")) {
                     hitColliders[i].gameObject.GetComponent<NextLevelDoor>().DoorCollided();
                 }
                 else if (hitColliders[i].gameObject.tag.Equals("PaintableObstacle")) {
@@ -147,31 +131,13 @@ public class TongueController : MonoBehaviour
         }
     }
 
-    private void setPointingUp(){
-        pointingUp = !pointingUp;
-        Debug.Log(pointingUp);
-    }
-
-    private void setPointingDown(){
-        pointingDown = !pointingDown;
-    }
-
-    private void setPointingStraight(){
-        pointingStraight = !pointingStraight;
-    }
-
     private void InWater() {
         inWater = !inWater;
     }
 
-
-
     private void OnEnable()
     {
         PlayerInputs.onShoot += setShootTongue;
-        PlayerInputs.onShootUp += setPointingUp;
-        PlayerInputs.onShootDown += setPointingDown;
-        PlayerInputs.onShootStraight += setPointingStraight;
         PlayerInputs.onChangeColor += ChangePlayerColor;
         WaterEffect.onWater += InWater;
         ColorManager.onGetColorBack += ChangePlayerColor;
@@ -180,9 +146,6 @@ public class TongueController : MonoBehaviour
     private void OnDisable()
     {
         PlayerInputs.onShoot -= setShootTongue;
-        PlayerInputs.onShootUp -= setPointingUp;
-        PlayerInputs.onShootDown -= setPointingDown;
-        PlayerInputs.onShootStraight -= setPointingStraight;
         PlayerInputs.onChangeColor -= ChangePlayerColor;
         WaterEffect.onWater -= InWater;
         ColorManager.onGetColorBack -= ChangePlayerColor;
