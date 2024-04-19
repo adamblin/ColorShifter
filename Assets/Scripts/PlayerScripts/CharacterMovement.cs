@@ -23,14 +23,12 @@ public class CharacterMovement: MonoBehaviour
     private Vector3 lastJumpPosition;
     Vector2 vecGravity;
 
-
     [Header("UNDER WATER")] 
     [SerializeField] private float speedInWater = 10f;
     [SerializeField] private float jumpForceInWater = 10f;
     [SerializeField] private float linearDrag = 10f;
     [SerializeField] private float gravityInWater = 0.5f;
     private bool inWater = false;
-
 
     private Rigidbody2D rb;
 

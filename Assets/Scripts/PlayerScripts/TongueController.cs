@@ -55,13 +55,13 @@ public class TongueController : MonoBehaviour
     private void ShootTongue() {
         if (shootTongue) {
             Vector3 shootDirection = GetShootingDirection();
-            tongueEnd.position += shootDirection * tongueSpeed;
+            tongueEnd.position = Vector3.MoveTowards(tongueEnd.position, tongueOrigin.position+ shootDirection*maxTongueDistance, tongueSpeed * Time.fixedDeltaTime);
         }
         else
         {
             if (Vector3.Distance(tongueOrigin.position, tongueEnd.position) != 0)
             {
-                tongueEnd.position = Vector3.MoveTowards(tongueEnd.position, tongueOrigin.position, tongueSpeed);
+                tongueEnd.position = Vector3.MoveTowards(tongueEnd.position, tongueOrigin.position, tongueSpeed*Time.fixedDeltaTime);
             }
             else    
             {
@@ -74,7 +74,8 @@ public class TongueController : MonoBehaviour
     }
 
     private Vector3 GetShootingDirection() {
-        if (getDirectionAgain) {
+        if (getDirectionAgain)
+        {
             Vector3 mousePositionWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             firstDirection = mousePositionWorld - transform.position;
             getDirectionAgain = false;
@@ -111,7 +112,7 @@ public class TongueController : MonoBehaviour
     {
         float currentDistance = Vector3.Distance(tongueOrigin.position, tongueEnd.position);
 
-        if (currentDistance >= maxTongueDistance || currentDistance <= -maxTongueDistance) {
+        if (currentDistance >= maxTongueDistance/* || currentDistance <= -maxTongueDistance*/) {
             shootTongue = false;
         }
     }
