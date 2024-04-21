@@ -148,18 +148,18 @@ public class CharacterMovement: MonoBehaviour
 
     private void OnEnable()
     {
-        TongueController.onShootingTongue += CanNotFlip;
-        TongueController.onNotMovingTongue += CanFlip;
-        TongueController.shootDirection += CheckIfLookingRightDirectionOnShoot;
+        TongueController.Instance.onShootingTongue += CanNotFlip;
+        TongueController.Instance.onNotMovingTongue += CanFlip;
+        TongueController.Instance.shootDirection += CheckIfLookingRightDirectionOnShoot;
         PlayerInputs.onJump += PlayerJump;
         WaterEffect.onWater += InWater;
     }
 
     private void OnDisable()
     {
-        TongueController.onShootingTongue -= CanNotFlip;
-        TongueController.onNotMovingTongue -= CanFlip;
-        TongueController.shootDirection -= CheckIfLookingRightDirectionOnShoot;
+        TongueController.Instance.onShootingTongue -= CanNotFlip;
+        TongueController.Instance.onNotMovingTongue -= CanFlip;
+        TongueController.Instance.shootDirection -= CheckIfLookingRightDirectionOnShoot;
         PlayerInputs.onJump -= PlayerJump;
         WaterEffect.onWater -= InWater;
     }

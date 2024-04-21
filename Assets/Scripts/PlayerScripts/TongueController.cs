@@ -1,10 +1,18 @@
 using UnityEngine;
 using System;
 using UnityEditor.PackageManager;
+using Unity.VisualScripting;
 
 public class TongueController : MonoBehaviour
 {
-    //Patorn Singletone
+    //Singletone pattern
+    private static TongueController instance;
+    public static TongueController Instance {  
+        get {
+            if (instance == null)
+                instance = FindAnyObjectByType<TongueController>();
+            return instance;
+        } }
 
     [Header("OTHER GAMEOBJECTS")]
     [SerializeField] private Transform tongueEnd;
@@ -26,21 +34,24 @@ public class TongueController : MonoBehaviour
 
     private Vector3 firstDirection;
 
-    public static event Action onShootingTongue;
-    public static event Action onNotMovingTongue;
-    public static event Action<Vector3> shootDirection;
+    public event Action onShootingTongue;
+    public event Action onNotMovingTongue;
+    public event Action<Vector3> shootDirection;
 
     private LineRenderer lineRenderer;
     private ColorManager colorManager;
     private SpriteRenderer spriteRenderer;
 
-    private void Start()
+    private void Awake()
     {
+        //line renderer
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
 
+        //color manager
         colorManager = FindAnyObjectByType<ColorManager>(); 
 
+        //sprite renderer
         spriteRenderer = GetComponent<SpriteRenderer>();
         ChangePlayerColor(ColorType.Default);
     }
