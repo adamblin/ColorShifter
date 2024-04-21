@@ -27,6 +27,4 @@ public class NextLevelDoor : MonoBehaviour
     {
         SceneManager.LoadScene(nextLevelName);
     }
-
-
 }

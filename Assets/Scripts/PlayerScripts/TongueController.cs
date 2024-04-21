@@ -1,8 +1,11 @@
 using UnityEngine;
 using System;
+using UnityEditor.PackageManager;
 
 public class TongueController : MonoBehaviour
 {
+    //Patorn Singletone
+
     [Header("OTHER GAMEOBJECTS")]
     [SerializeField] private Transform tongueEnd;
     [SerializeField] private Transform tongueOrigin;
@@ -25,6 +28,7 @@ public class TongueController : MonoBehaviour
 
     public static event Action onShootingTongue;
     public static event Action onNotMovingTongue;
+    public static event Action<Vector3> shootDirection;
 
     private LineRenderer lineRenderer;
     private ColorManager colorManager;
@@ -81,6 +85,7 @@ public class TongueController : MonoBehaviour
             firstDirection.z = 0.0f;
             getDirectionAgain = false;
         }
+        shootDirection?.Invoke(firstDirection.normalized);
         return firstDirection.normalized;
     }
 
