@@ -6094,11 +6094,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5593858733002335637, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: cantUseWater
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -5593858733002335637, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: cantUseElastic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3336242206432462131, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: m_Name
@@ -6147,6 +6147,10 @@ PrefabInstance:
     - target: {fileID: 3336242206432462134, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205682660357092311, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7884690054672578055, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: playerSpeed
