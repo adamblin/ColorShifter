@@ -13,6 +13,8 @@ public class HeadController : MonoBehaviour
     }
 
     private void RotatePlayerHead() {
+
+        //Get mouse direction
         Vector3 mousePositionWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         directionToLook = mousePositionWorld - playerHead.transform.position;
         directionToLook.z = 0.0f;
