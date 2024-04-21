@@ -320,6 +320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ad8c7b6e40b634a8ff87fe1226fe1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxTopHeadAngle: 40
+  maxBottomHeadAngle: -20
   playerHead: {fileID: 1628114428715075491}
 --- !u!114 &7884690054672578055
 MonoBehaviour:
@@ -556,7 +558,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2269747882167619560
 Transform:
   m_ObjectHideFlags: 0

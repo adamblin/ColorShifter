@@ -92,7 +92,7 @@ public class TongueController : MonoBehaviour
         if (getDirectionAgain)
         {
             Vector3 mousePositionWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            firstDirection = mousePositionWorld - transform.position;
+            firstDirection = mousePositionWorld - tongueOrigin.transform.position;
             firstDirection.z = 0.0f;
             getDirectionAgain = false;
         }
@@ -168,8 +168,6 @@ public class TongueController : MonoBehaviour
         WaterEffect.onWater -= InWater;
         ColorManager.onGetColorBack -= ChangePlayerColor;
     }
-
-
 
     private void OnDrawGizmos()
     {
