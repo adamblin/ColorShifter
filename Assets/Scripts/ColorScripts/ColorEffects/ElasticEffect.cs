@@ -38,7 +38,7 @@ public class ElasticEffect : IElasticEffect
 
         float totalForce = minImpulse + (jumpHeight * hightMultiplier);
 
-        rb.velocity = player.transform.up * totalForce;
+        rb.velocity = player.transform.up * totalForce*0.8f;
 
 
     }
