@@ -36,8 +36,15 @@ public class ElasticEffect : IElasticEffect
         float jumpHeight = Mathf.Abs(player.GetComponent<CharacterMovement>().getLastJumpPosition().y 
             - (obstacle.transform.position.y + obstacle.transform.localScale.y / 2));
 
+        
         float totalForce = minImpulse + (jumpHeight * hightMultiplier);
-
+        Debug.Log(totalForce);
+        
+        if (totalForce >= 150)
+        {
+            totalForce = totalForce / 2f;
+        }
+        
         rb.velocity = player.transform.up * totalForce;
 
 

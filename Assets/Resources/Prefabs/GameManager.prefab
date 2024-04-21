@@ -64,8 +64,8 @@ MonoBehaviour:
   waterColor: {r: 0.064044006, g: 0.67265624, b: 0.96981126, a: 1}
   elasticColor: {r: 0.26663578, g: 0.82641506, b: 0.2839933, a: 1}
   strechColor: {r: 0.82641506, g: 0.8215438, b: 0.19802772, a: 1}
-  elasticMinImpulse: 5
-  elasticHeightMultiplier: 9
+  elasticMinImpulse: 2.5
+  elasticHeightMultiplier: 7.2
   stretchMultiplier: 0.04
   strechLayerMask:
     serializedVersion: 2
