@@ -39,10 +39,13 @@ public class CharacterMovement: MonoBehaviour
         vecGravity = new Vector2(0, -Physics2D.gravity.y);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         movementDirection.x = Input.GetAxisRaw("Horizontal");
+    }
 
+    private void FixedUpdate()
+    {
         if(inWater)
             ApplyMovementInWater();
         else
@@ -151,7 +154,7 @@ public class CharacterMovement: MonoBehaviour
         TongueController.Instance.onShootingTongue += CanNotFlip;
         TongueController.Instance.onNotMovingTongue += CanFlip;
         TongueController.Instance.shootDirection += CheckIfLookingRightDirectionOnShoot;
-        PlayerInputs.onJump += PlayerJump;
+        PlayerInputs.Instance.onJump += PlayerJump;
         WaterEffect.onWater += InWater;
     }
 
@@ -160,7 +163,7 @@ public class CharacterMovement: MonoBehaviour
         TongueController.Instance.onShootingTongue -= CanNotFlip;
         TongueController.Instance.onNotMovingTongue -= CanFlip;
         TongueController.Instance.shootDirection -= CheckIfLookingRightDirectionOnShoot;
-        PlayerInputs.onJump -= PlayerJump;
+        PlayerInputs.Instance.onJump -= PlayerJump;
         WaterEffect.onWater -= InWater;
     }
 
