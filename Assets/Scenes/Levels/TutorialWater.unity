@@ -29094,6 +29094,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7884690054672578055, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: linearDrag
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7884690054672578055, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: speedInWater
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7884690054672578055, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: gravityInWater
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7884690054672578055, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: jumpForceInWater
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
 --- !u!1001 &1329254455
