@@ -36,7 +36,6 @@ public class TongueController : MonoBehaviour
 
     public event Action onShootingTongue;
     public event Action onNotMovingTongue;
-    public event Action<Vector3> shootDirection;
 
     private LineRenderer lineRenderer;
     private ColorManager colorManager;
@@ -96,7 +95,6 @@ public class TongueController : MonoBehaviour
             firstDirection.z = 0.0f;
             getDirectionAgain = false;
         }
-        shootDirection?.Invoke(firstDirection.normalized);
         return firstDirection.normalized;
     }
 
@@ -151,6 +149,10 @@ public class TongueController : MonoBehaviour
 
     private void InWater() {
         inWater = !inWater;
+    }
+
+    public ColorType GetColorType() {
+        return currentColorType;
     }
 
     private void OnEnable()
