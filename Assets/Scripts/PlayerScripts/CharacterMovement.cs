@@ -85,10 +85,6 @@ public class CharacterMovement: MonoBehaviour
     private void RotatePlayer() {
         facingRight = !facingRight;
 
-        //Vector3 currentRotation = transform.eulerAngles;
-        //currentRotation.y += 180f;
-        //transform.eulerAngles = currentRotation;
-
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;

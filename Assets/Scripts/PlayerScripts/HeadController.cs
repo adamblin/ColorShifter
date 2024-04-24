@@ -14,14 +14,9 @@ public class HeadController : MonoBehaviour
     private Vector3 directionToLook;
     private Vector3 mousePositionWorld;
 
-    private bool facingRight;
-    private bool mouseRightSide;
-
     private void Update()
     {
         RotatePlayerHead();
-        CheckMousePosition();
-        CheckIfFacingRight();
     }
 
     private void RotatePlayerHead() {
@@ -38,31 +33,6 @@ public class HeadController : MonoBehaviour
             maxBottomHeadAngle, 
             maxTopHeadAngle);
         playerHead.transform.localEulerAngles = eulerDir;
-
-        if (mouseRightSide != facingRight) { }
-            FlipPlayer(); //GIRAR SIEMPRE HACIA EL RATON O NO
-
-    }
-
-    private void FlipPlayer() {
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
-    }
-
-    private void CheckMousePosition() {
-        if (mousePositionWorld.x >= transform.position.x) //derecha
-            mouseRightSide = true;
-        else
-            mouseRightSide = false;
-    }
-
-    private void CheckIfFacingRight() {
-        if (transform.localScale.x >= 0) //right
-            facingRight = true;
-        else
-            facingRight = false;
-
     }
 
     private void OnDrawGizmos()
