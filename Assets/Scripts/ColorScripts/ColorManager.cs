@@ -72,6 +72,7 @@ public class ColorManager : MonoBehaviour
     public Color GetColor(ColorType colorType) {
         switch (colorType)
         {
+
             case ColorType.Elastic:
                 if(elasticAssigned)
                     return Color.white;

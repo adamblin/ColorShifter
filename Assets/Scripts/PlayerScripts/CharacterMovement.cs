@@ -9,6 +9,8 @@ public class CharacterMovement: MonoBehaviour
     //PLAYER MOVEMENT
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float initialGravityScale;
+    private bool facingRight = true;
+    private bool canFlip = true;
     private Vector2 movementDirection;
 
     [Header("JUMP")]
@@ -46,7 +48,7 @@ public class CharacterMovement: MonoBehaviour
         else
             ApplyMovement();
 
-        //FlipPlayerByMovement();
+        FlipPlayerByMovement();
         CheckJumpingLogic();
     }
 
@@ -63,6 +65,33 @@ public class CharacterMovement: MonoBehaviour
         rb.drag = 0;
         //falta usar el Time.deltaTime
         rb.velocity = new Vector2(movementDirection.x * playerSpeed , rb.velocity.y);
+    }
+
+    private void FlipPlayerByMovement(){
+        
+        if (canFlip) {
+            if ((movementDirection.x > 0 && !facingRight) || (movementDirection.x < 0 && facingRight))
+                RotatePlayer();
+        }
+    }
+
+    private void CheckIfLookingRightDirectionOnShoot(Vector3 shootDirection) {
+        if (shootDirection.x < 0 && facingRight)
+            RotatePlayer();
+        else if(shootDirection.x >= 0 && !facingRight)
+            RotatePlayer();
+    }
+
+    private void RotatePlayer() {
+        facingRight = !facingRight;
+
+        //Vector3 currentRotation = transform.eulerAngles;
+        //currentRotation.y += 180f;
+        //transform.eulerAngles = currentRotation;
+
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 
     private void CheckJumpingLogic() {
@@ -110,6 +139,14 @@ public class CharacterMovement: MonoBehaviour
         }
     }
 
+    private void CanNotFlip() {
+        canFlip = false;
+    }
+
+    private void CanFlip() {
+        canFlip = true;
+    }
+
     private void InWater() {
         inWater = !inWater;
     }
@@ -117,12 +154,18 @@ public class CharacterMovement: MonoBehaviour
 
     private void OnEnable()
     {
+        TongueController.Instance.onShootingTongue += CanNotFlip;
+        TongueController.Instance.onNotMovingTongue += CanFlip;
+        TongueController.Instance.shootDirection += CheckIfLookingRightDirectionOnShoot;
         PlayerInputs.onJump += PlayerJump;
         WaterEffect.onWater += InWater;
     }
 
     private void OnDisable()
     {
+        TongueController.Instance.onShootingTongue -= CanNotFlip;
+        TongueController.Instance.onNotMovingTongue -= CanFlip;
+        TongueController.Instance.shootDirection -= CheckIfLookingRightDirectionOnShoot;
         PlayerInputs.onJump -= PlayerJump;
         WaterEffect.onWater -= InWater;
     }
