@@ -24,6 +24,8 @@ public class PlayerInputs : MonoBehaviour
     [SerializeField] private KeyCode shootKey;
     [SerializeField] private KeyCode jumpKey;
 
+    [SerializeField] private KeyCode swapColor;
+
     [SerializeField] private KeyCode ElasticKey;
     [SerializeField] private KeyCode WaterKey;
     [SerializeField] private KeyCode StrechKey;
@@ -36,6 +38,7 @@ public class PlayerInputs : MonoBehaviour
 
     //Cambiar Colores
     public event Action<ColorType> onChangeColor;
+    public event Action onSwapColor;
 
 
     private void Update()
@@ -55,5 +58,9 @@ public class PlayerInputs : MonoBehaviour
 
         if (Input.GetKeyDown(StrechKey) && !cantUseStrech)
             onChangeColor?.Invoke(ColorType.Strech);
+
+
+        if(Input.GetKeyDown(swapColor))
+            onSwapColor?.Invoke();
     }
 }

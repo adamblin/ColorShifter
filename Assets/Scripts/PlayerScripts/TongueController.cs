@@ -24,7 +24,9 @@ public class TongueController : MonoBehaviour
     [SerializeField] private float detectionRadius;
     [SerializeField] private LayerMask tongueCanCollide;
 
-    private ColorType currentColorType;
+    //private ColorType currentColorType;
+    private ColorType[] colorTypes = {ColorType.Elastic, ColorType.Water, ColorType.Strech};
+    private int colorIndex = 0;
 
     private bool shootTongue = false;
     private bool canShootAgain = true;
@@ -64,7 +66,7 @@ public class TongueController : MonoBehaviour
         ShootTongue();
         CheckTongueCollisions();
         CheckMaxTongueDistance();
-        ChangePlayerColor(currentColorType);
+        ChangePlayerColor(colorTypes[colorIndex]);
     }
 
     private void ShootTongue() {
@@ -120,7 +122,7 @@ public class TongueController : MonoBehaviour
 
 
     private void ChangeObjectEffect(GameObject target) {
-        IColorEffect currentEffect = colorManager.GetColorEffect(currentColorType);
+        IColorEffect currentEffect = colorManager.GetColorEffect(colorTypes[colorIndex]);
         target.GetComponent<ObstacleEffectLogic>().ApplyEffect(currentEffect);
     }
 
@@ -135,8 +137,17 @@ public class TongueController : MonoBehaviour
     }
 
     private void ChangePlayerColor(ColorType colorType) {
-        currentColorType = colorType;
-        spriteRenderer.color = colorManager.GetColor(currentColorType);
+        Color color = colorManager.GetColor(colorType);
+        if (color == Color.white)
+            SwapColor();
+        else
+            spriteRenderer.color = colorManager.GetColor(colorType);
+    }
+
+    private void SwapColor() {
+        colorIndex++;
+        if (colorIndex > colorTypes.Length - 1)
+            colorIndex = 0;
     }
 
 
@@ -157,6 +168,7 @@ public class TongueController : MonoBehaviour
     {
         PlayerInputs.Instance.onShoot += setShootTongue;
         PlayerInputs.Instance.onChangeColor += ChangePlayerColor;
+        PlayerInputs.Instance.onSwapColor += SwapColor;
         WaterEffect.onWater += InWater;
         ColorManager.Instance.onGetColorBack += ChangePlayerColor;
     }
@@ -165,6 +177,7 @@ public class TongueController : MonoBehaviour
     {
         PlayerInputs.Instance.onShoot -= setShootTongue;
         PlayerInputs.Instance.onChangeColor -= ChangePlayerColor;
+        PlayerInputs.Instance.onSwapColor -= SwapColor;
         WaterEffect.onWater -= InWater;
         ColorManager.Instance.onGetColorBack -= ChangePlayerColor;
     }
