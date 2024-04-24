@@ -9,10 +9,14 @@ public class HeadController : MonoBehaviour
 {
     [SerializeField] private float maxTopHeadAngle;
     [SerializeField] private float maxBottomHeadAngle;
+    [SerializeField] private float rotationSpeed;
 
     [SerializeField] private GameObject playerHead;
     private Vector3 directionToLook;
     private Vector3 mousePositionWorld;
+
+    private bool canRotateHead = true;
+    private bool lookAtTongue = true;
 
     private void Update()
     {
@@ -25,19 +29,49 @@ public class HeadController : MonoBehaviour
 
         directionToLook = (mousePositionWorld - playerHead.transform.position).normalized;
 
-        Debug.Log(playerHead.transform.right);
-
-        playerHead.transform.right = directionToLook * Mathf.Sign(transform.localScale.x);
-        var eulerDir = playerHead.transform.localEulerAngles;
-        eulerDir.z = Mathf.Clamp(eulerDir.z - (eulerDir.z > 180 ? 360 : 0), 
-            maxBottomHeadAngle, 
-            maxTopHeadAngle);
-        playerHead.transform.localEulerAngles = eulerDir;
+        if (canRotateHead)
+        {
+            playerHead.transform.right = directionToLook * Mathf.Sign(transform.localScale.x);
+            var eulerDir = playerHead.transform.localEulerAngles;
+            eulerDir.z = Mathf.Clamp(eulerDir.z - (eulerDir.z > 180 ? 360 : 0),
+                maxBottomHeadAngle,
+                maxTopHeadAngle);
+            playerHead.transform.localEulerAngles = eulerDir;
+            lookAtTongue = true;
+        }
+        else 
+        {
+            if (lookAtTongue) 
+                playerHead.transform.right = directionToLook * Mathf.Sign(transform.localScale.x);
+            lookAtTongue = false;
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
         Gizmos.DrawLine(playerHead.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+    }
+
+    private void CanNotFlip()
+    {
+        canRotateHead = false;
+    }
+
+    private void CanFlip()
+    {
+        canRotateHead = true;
+    }
+
+    private void OnEnable()
+    {
+        TongueController.Instance.onShootingTongue += CanNotFlip;
+        TongueController.Instance.onNotMovingTongue += CanFlip;
+    }
+
+    private void OnDisable()
+    {
+     TongueController.Instance.onShootingTongue -= CanNotFlip;
+        TongueController.Instance.onNotMovingTongue -= CanFlip;   
     }
 }

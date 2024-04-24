@@ -22,7 +22,7 @@ public class CharacterMovement: MonoBehaviour
     public float checkRadius;
     public LayerMask whatIsGorunded;
     private Vector3 lastJumpPosition;
-    Vector2 vecGravity;
+    private Vector2 vecGravity;
 
     [Header("UNDER WATER")] 
     [SerializeField] private float speedInWater = 10f;
@@ -56,14 +56,12 @@ public class CharacterMovement: MonoBehaviour
     {
         rb.drag = linearDrag;
         rb.gravityScale = gravityInWater;
-        //falta usar el Time.deltaTime
         rb.AddForce(new Vector2(movementDirection.x * speedInWater , 0));
     }
 
     private void ApplyMovement() {
         rb.gravityScale = initialGravityScale;
         rb.drag = 0;
-        //falta usar el Time.deltaTime
         rb.velocity = new Vector2(movementDirection.x * playerSpeed , rb.velocity.y);
     }
 
