@@ -22,7 +22,7 @@ public class CharacterMovement: MonoBehaviour
     public float checkRadius;
     public LayerMask whatIsGorunded;
     private Vector3 lastJumpPosition;
-    Vector2 vecGravity;
+    private Vector2 vecGravity;
 
     [Header("UNDER WATER")] 
     [SerializeField] private float speedInWater = 10f;
@@ -39,10 +39,13 @@ public class CharacterMovement: MonoBehaviour
         vecGravity = new Vector2(0, -Physics2D.gravity.y);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         movementDirection.x = Input.GetAxisRaw("Horizontal");
+    }
 
+    private void FixedUpdate()
+    {
         if(inWater)
             ApplyMovementInWater();
         else
@@ -56,14 +59,12 @@ public class CharacterMovement: MonoBehaviour
     {
         rb.drag = linearDrag;
         rb.gravityScale = gravityInWater;
-        //falta usar el Time.deltaTime
         rb.AddForce(new Vector2(movementDirection.x * speedInWater , 0));
     }
 
     private void ApplyMovement() {
         rb.gravityScale = initialGravityScale;
         rb.drag = 0;
-        //falta usar el Time.deltaTime
         rb.velocity = new Vector2(movementDirection.x * playerSpeed , rb.velocity.y);
     }
 
@@ -153,7 +154,7 @@ public class CharacterMovement: MonoBehaviour
         TongueController.Instance.onShootingTongue += CanNotFlip;
         TongueController.Instance.onNotMovingTongue += CanFlip;
         TongueController.Instance.shootDirection += CheckIfLookingRightDirectionOnShoot;
-        PlayerInputs.onJump += PlayerJump;
+        PlayerInputs.Instance.onJump += PlayerJump;
         WaterEffect.onWater += InWater;
     }
 
@@ -162,7 +163,7 @@ public class CharacterMovement: MonoBehaviour
         TongueController.Instance.onShootingTongue -= CanNotFlip;
         TongueController.Instance.onNotMovingTongue -= CanFlip;
         TongueController.Instance.shootDirection -= CheckIfLookingRightDirectionOnShoot;
-        PlayerInputs.onJump -= PlayerJump;
+        PlayerInputs.Instance.onJump -= PlayerJump;
         WaterEffect.onWater -= InWater;
     }
 

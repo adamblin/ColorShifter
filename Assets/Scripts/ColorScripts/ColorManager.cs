@@ -6,6 +6,16 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
+    private static ColorManager instance;
+    public static ColorManager Instance
+    {
+        get { 
+            if (instance == null)
+                instance = FindAnyObjectByType<ColorManager>();
+            return instance;
+        }
+    }
+
     [Header("GENERAL")]
     [SerializeField] private Color waterColor;
     [SerializeField] private Color elasticColor;
@@ -16,7 +26,7 @@ public class ColorManager : MonoBehaviour
     private bool strechAssigned = false;
 
     private IColorEffect DefaultObject;
-    public static event Action<ColorType> onGetColorBack;
+    public event Action<ColorType> onGetColorBack;
 
     //Elastic
     [Header("ELASTIC")]
@@ -122,5 +132,9 @@ public class ColorManager : MonoBehaviour
     private void OnDisable()
     {
         ObstacleEffectLogic.onChangeEffect -= ChangeAssigneds;
+    }
+
+    public Color getWaterColor() {
+        return waterColor;
     }
 }

@@ -3,6 +3,15 @@ using System;
 
 public class ObstacleEffectLogic : MonoBehaviour
 {
+    private static ObstacleEffectLogic instance;
+    public static ObstacleEffectLogic Instace{
+        get {
+            if (instance == null)
+                instance = FindAnyObjectByType<ObstacleEffectLogic>();
+            return instance;
+        }
+    }
+
     [SerializeField] private float maxPlayerDistance;
 
     private IColorEffect currentColorEffect;

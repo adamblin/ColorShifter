@@ -5,6 +5,16 @@ using System;
 
 public class PlayerInputs : MonoBehaviour
 {
+    private static PlayerInputs instance;
+    public static PlayerInputs Instance
+    {
+        get { 
+            if (instance == null)
+                instance = FindAnyObjectByType<PlayerInputs>();
+            return instance;
+        }
+    }
+
     [Header("BLOQUEAR EFECTOS ESCENAS")]
     [SerializeField] private bool cantUseStrech = false;
     [SerializeField] private bool cantUseElastic = false;
@@ -19,13 +29,13 @@ public class PlayerInputs : MonoBehaviour
     [SerializeField] private KeyCode StrechKey;
 
     //Tecla para disparar
-    public static event Action onShoot;
+    public event Action onShoot;
 
     //Movimiento
-    public static event Action onJump;
+    public event Action onJump;
 
     //Cambiar Colores
-    public static event Action<ColorType> onChangeColor;
+    public event Action<ColorType> onChangeColor;
 
 
     private void Update()

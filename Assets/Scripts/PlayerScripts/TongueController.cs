@@ -155,18 +155,18 @@ public class TongueController : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInputs.onShoot += setShootTongue;
-        PlayerInputs.onChangeColor += ChangePlayerColor;
+        PlayerInputs.Instance.onShoot += setShootTongue;
+        PlayerInputs.Instance.onChangeColor += ChangePlayerColor;
         WaterEffect.onWater += InWater;
-        ColorManager.onGetColorBack += ChangePlayerColor;
+        ColorManager.Instance.onGetColorBack += ChangePlayerColor;
     }
 
     private void OnDisable()
     {
-        PlayerInputs.onShoot -= setShootTongue;
-        PlayerInputs.onChangeColor -= ChangePlayerColor;
+        PlayerInputs.Instance.onShoot -= setShootTongue;
+        PlayerInputs.Instance.onChangeColor -= ChangePlayerColor;
         WaterEffect.onWater -= InWater;
-        ColorManager.onGetColorBack -= ChangePlayerColor;
+        ColorManager.Instance.onGetColorBack -= ChangePlayerColor;
     }
 
     private void OnDrawGizmos()
