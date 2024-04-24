@@ -268,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 671376282634236279, guid: 2c4887b8865514e4d8232a6206c83945, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.531342
+      value: 6.412026
       objectReference: {fileID: 0}
     - target: {fileID: 671376282634236279, guid: 2c4887b8865514e4d8232a6206c83945, type: 3}
       propertyPath: m_LocalScale.y
@@ -276,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 671376282634236279, guid: 2c4887b8865514e4d8232a6206c83945, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 71.421425
+      value: 70.4813
       objectReference: {fileID: 0}
     - target: {fileID: 671376282634236279, guid: 2c4887b8865514e4d8232a6206c83945, type: 3}
       propertyPath: m_LocalPosition.y
@@ -29038,14 +29038,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 934425369}
     m_Modifications:
-    - target: {fileID: -5593858733002335637, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
-      propertyPath: cantUseStrech
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -5593858733002335637, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
-      propertyPath: cantUseElastic
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3336242206432462131, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: m_Name
       value: Player

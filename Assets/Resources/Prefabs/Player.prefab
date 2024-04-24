@@ -280,8 +280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6435019ad619cc447a1335c921ea74df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantUseStrech: 0
-  cantUseElastic: 0
+  cantUseStrech: 1
+  cantUseElastic: 1
   cantUseWater: 0
   shootKey: 13
   jumpKey: 32
@@ -345,10 +345,10 @@ MonoBehaviour:
   whatIsGorunded:
     serializedVersion: 2
     m_Bits: 192
-  speedInWater: 1000
-  jumpForceInWater: 800
-  linearDrag: 5
-  gravityInWater: 2.5
+  speedInWater: 35
+  jumpForceInWater: 550
+  linearDrag: 3
+  gravityInWater: 2
 --- !u!114 &4407038486316679020
 MonoBehaviour:
   m_ObjectHideFlags: 0
