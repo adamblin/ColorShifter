@@ -280,15 +280,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6435019ad619cc447a1335c921ea74df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantUseStrech: 1
-  cantUseElastic: 1
-  cantUseWater: 0
   shootKey: 13
   jumpKey: 32
   swapColor: 101
-  ElasticKey: 49
-  WaterKey: 50
-  StrechKey: 51
+  swapColorReverse: 113
 --- !u!114 &3336242206432462138
 MonoBehaviour:
   m_ObjectHideFlags: 0

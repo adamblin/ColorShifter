@@ -6,16 +6,6 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
-    private static ColorManager instance;
-    public static ColorManager Instance
-    {
-        get { 
-            if (instance == null)
-                instance = FindAnyObjectByType<ColorManager>();
-            return instance;
-        }
-    }
-
     [Header("GENERAL")]
     [SerializeField] private Color waterColor;
     [SerializeField] private Color elasticColor;
@@ -26,7 +16,6 @@ public class ColorManager : MonoBehaviour
     private bool strechAssigned = false;
 
     private IColorEffect DefaultObject;
-    public event Action<ColorType> onGetColorBack;
 
     //Elastic
     [Header("ELASTIC")]
@@ -66,12 +55,6 @@ public class ColorManager : MonoBehaviour
                 return new StrechEffect(strechColor, ColorType.Strech, stretchMultiplier, strechLayerMask);
 
             case ColorType.Default:
-                if (strechAssigned)
-                    onGetColorBack?.Invoke(ColorType.Strech);
-                if (waterAssigned)
-                    onGetColorBack?.Invoke(ColorType.Water);
-                if (elasticAssigned)
-                    onGetColorBack?.Invoke(ColorType.Elastic);
                 return DefaultObject;
 
             default:
@@ -106,6 +89,21 @@ public class ColorManager : MonoBehaviour
         }
     }
 
+    public bool GetAssigneds(ColorType colorType)
+    {
+        switch (colorType)
+        {
+            case ColorType.Elastic:
+                return elasticAssigned;
+            case ColorType.Water:
+                return waterAssigned;
+            case ColorType.Strech:
+                return strechAssigned;
+            default:
+                throw new ArgumentException("Color no soportado", nameof(colorType));
+        }
+    }
+
     private void ChangeAssigneds(ColorType colorType)
     {
         switch (colorType) { 
@@ -132,9 +130,5 @@ public class ColorManager : MonoBehaviour
     private void OnDisable()
     {
         ObstacleEffectLogic.onChangeEffect -= ChangeAssigneds;
-    }
-
-    public Color getWaterColor() {
-        return waterColor;
     }
 }

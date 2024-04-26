@@ -55,7 +55,6 @@ public class TongueController : MonoBehaviour
 
         //sprite renderer
         spriteRenderer = GetComponent<SpriteRenderer>();
-        ChangePlayerColor(ColorType.Default);
     }
 
     private void FixedUpdate()
@@ -138,10 +137,19 @@ public class TongueController : MonoBehaviour
 
     private void ChangePlayerColor(ColorType colorType) {
         Color color = colorManager.GetColor(colorType);
-        if (color == Color.white)
+        int counter = 0;
+        Debug.Log(colorManager.GetAssigneds(colorTypes[colorIndex]) + " " + colorTypes.Length);
+        
+        while (colorManager.GetAssigneds(colorTypes[colorIndex])) {
             SwapColor();
-        else
-            spriteRenderer.color = colorManager.GetColor(colorType);
+            counter++;
+
+            if(counter >= colorTypes.Length){
+                color = Color.white;
+                break;
+            }
+        }
+        spriteRenderer.color = color;
     }
 
     private void SwapColor() {
@@ -150,6 +158,11 @@ public class TongueController : MonoBehaviour
             colorIndex = 0;
     }
 
+    private void SwapColorReverse() {
+        colorIndex--;
+        if (colorIndex < 0)
+            colorIndex = colorTypes.Length - 1;
+    }
 
     private void setShootTongue() {
         if (canShootAgain && !inWater) { 
@@ -167,19 +180,17 @@ public class TongueController : MonoBehaviour
     private void OnEnable()
     {
         PlayerInputs.Instance.onShoot += setShootTongue;
-        PlayerInputs.Instance.onChangeColor += ChangePlayerColor;
         PlayerInputs.Instance.onSwapColor += SwapColor;
+        PlayerInputs.Instance.onSwapColorReverse += SwapColorReverse;
         WaterEffect.onWater += InWater;
-        ColorManager.Instance.onGetColorBack += ChangePlayerColor;
     }
 
     private void OnDisable()
     {
         PlayerInputs.Instance.onShoot -= setShootTongue;
-        PlayerInputs.Instance.onChangeColor -= ChangePlayerColor;
         PlayerInputs.Instance.onSwapColor -= SwapColor;
+        PlayerInputs.Instance.onSwapColorReverse -= SwapColorReverse;
         WaterEffect.onWater -= InWater;
-        ColorManager.Instance.onGetColorBack -= ChangePlayerColor;
     }
 
     private void OnDrawGizmos()
