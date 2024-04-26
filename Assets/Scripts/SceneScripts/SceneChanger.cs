@@ -7,7 +7,6 @@ public class SceneChanger : MonoBehaviour
 {
     [SerializeField]
     private string name;
-
     public void StartGame()
     {
         SceneManager.LoadScene(name);
