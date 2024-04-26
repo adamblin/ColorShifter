@@ -36,7 +36,6 @@ public class StrechEffect : IStrechEffect
     public void ApplyEffect()
     {
         RaycastHit2D[] hits = Physics2D.RaycastAll(obstacle.transform.position, obstacle.transform.up, obstacle.transform.localScale.y / 2, layerMask);
-        Debug.Log("APLLY");
         if (hits.Length == 1) {
             StrechObject(false);
         }

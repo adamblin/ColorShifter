@@ -67,18 +67,12 @@ public class ColorManager : MonoBehaviour
         {
 
             case ColorType.Elastic:
-                if(elasticAssigned)
-                    return Color.white;
                 return elasticColor;
 
             case ColorType.Water:
-                if (waterAssigned)
-                    return Color.white;
                 return waterColor;
 
             case ColorType.Strech:
-                if (strechAssigned)
-                    return Color.white;
                 return strechColor;
 
             case ColorType.Default:

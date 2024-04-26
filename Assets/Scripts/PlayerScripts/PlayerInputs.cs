@@ -15,21 +15,11 @@ public class PlayerInputs : MonoBehaviour
         }
     }
 
-    [Header("BLOQUEAR EFECTOS ESCENAS")]
-    //[SerializeField] private bool cantUseStrech = false;
-    //[SerializeField] private bool cantUseElastic = false;
-    //[SerializeField] private bool cantUseWater = false;
-
     [Header("CONTROLES")]
     [SerializeField] private KeyCode shootKey;
     [SerializeField] private KeyCode jumpKey;
 
     [SerializeField] private KeyCode swapColor;
-    [SerializeField] private KeyCode swapColorReverse;
-
-    //[SerializeField] private KeyCode ElasticKey;
-    //[SerializeField] private KeyCode WaterKey;
-    //[SerializeField] private KeyCode StrechKey;
 
     //Tecla para disparar
     public event Action onShoot;
@@ -38,9 +28,7 @@ public class PlayerInputs : MonoBehaviour
     public event Action onJump;
 
     //Cambiar Colores
-    //public event Action<ColorType> onChangeColor;
     public event Action onSwapColor;
-    public event Action onSwapColorReverse;
 
 
     private void Update()
@@ -52,20 +40,7 @@ public class PlayerInputs : MonoBehaviour
             onJump?.Invoke();
 
         //COLORS
-        //if (Input.GetKeyDown(ElasticKey) && !cantUseElastic) 
-        //    onChangeColor?.Invoke(ColorType.Elastic);
-
-        //if (Input.GetKeyDown(WaterKey) && !cantUseWater)
-        //    onChangeColor?.Invoke(ColorType.Water);
-
-        //if (Input.GetKeyDown(StrechKey) && !cantUseStrech)
-        //    onChangeColor?.Invoke(ColorType.Strech);
-
-
         if(Input.GetKeyDown(swapColor))
             onSwapColor?.Invoke();
-
-        if(Input.GetKeyDown(swapColorReverse))
-            onSwapColorReverse?.Invoke();
     }
 }

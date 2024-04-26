@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using UnityEditor.PackageManager;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class TongueController : MonoBehaviour
 {
@@ -14,6 +15,13 @@ public class TongueController : MonoBehaviour
             return instance;
         } }
 
+    [Header("BLOQUEAR EFECTOS ESCENAS")]
+    [SerializeField] private bool canUseStrech = true;
+    [SerializeField] private bool canUseElastic = true;
+    [SerializeField] private bool canUseWater = true;
+    private ColorType[] colorTypes;
+    private int colorIndex = 0;
+
     [Header("OTHER GAMEOBJECTS")]
     [SerializeField] private Transform tongueEnd;
     [SerializeField] private Transform tongueOrigin;
@@ -23,10 +31,6 @@ public class TongueController : MonoBehaviour
     [SerializeField] private float maxTongueDistance;
     [SerializeField] private float detectionRadius;
     [SerializeField] private LayerMask tongueCanCollide;
-
-    //private ColorType currentColorType;
-    private ColorType[] colorTypes = {ColorType.Elastic, ColorType.Water, ColorType.Strech};
-    private int colorIndex = 0;
 
     private bool shootTongue = false;
     private bool canShootAgain = true;
@@ -46,15 +50,27 @@ public class TongueController : MonoBehaviour
 
     private void Awake()
     {
-        //line renderer
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
 
-        //color manager
         colorManager = FindAnyObjectByType<ColorManager>(); 
 
-        //sprite renderer
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        SetColorsCanShoot();
+    }
+
+    private void SetColorsCanShoot() {
+        List<ColorType> colorTypesList = new List<ColorType>();
+
+        if (canUseElastic)
+            colorTypesList.Add(ColorType.Elastic);
+        if (canUseWater)
+            colorTypesList.Add(ColorType.Water);
+        if (canUseStrech)
+            colorTypesList.Add(ColorType.Strech);
+
+        colorTypes = colorTypesList.ToArray();
     }
 
     private void FixedUpdate()
@@ -138,14 +154,13 @@ public class TongueController : MonoBehaviour
     private void ChangePlayerColor(ColorType colorType) {
         Color color = colorManager.GetColor(colorType);
         int counter = 0;
-        Debug.Log(colorManager.GetAssigneds(colorTypes[colorIndex]) + " " + colorTypes.Length);
         
         while (colorManager.GetAssigneds(colorTypes[colorIndex])) {
             SwapColor();
             counter++;
 
             if(counter >= colorTypes.Length){
-                color = Color.white;
+                color = colorManager.GetColor(ColorType.Default);
                 break;
             }
         }
@@ -156,12 +171,6 @@ public class TongueController : MonoBehaviour
         colorIndex++;
         if (colorIndex > colorTypes.Length - 1)
             colorIndex = 0;
-    }
-
-    private void SwapColorReverse() {
-        colorIndex--;
-        if (colorIndex < 0)
-            colorIndex = colorTypes.Length - 1;
     }
 
     private void setShootTongue() {
@@ -181,7 +190,6 @@ public class TongueController : MonoBehaviour
     {
         PlayerInputs.Instance.onShoot += setShootTongue;
         PlayerInputs.Instance.onSwapColor += SwapColor;
-        PlayerInputs.Instance.onSwapColorReverse += SwapColorReverse;
         WaterEffect.onWater += InWater;
     }
 
@@ -189,7 +197,6 @@ public class TongueController : MonoBehaviour
     {
         PlayerInputs.Instance.onShoot -= setShootTongue;
         PlayerInputs.Instance.onSwapColor -= SwapColor;
-        PlayerInputs.Instance.onSwapColorReverse -= SwapColorReverse;
         WaterEffect.onWater -= InWater;
     }
 
