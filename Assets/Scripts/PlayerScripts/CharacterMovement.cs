@@ -5,6 +5,16 @@ using UnityEngine;
 
 public class CharacterMovement: MonoBehaviour
 {
+    private static CharacterMovement instance;
+    public static CharacterMovement Instance
+    {
+        get { 
+            if(instance == null)
+                instance = FindAnyObjectByType<CharacterMovement>();
+            return instance;
+        }
+    }
+
     [Header("MOVEMENT")]
     //PLAYER MOVEMENT
     [SerializeField] private float playerSpeed = 5f;
@@ -76,13 +86,6 @@ public class CharacterMovement: MonoBehaviour
         }
     }
 
-    private void CheckIfLookingRightDirectionOnShoot(Vector3 shootDirection) {
-        if (shootDirection.x < 0 && facingRight)
-            RotatePlayer();
-        else if(shootDirection.x >= 0 && !facingRight)
-            RotatePlayer();
-    }
-
     private void RotatePlayer() {
         facingRight = !facingRight;
 
@@ -148,12 +151,15 @@ public class CharacterMovement: MonoBehaviour
         inWater = !inWater;
     }
 
+    public bool GetFacingRight() {
+        return facingRight;
+    }
+
 
     private void OnEnable()
     {
         TongueController.Instance.onShootingTongue += CanNotFlip;
         TongueController.Instance.onNotMovingTongue += CanFlip;
-        TongueController.Instance.shootDirection += CheckIfLookingRightDirectionOnShoot;
         PlayerInputs.Instance.onJump += PlayerJump;
         WaterEffect.onWater += InWater;
     }
@@ -162,7 +168,6 @@ public class CharacterMovement: MonoBehaviour
     {
         TongueController.Instance.onShootingTongue -= CanNotFlip;
         TongueController.Instance.onNotMovingTongue -= CanFlip;
-        TongueController.Instance.shootDirection -= CheckIfLookingRightDirectionOnShoot;
         PlayerInputs.Instance.onJump -= PlayerJump;
         WaterEffect.onWater -= InWater;
     }

@@ -42,7 +42,6 @@ public class TongueController : MonoBehaviour
 
     public event Action onShootingTongue;
     public event Action onNotMovingTongue;
-    public event Action<Vector3> shootDirection;
 
     private LineRenderer lineRenderer;
     private ColorManager colorManager;
@@ -87,6 +86,7 @@ public class TongueController : MonoBehaviour
     private void ShootTongue() {
         if (shootTongue) {
             Vector3 shootDirection = GetShootingDirection();
+            CheckIfShootingBack(shootDirection);
             tongueEnd.position += shootDirection * tongueSpeed * Time.fixedDeltaTime;
         }
         else
@@ -113,8 +113,18 @@ public class TongueController : MonoBehaviour
             firstDirection.z = 0.0f;
             getDirectionAgain = false;
         }
-        shootDirection?.Invoke(firstDirection.normalized);
         return firstDirection.normalized;
+    }
+
+    private void CheckIfShootingBack(Vector3 shootingDirection) {
+        Vector2 playerRight = transform.right;
+
+        if (!CharacterMovement.Instance.GetFacingRight()) //mirando a la izquierda
+            playerRight = -playerRight;
+
+        if (Vector2.Angle(shootingDirection, playerRight) > 90) { //disparando a la espalda
+            shootTongue = false;
+        } 
     }
 
 

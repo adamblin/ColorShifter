@@ -9,7 +9,6 @@ public class HeadController : MonoBehaviour
 {
     [SerializeField] private float maxTopHeadAngle;
     [SerializeField] private float maxBottomHeadAngle;
-    [SerializeField] private float rotationSpeed;
 
     [SerializeField] private GameObject playerHead;
     private Vector3 directionToLook;
@@ -32,6 +31,7 @@ public class HeadController : MonoBehaviour
         if (canRotateHead)
         {
             playerHead.transform.right = directionToLook * Mathf.Sign(transform.localScale.x);
+
             var eulerDir = playerHead.transform.localEulerAngles;
             eulerDir.z = Mathf.Clamp(eulerDir.z - (eulerDir.z > 180 ? 360 : 0),
                 maxBottomHeadAngle,
@@ -39,12 +39,25 @@ public class HeadController : MonoBehaviour
             playerHead.transform.localEulerAngles = eulerDir;
             lookAtTongue = true;
         }
-        else 
+        else //mirar directament a la direccio mentres disparem la llengua 
         {
-            if (lookAtTongue) 
+            if (lookAtTongue && ShootingFront())
                 playerHead.transform.right = directionToLook * Mathf.Sign(transform.localScale.x);
             lookAtTongue = false;
         }
+    }
+
+    private bool ShootingFront()
+    {
+        Vector2 playerRight = transform.right;
+
+        if (!CharacterMovement.Instance.GetFacingRight())
+            playerRight = -transform.right;
+
+        if (Vector2.Angle(directionToLook, playerRight) < 90)
+            return true;
+
+        return false;
     }
 
     private void OnDrawGizmos()
@@ -71,7 +84,7 @@ public class HeadController : MonoBehaviour
 
     private void OnDisable()
     {
-     TongueController.Instance.onShootingTongue -= CanNotFlip;
+        TongueController.Instance.onShootingTongue -= CanNotFlip;
         TongueController.Instance.onNotMovingTongue -= CanFlip;   
     }
 }
