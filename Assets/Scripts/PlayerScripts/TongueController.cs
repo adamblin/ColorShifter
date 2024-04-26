@@ -197,6 +197,10 @@ public class TongueController : MonoBehaviour
         inWater = !inWater;
     }
 
+    public float GetMaxAngleToShoot() {
+        return maxAngleToShoot;
+    }
+
     private void OnEnable()
     {
         PlayerInputs.Instance.onShoot += setShootTongue;

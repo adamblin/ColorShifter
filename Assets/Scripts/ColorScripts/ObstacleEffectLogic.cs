@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class ObstacleEffectLogic : MonoBehaviour
 {
@@ -73,16 +74,6 @@ public class ObstacleEffectLogic : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        if (currentColorType != ColorType.Default && player != null) {
-            Gizmos.color = Color.black;
-            Vector3 direction = (player.transform.position - transform.position).normalized;
-            Gizmos.DrawLine(transform.position, transform.position + direction * maxPlayerDistance);
-        }
-    }
-
-
     //STRECH LOGIC
 
     private void StrechEffect() {
@@ -149,6 +140,16 @@ public class ObstacleEffectLogic : MonoBehaviour
 
     private void RemoveAllEffects(ColorType colorType) {
         ApplyEffect(FindAnyObjectByType<ColorManager>().GetColorEffect(colorType));
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (currentColorType != ColorType.Default && player != null)
+        {
+            Gizmos.color = Color.black;
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+            Gizmos.DrawLine(transform.position, transform.position + direction * maxPlayerDistance);
+        }
     }
 
 

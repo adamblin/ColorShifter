@@ -54,7 +54,7 @@ public class HeadController : MonoBehaviour
         if (!CharacterMovement.Instance.GetFacingRight())
             playerRight = -transform.right;
 
-        if (Vector2.Angle(directionToLook, playerRight) < 90)
+        if (Vector2.Angle(directionToLook, playerRight) < TongueController.Instance.GetMaxAngleToShoot())
             return true;
 
         return false;
