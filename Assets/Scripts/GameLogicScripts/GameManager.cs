@@ -5,10 +5,20 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager instance;
+    public static GameManager Instance
+    {
+        get { 
+            if(instance == null)
+                instance = FindAnyObjectByType<GameManager>();
+            return instance;
+        }
+    }
+
     [SerializeField] private List<GameObject> checkPoints;
     private int currentIndex = 0;
 
-    public static event Action<ColorType> onPlayerDeath;
+    public event Action<ColorType> onPlayerDeath;
 
     public void MoveToCheckPoint() {
         GameObject player = GameObject.Find("Player");

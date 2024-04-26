@@ -155,6 +155,11 @@ public class CharacterMovement: MonoBehaviour
         return facingRight;
     }
 
+    public Vector3 getLastJumpPosition()
+    {
+        return lastJumpPosition;
+    }
+
 
     private void OnEnable()
     {
@@ -172,7 +177,10 @@ public class CharacterMovement: MonoBehaviour
         WaterEffect.onWater -= InWater;
     }
 
-    public Vector3 getLastJumpPosition() { 
-        return lastJumpPosition;
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(groundCheck.transform.position, checkRadius);
     }
+
 }

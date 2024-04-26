@@ -154,11 +154,12 @@ public class ObstacleEffectLogic : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.onPlayerDeath += RemoveAllEffects;
+        GameManager.Instance.onPlayerDeath += RemoveAllEffects;
     }
 
     private void OnDisable()
     {
-        GameManager.onPlayerDeath -= RemoveAllEffects;
+        if(GameManager.Instance != null)
+            GameManager.Instance.onPlayerDeath -= RemoveAllEffects;
     }
 }

@@ -30,6 +30,7 @@ public class TongueController : MonoBehaviour
     [SerializeField] private float tongueSpeed;
     [SerializeField] private float maxTongueDistance;
     [SerializeField] private float detectionRadius;
+    [SerializeField] private float maxAngleToShoot;
     [SerializeField] private LayerMask tongueCanCollide;
 
     private bool shootTongue = false;
@@ -122,7 +123,7 @@ public class TongueController : MonoBehaviour
         if (!CharacterMovement.Instance.GetFacingRight()) //mirando a la izquierda
             playerRight = -playerRight;
 
-        if (Vector2.Angle(shootingDirection, playerRight) > 90) { //disparando a la espalda
+        if (Vector2.Angle(shootingDirection, playerRight) > maxAngleToShoot) { //disparando a la espalda
             shootTongue = false;
         } 
     }
@@ -215,7 +216,6 @@ public class TongueController : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, transform.position + transform.right * 3);
 
-        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(tongueEnd.position, detectionRadius);
     }
 }

@@ -2,10 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using JetBrains.Annotations;
 
 public class PlayerSquashed : MonoBehaviour
 {
-    [SerializeField] private float xSize, ySize;
+    [Header("CHECK TOP AND BOTTOM")]
+    [SerializeField] private float topXSize;
+    [SerializeField] private float topYSize;
+
+    [Header("CHECK LATERALS")]
+    [SerializeField] private float latXSize;
+    [SerializeField] private float latYSize;
+
+    [Header("WHAT CAN GET SQUASHED WITH")]
     [SerializeField] private LayerMask layerMask;
 
 
@@ -15,16 +24,32 @@ public class PlayerSquashed : MonoBehaviour
     }
 
     private void CheckIfPlayerSquished() {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(xSize, ySize), 0, layerMask);
-        if (colliders.Length == 2) { 
-            FindAnyObjectByType<GameManager>().MoveToCheckPoint();
+        Collider2D[] topAndBottomCol = Physics2D.OverlapBoxAll(transform.position, new Vector2(topXSize, topYSize), 0, layerMask);
+        CheckIfKillPlayer(topAndBottomCol);
+
+        Collider2D[] lateralCol = Physics2D.OverlapBoxAll(transform.position, new Vector2(latXSize, latYSize), 0, layerMask);
+        CheckIfKillPlayer(lateralCol);
+
+        Debug.Log("top: " + topAndBottomCol.Length + " lateral: " + lateralCol.Length);
+    }
+
+    private void CheckIfKillPlayer(Collider2D[] collisions) {
+        if (collisions.Length >= 2) {
+            for (int i = 0; i < collisions.Length; i++){ //si estem chocant amb una paret y un obstacle de color groc
+                GameObject obstacle = collisions[i].gameObject;
+
+                if (obstacle.CompareTag("PaintableObstacle"))
+                    if(obstacle.GetComponent<ObstacleEffectLogic>().getCurrentColorType() == ColorType.Strech)
+                        GameManager.Instance.MoveToCheckPoint();
+            }
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position, new Vector2(xSize, ySize));
+        Gizmos.DrawWireCube(transform.position, new Vector2(topXSize, topYSize));
+        Gizmos.DrawWireCube(transform.position, new Vector2(latXSize, latYSize));
     }
 }
 

@@ -283,7 +283,6 @@ MonoBehaviour:
   shootKey: 13
   jumpKey: 32
   swapColor: 101
-  swapColorReverse: 113
 --- !u!114 &3336242206432462138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,11 +295,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd581bb69f194042a2aa61f8e7ee4fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseStrech: 1
+  canUseElastic: 1
+  canUseWater: 1
   tongueEnd: {fileID: 3336242205924660175}
   tongueOrigin: {fileID: 3336242206842478858}
   tongueSpeed: 30
   maxTongueDistance: 15
   detectionRadius: 0.25
+  maxAngleToShoot: 92
   tongueCanCollide:
     serializedVersion: 2
     m_Bits: 448
@@ -318,7 +321,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTopHeadAngle: 40
   maxBottomHeadAngle: -20
-  rotationSpeed: 1
   playerHead: {fileID: 1628114428715075491}
 --- !u!114 &7884690054672578055
 MonoBehaviour:
@@ -337,7 +339,7 @@ MonoBehaviour:
   jumpForce: 25
   fallMultiplier: 5
   groundCheck: {fileID: 4437298614734752185}
-  checkRadius: 0.5
+  checkRadius: 0.4
   whatIsGorunded:
     serializedVersion: 2
     m_Bits: 192
@@ -357,8 +359,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d15a65ff49eb44c8eb6a6ddbaf9672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 1
-  ySize: 2.76
+  topXSize: 1.5
+  topYSize: 4.85
+  latXSize: 2.3
+  latYSize: 4
   layerMask:
     serializedVersion: 2
     m_Bits: 448
@@ -407,7 +411,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.9, y: 1.95}
   m_EdgeRadius: 0
 --- !u!120 &3336242206432462137
 LineRenderer:
@@ -550,7 +554,7 @@ GameObject:
   - component: {fileID: 2269747882167619560}
   - component: {fileID: 2309439931099279975}
   m_Layer: 0
-  m_Name: Sprite
+  m_Name: Body Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -887,7 +891,7 @@ GameObject:
   m_Layer: 0
   m_Name: GroundChecker
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
