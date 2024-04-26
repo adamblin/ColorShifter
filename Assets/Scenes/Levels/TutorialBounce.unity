@@ -28522,8 +28522,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
     - target: {fileID: 3336242206432462138, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: canUseWater
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336242206432462138, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
       propertyPath: tongueSpeed
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336242206432462138, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
+      propertyPath: canUseStrech
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3b6e749cdd5d904d9cc6cf32bdd4f61, type: 3}
