@@ -1,15 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneChanger : MonoBehaviour
 {
     [SerializeField]
-    private string name;
+    private string startName;
+    [SerializeField]
+    private string levelName;
+    [SerializeField] 
+    private GameObject button;
+
+    void Start()
+    {
+        //button.interactable = false;
+        button.SetActive(false);
+    }
     public void StartGame()
     {
-        SceneManager.LoadScene(name);
+        SceneManager.LoadScene(startName);
     }
 
     public void EndGame()
@@ -18,10 +30,10 @@ public class SceneChanger : MonoBehaviour
        Application.Quit();
     }
 
-    /*
-    public void SelectGame()
+    
+    public void SelectLevel()
     {
-
+        SceneManager.LoadScene(levelName);
     }
-    */
+    
 }

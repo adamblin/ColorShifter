@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelector : MonoBehaviour
 {
+   
+   
+    [SerializeField]
+    private string name;
  
     void Update()
     {
@@ -24,5 +28,10 @@ public class LevelSelector : MonoBehaviour
         {
             SceneManager.LoadScene("TutorialStretch");
         }
+    }
+
+    private void LevelChanger()
+    {
+        SceneManager.LoadScene(name);
     }
 }
