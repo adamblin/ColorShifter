@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6435019ad619cc447a1335c921ea74df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseGame: 27
   shootKey: 13
   jumpKey: 32
   swapColor: 101
