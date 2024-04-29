@@ -27,7 +27,7 @@ public class NextLevelDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SceneManager.LoadScene(nextLevelName);
+       
         //Logica para mostrar el nivel 1
         if (SceneManager.GetActiveScene().name == firstLevel)
         {
@@ -37,6 +37,6 @@ public class NextLevelDoor : MonoBehaviour
         {
             Debug.Log("No es el primer nivel");
         }
-            
+        SceneManager.LoadScene(nextLevelName);
     }
 }
