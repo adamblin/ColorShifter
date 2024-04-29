@@ -21,9 +21,13 @@ public class GameManager : MonoBehaviour
 
     public event Action<ColorType> onPlayerDeath;
 
-
-    [SerializeField] private GameObject pauseMenuPrefab;
+    private GameObject pauseUIInstance;
     private bool gamePaused = false;
+
+    private void Start()
+    {
+        pauseUIInstance = GameObject.Find("GamePauseUI");
+    }
 
     private void Update()
     {
@@ -31,14 +35,14 @@ public class GameManager : MonoBehaviour
     }
 
     private void ManagePauseGame() {
-        Debug.Log(pauseMenuPrefab + " " + gamePaused);
+        Debug.Log(pauseUIInstance + " " + gamePaused);
 
         if (gamePaused) {
-            pauseMenuPrefab.SetActive(true);
+            pauseUIInstance.SetActive(true);
             Time.timeScale = 0f;
         }
         else {
-            pauseMenuPrefab.SetActive(false);
+            pauseUIInstance.SetActive(false);
             Time.timeScale = 1f;  
         }
     }

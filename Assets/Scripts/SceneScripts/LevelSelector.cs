@@ -32,10 +32,12 @@ public class LevelSelector : MonoBehaviour
     }
 
     public void LeaveLevel() {
-        SceneManager.LoadScene("LevelSelector");
+        Debug.Log("Leaving Game");
+;       SceneManager.LoadScene("LevelSelector");
     }
 
     public void ResetLevel() {
+        Debug.Log("ResetLevel");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
     }
