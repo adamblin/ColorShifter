@@ -50,7 +50,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  pauseMenuPrefab: {fileID: 8824907898654072053, guid: cc4789fd4ed10b142a666382cff0df64, type: 3}
+  deathTime: 1.5
 --- !u!114 &1419596924599824962
 MonoBehaviour:
   m_ObjectHideFlags: 0

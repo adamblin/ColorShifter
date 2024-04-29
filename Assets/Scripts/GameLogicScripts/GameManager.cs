@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     private GameObject pauseUIInstance;
     private bool gamePaused = false;
+    
+    [SerializeField]
+    private float deathTime; 
 
     private void Start()
     {
@@ -48,10 +51,18 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void MoveToCheckPoint() {
-        GameObject player = GameObject.Find("Player");
+    public void MoveToCheckPoint()
+    {
+        StartCoroutine(WaitForRevive());
+    }
+
+    private IEnumerator WaitForRevive()
+    {
+         GameObject player = GameObject.Find("Player");
         player.transform.position = checkPoints[currentIndex].transform.position;
         onPlayerDeath.Invoke(ColorType.Default);
+        yield return new WaitForSeconds(deathTime);
+       
     }
 
     private void nextCheckPoint(GameObject checkPoint) {
