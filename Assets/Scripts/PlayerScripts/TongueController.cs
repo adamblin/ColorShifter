@@ -41,10 +41,10 @@ public class TongueController : MonoBehaviour
 
     public event Action onShootingTongue;
     public event Action onNotMovingTongue;
+    public event Action<Color> onPaintPlayer;
 
     private LineRenderer lineRenderer;
     private ColorManager colorManager;
-    private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
@@ -52,8 +52,6 @@ public class TongueController : MonoBehaviour
         lineRenderer.positionCount = 2;
 
         colorManager = FindAnyObjectByType<ColorManager>(); 
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         SetColorsCanShoot();
     }
@@ -160,6 +158,8 @@ public class TongueController : MonoBehaviour
         }
     }
 
+
+
     private void ChangePlayerColor(ColorType colorType) {
         Color color = colorManager.GetColor(colorType);
         int counter = 0;
@@ -173,7 +173,7 @@ public class TongueController : MonoBehaviour
                 break;
             }
         }
-        spriteRenderer.color = color;
+        onPaintPlayer?.Invoke(color);
     }
 
     private void SwapColor() {
