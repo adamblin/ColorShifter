@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public event Action<ColorType> onPlayerDeath;
 
+    [SerializeField] private GameObject pauseUIPrefab;
     private GameObject pauseUIInstance;
     private bool gamePaused = false;
     
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        pauseUIInstance = GameObject.Find("GamePauseUI");
+        pauseUIInstance = Instantiate(pauseUIPrefab);
     }
 
     private void Update()
