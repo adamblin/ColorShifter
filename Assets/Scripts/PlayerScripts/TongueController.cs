@@ -38,13 +38,14 @@ public class TongueController : MonoBehaviour
     private bool inWater = false;
 
     private Vector3 firstDirection;
+    private Vector3 shootDirection;
 
     public event Action onShootingTongue;
     public event Action onNotMovingTongue;
+    public event Action<Color> onPaintPlayer;
 
     private LineRenderer lineRenderer;
     private ColorManager colorManager;
-    private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
@@ -52,8 +53,6 @@ public class TongueController : MonoBehaviour
         lineRenderer.positionCount = 2;
 
         colorManager = FindAnyObjectByType<ColorManager>(); 
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         SetColorsCanShoot();
     }
@@ -84,8 +83,8 @@ public class TongueController : MonoBehaviour
 
     private void ShootTongue() {
         if (shootTongue) {
-            Vector3 shootDirection = GetShootingDirection();
-            CheckIfShootingBack(shootDirection);
+            shootDirection = GetShootingDirection();
+            CheckIfShootingBack();
             tongueEnd.position += shootDirection * tongueSpeed * Time.fixedDeltaTime;
         }
         else
@@ -115,15 +114,18 @@ public class TongueController : MonoBehaviour
         return firstDirection.normalized;
     }
 
-    private void CheckIfShootingBack(Vector3 shootingDirection) {
+    private void CheckIfShootingBack() {
         Vector2 playerRight = transform.right;
 
         if (!CharacterMovement.Instance.GetFacingRight()) //mirando a la izquierda
             playerRight = -playerRight;
 
-        if (Vector2.Angle(shootingDirection, playerRight) > maxAngleToShoot) { //disparando a la espalda
+        float angle = Vector2.Angle(shootDirection, playerRight);
+
+        if (angle > maxAngleToShoot) { //disparando a la espalda
             shootTongue = false;
-        } 
+        }
+        
     }
 
 
@@ -160,6 +162,8 @@ public class TongueController : MonoBehaviour
         }
     }
 
+
+
     private void ChangePlayerColor(ColorType colorType) {
         Color color = colorManager.GetColor(colorType);
         int counter = 0;
@@ -173,7 +177,7 @@ public class TongueController : MonoBehaviour
                 break;
             }
         }
-        spriteRenderer.color = color;
+        onPaintPlayer?.Invoke(color);
     }
 
     private void SwapColor() {

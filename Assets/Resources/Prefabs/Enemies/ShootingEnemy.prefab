@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c36dcc2f64b1dd4096eb5a26623f413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondsToShootAgain: 0
+  secondsToShootAgain: 5
   bulletPrefab: {fileID: 6500078755803500426, guid: 6a3fbb5a78b982e4ca852e0c87a326c0, type: 3}
   shootingPoint: {fileID: 3157662588177143518}
 --- !u!61 &-857128854606727027

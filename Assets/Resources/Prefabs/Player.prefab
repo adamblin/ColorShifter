@@ -349,6 +349,7 @@ GameObject:
   - component: {fileID: 3336242206432462135}
   - component: {fileID: -5593858733002335637}
   - component: {fileID: 3336242206432462138}
+  - component: {fileID: 6799224346373529470}
   - component: {fileID: 1594624562852565711}
   - component: {fileID: 7884690054672578055}
   - component: {fileID: 4407038486316679020}
@@ -470,10 +471,24 @@ MonoBehaviour:
   tongueSpeed: 30
   maxTongueDistance: 15
   detectionRadius: 0.25
-  maxAngleToShoot: 92
+  maxAngleToShoot: 95
   tongueCanCollide:
     serializedVersion: 2
     m_Bits: 448
+--- !u!114 &6799224346373529470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3336242206432462131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76327254757c9c4fa2302cd2959e741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadSprite: {fileID: 8735980340453044356}
+  bodySpritesParent: {fileID: 5981407228460247992}
 --- !u!114 &1594624562852565711
 MonoBehaviour:
   m_ObjectHideFlags: 0
