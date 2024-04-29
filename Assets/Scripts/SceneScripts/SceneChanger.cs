@@ -17,7 +17,7 @@ public class SceneChanger : MonoBehaviour
     void Start()
     {
         //button.interactable = false;
-        button.SetActive(false);
+        //button.SetActive(false);
     }
     public void StartGame()
     {

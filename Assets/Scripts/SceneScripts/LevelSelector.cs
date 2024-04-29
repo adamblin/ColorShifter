@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelector : MonoBehaviour
 {
-   
-    
- 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
@@ -32,5 +29,14 @@ public class LevelSelector : MonoBehaviour
     public void LevelChanger(String name)
     {
         SceneManager.LoadScene(name);
+    }
+
+    public void LeaveLevel() {
+        SceneManager.LoadScene("LevelSelector");
+    }
+
+    public void ResetLevel() {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }
