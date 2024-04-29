@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorHits: 1
   nextLevelName: Tutorial
+  firstLevel: 
 --- !u!61 &426513708971474926
 BoxCollider2D:
   m_ObjectHideFlags: 0
