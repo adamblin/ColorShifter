@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,7 @@ using UnityEngine.SceneManagement;
 public class LevelSelector : MonoBehaviour
 {
    
-   
-    [SerializeField]
-    private string name;
+    
  
     void Update()
     {
@@ -30,7 +29,7 @@ public class LevelSelector : MonoBehaviour
         }
     }
 
-    private void LevelChanger()
+    public void LevelChanger(String name)
     {
         SceneManager.LoadScene(name);
     }
