@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,7 @@ public class NextLevelDoor : MonoBehaviour
 {
     [SerializeField] private int doorHits;
     [SerializeField] private string nextLevelName;
+    [SerializeField] private String firstLevel;
 
     private SpriteRenderer spriteRenderer;
 
@@ -26,5 +28,15 @@ public class NextLevelDoor : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         SceneManager.LoadScene(nextLevelName);
+        //Logica para mostrar el nivel 1
+        if (SceneManager.GetActiveScene().name == firstLevel)
+        {
+            Debug.Log("Es el primer nivel");
+        }
+        else
+        {
+            Debug.Log("No es el primer nivel");
+        }
+            
     }
 }
