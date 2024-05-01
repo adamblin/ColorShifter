@@ -51,16 +51,19 @@ public class PlayerSquashed : MonoBehaviour
         collisions.Add(col2);
 
         int counter = 0;
+        int groundCounter = 0;
         foreach (Collider2D col in collisions) {
             if (col.gameObject.CompareTag("PaintableObstacle")) {
                 if (col.gameObject.GetComponent<ObstacleEffectLogic>().getCurrentColorType() != ColorType.Water)
                     counter++;
             }
-            else
+            else {
+                groundCounter++;
                 counter++;
+            }
         }
 
-        if (counter >= 2)
+        if (counter >= 2 && groundCounter < 2)
             GameManager.Instance.MoveToCheckPoint();
     }
 
