@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 56e62c5b3bafb6c42882378953d14872
+guid: 0cffa951cf9885c41a1a643735686dba
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ ScriptedImporter:
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
     spritePixelsToUnits: 100
-    spriteBorder: {x: 314, y: 343, z: 266, w: 359}
+    spriteBorder: {x: 1218, y: 823, z: 624, w: 221}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
     cubemapConvolution: 0
@@ -69,27 +69,36 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   spriteImportData:
-  - name: plataforma-agua_1
+  - name: Cactus-Enemy_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
-    border: {x: 314, y: 343, z: 266, w: 359}
+    border: {x: 1218, y: 823, z: 624, w: 221}
     rect:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1024
-      height: 1024
-    spriteID: 1e2d82af2fc21864cb8367a34e125424
+      width: 4801
+      height: 3599
+    spriteID: 7b4f00fdaeda93d4b8bdde24e7d8ff21
     spriteBone: []
     spriteOutline:
     - outline:
-      - {x: -62, y: 152}
-      - {x: -199, y: 110}
-      - {x: -199, y: -169}
-      - {x: 246, y: -169}
-      - {x: 246, y: 128}
-      - {x: 172, y: 152}
+      - {x: 937.6953, y: 791.3111}
+      - {x: 947.07227, y: 887.44073}
+      - {x: 918.9414, y: 889.78534}
+      - {x: 815.7949, y: 1354.0212}
+      - {x: 686.8618, y: 1541.5912}
+      - {x: -457.12646, y: 1541.5912}
+      - {x: -1158.0537, y: 1014.05054}
+      - {x: -1158.0537, y: -589.6733}
+      - {x: -836.89307, y: -943.71173}
+      - {x: 663.41943, y: -943.71173}
+      - {x: 1727.7036, y: -87.923454}
+      - {x: 1727.7036, y: 943.71173}
+      - {x: 1706.6055, y: 990.60425}
+      - {x: 1305.7407, y: 1084.3893}
+      - {x: 949.4165, y: 819.4466}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -100,7 +109,7 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: Capa 1
+  - name: Capa 2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -109,9 +118,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 709
-      height: 377
-    spriteID: c9864f43fb291aa4c8ad776a42a3d2cb
+      width: 2874
+      height: 2473
+    spriteID: c68159de9b2c1ac4e83cff95dd2916f5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -121,7 +130,7 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 4, y: 4}
-    spritePosition: {x: 315, y: 345}
+    spritePosition: {x: 1248, y: 863}
   characterData:
     bones: []
     parts: []
@@ -176,26 +185,16 @@ ScriptedImporter:
   resliceFromLayer: 0
   mosaicPSDLayers: []
   rigPSDLayers:
-  - name: Capa 1
-    spriteName: Capa 1
+  - name: Capa 2
+    spriteName: Capa 2
     isGroup: 0
     parentIndex: -1
-    spriteID: c9864f43fb291aa4c8ad776a42a3d2cb
-    layerID: 2
+    spriteID: c68159de9b2c1ac4e83cff95dd2916f5
+    layerID: 3
     mosaicPosition: {x: 4, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: Capa 2
-    spriteName: 
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 9880ec45785e07347b83677e9fec51aa
-    layerID: 4
-    mosaicPosition: {x: 0, y: 0}
-    flatten: 0
-    isImported: 0
-    isVisible: 0
   sharedRigPSDLayers: []
   pSDLayerImportSetting: []
   generateGOHierarchy: 0
