@@ -53,7 +53,7 @@ public class PlayerSquashed : MonoBehaviour
         
         
 
-        if(col1.gameObject.)
+        //if(col1.gameObject.)
             GameManager.Instance.MoveToCheckPoint();
 
         //if (collisions.Length >= 2) {

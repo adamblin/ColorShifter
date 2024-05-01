@@ -5,8 +5,11 @@ using Unity.VisualScripting;
 public class ObstacleEffectLogic : MonoBehaviour
 {
     private static ObstacleEffectLogic instance;
-    public static ObstacleEffectLogic Instace{
-        get {
+
+    public static ObstacleEffectLogic Instace
+    {
+        get
+        {
             if (instance == null)
                 instance = FindAnyObjectByType<ObstacleEffectLogic>();
             return instance;
@@ -25,20 +28,26 @@ public class ObstacleEffectLogic : MonoBehaviour
     private IStrechEffect lastStrechEffect;
     private Vector3 initialScale;
 
-    public void ApplyEffect(IColorEffect colorEffect) {
+    public void ApplyEffect(IColorEffect colorEffect)
+    {
         if (currentColorType == ColorType.Default)
         {
             currentColorEffect = colorEffect;
             currentColorEffect.InitializeEffect(gameObject);
             currentColorType = currentColorEffect.getColorType();
 
-        } else {
-            if (currentColorType == ColorType.Strech) { //STRECH LOGIC
+        }
+        else
+        {
+            if (currentColorType == ColorType.Strech)
+            {
+                //STRECH LOGIC
                 IStrechEffect effect = currentColorEffect as IStrechEffect;
                 lastStrechEffect = effect;
             }
 
-            if (colorEffect.getColorType() != ColorType.Default) {
+            if (colorEffect.getColorType() != ColorType.Default)
+            {
                 onChangeEffect?.Invoke(colorEffect.getColorType());
             }
 
@@ -64,10 +73,13 @@ public class ObstacleEffectLogic : MonoBehaviour
         CheckPlayerDistance();
     }
 
-    private void CheckPlayerDistance() {
+    private void CheckPlayerDistance()
+    {
         //Si el jugador esta muy lejos, devolvemos el color
-        if (currentColorType != ColorType.Default) {
-            if (Vector3.Distance(transform.position, player.transform.position) >= maxPlayerDistance){
+        if (currentColorType != ColorType.Default)
+        {
+            if (Vector3.Distance(transform.position, player.transform.position) >= maxPlayerDistance)
+            {
                 RemoveAllEffects(ColorType.Default);
             }
         }
@@ -75,28 +87,34 @@ public class ObstacleEffectLogic : MonoBehaviour
 
     //STRECH LOGIC
 
-    private void StrechEffect() {
-        if (currentColorType == ColorType.Strech) { 
+    private void StrechEffect()
+    {
+        if (currentColorType == ColorType.Strech)
+        {
             IStrechEffect effect = currentColorEffect as IStrechEffect;
             effect.ApplyEffect();
         }
     }
 
-    private void RevertStrechEffect() {
-        if (lastStrechEffect != null && currentColorType != ColorType.Strech) {
+    private void RevertStrechEffect()
+    {
+        if (lastStrechEffect != null && currentColorType != ColorType.Strech)
+        {
             if (!lastStrechEffect.getRevertingEffect())
             {
                 lastStrechEffect.RemoveEffect(gameObject);
             }
-            else {
+            else
+            {
                 lastStrechEffect = null;
             }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) //ELASTIC LOGIC
-    { 
-        if (currentColorEffect != null) {
+    {
+        if (currentColorEffect != null)
+        {
             if (currentColorType == ColorType.Elastic && collision.gameObject.CompareTag("Player"))
             {
                 IElasticEffect effect = currentColorEffect as IElasticEffect;
@@ -109,8 +127,10 @@ public class ObstacleEffectLogic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (currentColorEffect != null) {
-            if (currentColorType == ColorType.Water && collision.gameObject.CompareTag("Player")) { 
+        if (currentColorEffect != null)
+        {
+            if (currentColorType == ColorType.Water && collision.gameObject.CompareTag("Player"))
+            {
                 IWaterEffect effect = currentColorEffect as IWaterEffect;
                 effect.ApplyEffect();
             }
@@ -129,15 +149,18 @@ public class ObstacleEffectLogic : MonoBehaviour
         }
     }
 
-    public Vector3 getInitialScale() { 
+    public Vector3 getInitialScale()
+    {
         return initialScale;
     }
 
-    public ColorType getCurrentColorType() {
+    public ColorType getCurrentColorType()
+    {
         return currentColorType;
     }
 
-    private void RemoveAllEffects(ColorType colorType) {
+    private void RemoveAllEffects(ColorType colorType)
+    {
         ApplyEffect(FindAnyObjectByType<ColorManager>().GetColorEffect(colorType));
     }
 
@@ -159,18 +182,7 @@ public class ObstacleEffectLogic : MonoBehaviour
 
     private void OnDisable()
     {
-        if(GameManager.Instance != null)
+        if (GameManager.Instance != null)
             GameManager.Instance.onPlayerDeath -= RemoveAllEffects;
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (currentColorEffect.getColorType() == ColorType.Elastic)
-        {
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                currentColorEffect.ApplyEffect(collision.gameObject);
-            }
-        }
     }
 }

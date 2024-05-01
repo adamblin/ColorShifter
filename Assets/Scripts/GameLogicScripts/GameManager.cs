@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] 
     private Animator animator;
 
-    [SerializeField] 
-    private ParticleSystem deathPartciles;
+    //[SerializeField] 
+    //private ParticleSystem deathPartciles;
 
     private void Start()
     {
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitForRevive()
     {
       
-        deathPartciles.Play();
+        //deathPartciles.Play();
         animator.SetTrigger("End");
         GameObject player = GameObject.Find("Player");
         player.transform.position = checkPoints[currentIndex].transform.position;

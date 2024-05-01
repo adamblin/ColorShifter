@@ -45,8 +45,8 @@ public class CheckpointSystem : MonoBehaviour
         if (currentCheckpointIndex > -1)
         {
             checkpoints[currentCheckpointIndex].Activate();
-            CharacterMovement player = FindObjectOfType<CharacterMovement>();
-            player.SetPosition(checkpoints[currentCheckpointIndex].GetCheckpointPosition());
+            
+            CharacterMovement.Instance.SetPlayerPosition(checkpoints[currentCheckpointIndex].GetCheckpointPosition());
         }
     }
 

@@ -16,7 +16,6 @@ public class CharacterMovement : MonoBehaviour
     //PLAYER MOVEMENT
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float initialGravityScale;
-    private bool facingRight = true;
     private bool canFlip = true;
     private Vector2 movementDirection;
 
@@ -24,7 +23,6 @@ public class CharacterMovement : MonoBehaviour
     //PLAYER JUMP
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float fallMultiplier;
-    private bool isGrounded;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGorunded;
@@ -54,7 +52,7 @@ public class CharacterMovement : MonoBehaviour
         movementDirection.x = Input.GetAxisRaw("Horizontal");
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(inWater)
             ApplyMovementInWater();
@@ -158,6 +156,11 @@ public class CharacterMovement : MonoBehaviour
     public Vector3 getLastJumpPosition()
     {
         return lastJumpPosition;
+    }
+
+    public void SetPlayerPosition(Vector3 checkPointPosition)
+    {
+        transform.position = checkPointPosition;
     }
 
 

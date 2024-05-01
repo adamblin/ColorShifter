@@ -39,11 +39,6 @@ public class WaterEffect : IWaterEffect
         onWater?.Invoke();
     }
 
-    public ColorType getColorType()
-    {
-        return colorType;
-    }
-
     public void RemoveEffect(GameObject target)
     {
         Collider2D[] collider = Physics2D.OverlapBoxAll(target.transform.position, target.transform.localScale, 0f);
