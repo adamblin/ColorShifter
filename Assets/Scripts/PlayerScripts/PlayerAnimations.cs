@@ -22,7 +22,7 @@ public class PlayerAnimations : MonoBehaviour
     private PlayerAnim lastAnim;
 
 
-    public void ChangeAnimationState(PlayerAnim newAnim)
+    public void ChangeAnimation(PlayerAnim newAnim)
     {
         if (lastAnim != newAnim) { 
             lastAnim = newAnim;
@@ -44,11 +44,12 @@ public class PlayerAnimations : MonoBehaviour
             }
         }
     }
+}
 
-    public enum PlayerAnim { 
-        Idle,
-        Jump,
-        Walk,
-        Shoot
-    }
+public enum PlayerAnim
+{
+    Idle,
+    Jump,
+    Walk,
+    Shoot
 }

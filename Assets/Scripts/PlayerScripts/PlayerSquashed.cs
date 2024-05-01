@@ -41,11 +41,6 @@ public class PlayerSquashed : MonoBehaviour
         Collider2D[] rightCol = Physics2D.OverlapBoxAll(transform.position + new Vector3(transform.localScale.x / 2 + rightOffset, 0, 0), new Vector2(topXSize, topYSize), 0, layerMask);
         if(leftCol.Length != 0 && rightCol.Length != 0)
             CheckIfKillPlayer(leftCol[0], rightCol[0]);
-
-        Debug.Log("topCol: " + topCol.Length);
-        Debug.Log("botCol: " + botCol.Length);
-        Debug.Log("leftCol: " + leftCol.Length);
-        Debug.Log("rightCol: " + rightCol.Length);
     }
 
     private void CheckIfKillPlayer(Collider2D col1, Collider2D col2)
