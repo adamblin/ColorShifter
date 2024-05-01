@@ -6,10 +6,7 @@ using UnityEngine;
 public interface IColorEffect {
 
     void InitializeEffect(GameObject target);
-
-
-    void ApplyEffect(GameObject target);
+    void RemoveEffect(GameObject target);
 
     ColorType getColorType();
-
 }

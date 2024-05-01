@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9002447815711592131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6348649749849883701}
+  - component: {fileID: 1560776995438566935}
+  - component: {fileID: 1419596924599824962}
+  - component: {fileID: -6885249382805150738}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6348649749849883701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9002447815711592131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1560776995438566935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9002447815711592131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eccb6cefa5fa8fd4089e6c3d966c252d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  pauseUIPrefab: {fileID: 8824907898654072053, guid: cc4789fd4ed10b142a666382cff0df64, type: 3}
+  deathTime: 1.5
+  animator: {fileID: 1778716886080463242, guid: f8ef003bf964fc844a21e3ab6d1969cd, type: 3}
+--- !u!114 &1419596924599824962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9002447815711592131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51093e617b0114488911563497cdaa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterColor: {r: 0.064044006, g: 0.67265624, b: 0.96981126, a: 1}
+  elasticColor: {r: 0.26663578, g: 0.82641506, b: 0.2839933, a: 1}
+  strechColor: {r: 0.82641506, g: 0.8215438, b: 0.19802772, a: 1}
+  elasticMinImpulse: 2.5
+  elasticHeightMultiplier: 7.2
+  stretchMultiplier: 0.04
+  strechLayerMask:
+    serializedVersion: 2
+    m_Bits: 448
+--- !u!114 &-6885249382805150738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9002447815711592131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021e44538149d994ca5eadf7de9d7e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

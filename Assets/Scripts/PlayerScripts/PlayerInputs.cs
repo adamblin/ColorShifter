@@ -5,79 +5,49 @@ using System;
 
 public class PlayerInputs : MonoBehaviour
 {
+    private static PlayerInputs instance;
+    public static PlayerInputs Instance
+    {
+        get { 
+            if (instance == null)
+                instance = FindAnyObjectByType<PlayerInputs>();
+            return instance;
+        }
+    }
+
+    [Header("CONTROLES")]
+    [SerializeField] private KeyCode pauseGame;
     [SerializeField] private KeyCode shootKey;
-    [SerializeField] private KeyCode upKey;
-    [SerializeField] private KeyCode downKey;
-    [SerializeField] private KeyCode leftKey;
-    [SerializeField] private KeyCode rightKey;
     [SerializeField] private KeyCode jumpKey;
 
+    [SerializeField] private KeyCode swapColor;
 
     //Tecla para disparar
-    public static event Action onShoot;
-
-    //Disparar hacia arriba
-    public static event Action onShootUp;
-
-    //Disparar hacia abajo
-    public static event Action onShootDown;
-
-    //Disparar a los lados
-    public static event Action onShootStraight;
+    public event Action onShoot;
 
     //Movimiento
-    public static event Action onMoveLeft;
-    public static event Action onStopMoveLeft;
-    public static event Action onMoveRight;
-    public static event Action onStopMoveRight;
+    public event Action onJump;
 
-    public static event Action onJump;
+    //Cambiar Colores
+    public event Action onSwapColor;
 
+    //Pausar Juego
+    public event Action onPauseGame;
 
 
     private void Update()
     {
-        if (Input.GetKeyDown(shootKey) || Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(shootKey) || Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Mouse0))
             onShoot?.Invoke();
 
-        if (Input.GetKeyDown(upKey))
-            onShootUp?.Invoke();
-
-        if (Input.GetKeyUp(upKey))
-            onShootUp?.Invoke();
-
-        if (Input.GetKeyDown(downKey))
-            onShootDown?.Invoke();
-
-        if (Input.GetKeyUp(downKey))
-            onShootDown?.Invoke();
-
-        if (Input.GetKeyDown(rightKey) || Input.GetKeyDown(leftKey))
-            onShootStraight?.Invoke();
-
-        if (Input.GetKeyUp(rightKey) || Input.GetKeyUp(leftKey))
-            onShootStraight?.Invoke();
-        
-
-        //Movement
-        if (Input.GetKeyDown(leftKey))
-            onMoveLeft?.Invoke();
-    
-       if (Input.GetKeyUp(leftKey))
-            onStopMoveLeft?.Invoke();
-        
-
-        if (Input.GetKeyDown(rightKey))
-            onMoveRight?.Invoke();
-    
-        if (Input.GetKeyUp(rightKey))
-            onStopMoveRight?.Invoke();
-
-        if (Input.GetKeyDown(jumpKey))
+        if(Input.GetKeyDown(jumpKey))
             onJump?.Invoke();
-       
-       if (Input.GetKeyUp(jumpKey))
-            onJump?.Invoke();
-            
+
+        //COLORS
+        if(Input.GetKeyDown(swapColor))
+            onSwapColor?.Invoke();
+
+        if(Input.GetKeyDown(pauseGame))
+            onPauseGame?.Invoke();
     }
 }

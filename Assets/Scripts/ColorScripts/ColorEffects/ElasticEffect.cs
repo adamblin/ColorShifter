@@ -1,46 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
-public class ElasticEffect : IColorEffect
+public class ElasticEffect : IElasticEffect
 {
     private Color effectColor;
     private ColorType colorType;
-    private float minIntensity;
 
+    private float minImpulse;
+    private float hightMultiplier;
 
-    public ElasticEffect(Color color, ColorType type, float intensity)
+    private Color previousColor;
+    private GameObject obstacle;
+
+    public ElasticEffect(Color color, ColorType colorType, float minImpulse, float hightMultiplier)
     {
         effectColor = color;
-        colorType = type;
-        minIntensity = intensity;
+        this.colorType = colorType;
+        this.minImpulse = minImpulse;
+        this.hightMultiplier = hightMultiplier;
     }
 
-
-    public void ApplyEffect(GameObject target)
-    {
-        Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.AddForce(Vector2.up * minIntensity, ForceMode2D.Impulse);
-        }
-    }
-
-  
 
     public void InitializeEffect(GameObject target)
     {
-
-        //aplicar la logica del efecte
+        obstacle = target;
+        previousColor = target.GetComponent<SpriteRenderer>().color;
         target.GetComponent<SpriteRenderer>().color = effectColor;
-        Debug.Log("APLICANDO EFECTO");
+    }
+
+    public void ApplyEffect(GameObject player)
+    {
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+
+        float jumpHeight = Mathf.Abs(player.GetComponent<CharacterMovement>().getLastJumpPosition().y 
+            - (obstacle.transform.position.y + obstacle.transform.localScale.y / 2));
+
+        
+        float totalForce = minImpulse + (jumpHeight * hightMultiplier);
+        Debug.Log(totalForce);
+        
+        if (totalForce >= 150)
+        {
+            totalForce = 70;
+        }
+        
+        rb.velocity = player.transform.up * totalForce;
+
+
+    }
+
+    public void RemoveEffect(GameObject target)
+    {
+        target.GetComponent<SpriteRenderer>().color = previousColor;
     }
 
     public ColorType getColorType()
     {
         return colorType;
     }
-
 }
     
 

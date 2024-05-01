@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Ground
   - PaintableObstacle
-  - Obstacle
+  - Door
   - Enemy
   layers:
   - Default
@@ -16,8 +16,8 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
+  - PaintableObstacle
+  - Door
   - 
   - 
   - 
