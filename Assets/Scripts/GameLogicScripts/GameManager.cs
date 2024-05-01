@@ -26,28 +26,37 @@ public class GameManager : MonoBehaviour
     private bool gamePaused = false;
     
     [SerializeField]
-    private float deathTime; 
+    private float deathTime;
+
+    [SerializeField] 
+    private Animator animator;
+
+    [SerializeField] 
+    private ParticleSystem deathPartciles;
 
     private void Start()
     {
         pauseUIInstance = Instantiate(pauseUIPrefab);
+        
+
     }
 
     private void Update()
     {
         ManagePauseGame();    
     }
-
     private void ManagePauseGame() {
         Debug.Log(pauseUIInstance + " " + gamePaused);
 
-        if (gamePaused) {
+        if (gamePaused)
+        {
             pauseUIInstance.SetActive(true);
             Time.timeScale = 0f;
         }
-        else {
+        else
+        {
             pauseUIInstance.SetActive(false);
-            Time.timeScale = 1f;  
+            Time.timeScale = 1f;
         }
     }
 
@@ -59,11 +68,15 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitForRevive()
     {
-         GameObject player = GameObject.Find("Player");
+      
+        deathPartciles.Play();
+        animator.SetTrigger("End");
+        GameObject player = GameObject.Find("Player");
         player.transform.position = checkPoints[currentIndex].transform.position;
         onPlayerDeath.Invoke(ColorType.Default);
         yield return new WaitForSeconds(deathTime);
-       
+
+
     }
 
     private void nextCheckPoint(GameObject checkPoint) {
