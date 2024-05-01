@@ -22,12 +22,15 @@ public class PaintBody : MonoBehaviour
     private void PaintPlayer(Color color) {
         
         if(color != lastColor){
-            HeadSprite.GetComponent<Renderer>().material.color = color;
+            HeadSprite.GetComponent<SpriteRenderer>().material.color = color;
 
             for (int i = 0; i < bodyChildCount; i++)
             {
                 Transform child = bodySpritesParent.transform.GetChild(i);
-                child.gameObject.GetComponent<Renderer>().material.color = color;
+                SpriteRenderer childRender = child.GetComponent<SpriteRenderer>();
+
+                if(childRender != null)
+                    childRender.material.color = color;
             }
             lastColor = color;
         }
