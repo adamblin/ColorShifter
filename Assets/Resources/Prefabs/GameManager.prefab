@@ -52,6 +52,7 @@ MonoBehaviour:
   - {fileID: 0}
   pauseUIPrefab: {fileID: 8824907898654072053, guid: cc4789fd4ed10b142a666382cff0df64, type: 3}
   deathTime: 1.5
+  animator: {fileID: 1778716886080463242, guid: f8ef003bf964fc844a21e3ab6d1969cd, type: 3}
 --- !u!114 &1419596924599824962
 MonoBehaviour:
   m_ObjectHideFlags: 0
