@@ -148,7 +148,7 @@ public class CharacterMovement : MonoBehaviour
             PlayerAnimations.Instance.ChangeAnimation(PlayerAnim.Jump);
         else if (movementDirection.x != 0 && isGrounded) //walk
             PlayerAnimations.Instance.ChangeAnimation(PlayerAnim.Walk);
-        else if (movementDirection.x == 0 && isGrounded) //idle
+        else if (movementDirection.x == 0 && isGrounded)
             PlayerAnimations.Instance.ChangeAnimation(PlayerAnim.Idle);
     }
 

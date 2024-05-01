@@ -19,34 +19,30 @@ public class PlayerAnimations : MonoBehaviour
     [SerializeField] private string jumpname;
     [SerializeField] private string walkName;
     [SerializeField] private string shootName;
-    private string currentState;
+    private PlayerAnim lastAnim;
 
 
     public void ChangeAnimation(PlayerAnim newAnim)
     {
+        if (lastAnim != newAnim) { 
+            lastAnim = newAnim;
 
-        switch (newAnim) {
-            case PlayerAnim.Idle: 
-                ChangeAnimationState(idleName); break;
+            switch (newAnim) {
+                case PlayerAnim.Idle: 
+                    animator.Play(idleName); break;
 
-            case PlayerAnim.Jump:
-                ChangeAnimationState(jumpname); break;
+                case PlayerAnim.Jump: 
+                    animator.Play(jumpname); break;
 
-            case PlayerAnim.Walk:
-                ChangeAnimationState(walkName); break;
+                case PlayerAnim.Walk: 
+                    animator.Play(walkName); break;
 
-            case PlayerAnim.Shoot:
-                ChangeAnimationState(shootName); break;
+                case PlayerAnim.Shoot: 
+                    animator.Play(shootName); break;
 
-            default: throw new System.Exception("error"); 
+                default: throw new System.Exception("error"); 
+            }
         }
-    }
-    private void ChangeAnimationState(string newState)
-    {
-        Debug.Log(newState);
-        if (currentState == newState) return;
-        animator.Play(newState);
-        currentState = newState;
     }
 }
 
