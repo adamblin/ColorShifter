@@ -8,7 +8,6 @@ public class PlayerSquashed : MonoBehaviour
     [SerializeField] private float topXSize;
     [SerializeField] private float topYSize;
     [SerializeField] private float topOffset;
-    
 
     [SerializeField] private float bottomXSize;
     [SerializeField] private float bottomYSize;
