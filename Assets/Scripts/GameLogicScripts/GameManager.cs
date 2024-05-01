@@ -29,12 +29,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject sceneTransitionPrefab;
     private Animator animator;
 
-
     [SerializeField] private float deathTime;
 
-
-    //[SerializeField] 
-    //private ParticleSystem deathPartciles;
+    [SerializeField]
+    private ParticleSystem deathPartciles;
 
     private void Start()
     {
@@ -72,7 +70,10 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitForRevive()
     {
       
-        //deathPartciles.Play();
+        deathPartciles.Play();
+        yield return new WaitForSeconds(deathPartciles.main.duration);
+        Debug.Log("Tendrian que salir las particulas");
+        deathPartciles.Stop();
         animator.SetTrigger("End");
         yield return new WaitForSeconds(deathTime);
         CharacterMovement.Instance.SetPlayerPosition(checkPoints[currentIndex].transform.position);
