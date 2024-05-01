@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class PlayerSquashed : MonoBehaviour
 {
@@ -7,7 +8,6 @@ public class PlayerSquashed : MonoBehaviour
     [SerializeField] private float topXSize;
     [SerializeField] private float topYSize;
     [SerializeField] private float topOffset;
-    
 
     [SerializeField] private float bottomXSize;
     [SerializeField] private float bottomYSize;
@@ -40,42 +40,28 @@ public class PlayerSquashed : MonoBehaviour
         Collider2D[] leftCol= Physics2D.OverlapBoxAll(transform.position - new Vector3(transform.localScale.x / 2 + leftOffset, 0, 0), new Vector2(leftXSize, leftYSize), 0, layerMask);
         Collider2D[] rightCol = Physics2D.OverlapBoxAll(transform.position + new Vector3(transform.localScale.x / 2 + rightOffset, 0, 0), new Vector2(topXSize, topYSize), 0, layerMask);
         if(leftCol.Length != 0 && rightCol.Length != 0)
-            CheckIfKillPlayer(topCol[0], botCol[0]);
-
-        Debug.Log("topCol: " + topCol.Length);
-        Debug.Log("botCol: " + botCol.Length);
-        Debug.Log("leftCol: " + leftCol.Length);
-        Debug.Log("rightCol: " + rightCol.Length);
+            CheckIfKillPlayer(leftCol[0], rightCol[0]);
     }
 
-    private void CheckIfKillPlayer(Collider2D col1, Collider2D col2) {
-        Debug.Log("IN");
-        
-        
+    private void CheckIfKillPlayer(Collider2D col1, Collider2D col2)
+    {
 
-        //if(col1.gameObject.)
-            //GameManager.Instance.MoveToCheckPoint();
+        List<Collider2D> collisions = new List<Collider2D>();
+        collisions.Add(col1);
+        collisions.Add(col2);
 
-        //if (collisions.Length >= 2) {
-        //    int counter = 0;
-        //    for (int i = 0; i < collisions.Length; i++){ //si estem chocant amb una paret y un obstacle de color groc
-        //        GameObject obstacle = collisions[i].gameObject;
+        int counter = 0;
+        foreach (Collider2D col in collisions) {
+            if (col.gameObject.CompareTag("PaintableObstacle")) {
+                if (col.gameObject.GetComponent<ObstacleEffectLogic>().getCurrentColorType() != ColorType.Water)
+                    counter++;
+            }
+            else
+                counter++;
+        }
 
-        //        if (obstacle.CompareTag("PaintableObstacle")) {
-        //            ColorType obstacleColorType = obstacle.GetComponent<ObstacleEffectLogic>().getCurrentColorType();
-        //            if (obstacleColorType == ColorType.Strech)
-        //                counter++;
-        //        }
-        //        else
-        //            counter++;
-        //    }
-        //    Debug.Log(counter);
-        //    if (counter >= 2) {
-        //        Debug.Log("Squashed");
-        //        GameManager.Instance.MoveToCheckPoint();
-        //    }
-                
-        //}
+        if (counter >= 2)
+            GameManager.Instance.MoveToCheckPoint();
     }
 
     private void OnDrawGizmosSelected()

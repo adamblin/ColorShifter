@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float fallMultiplier;
     public Transform groundCheck;
     public float checkRadius;
+    private bool isGrounded;
     public LayerMask whatIsGorunded;
     private Vector3 lastJumpPosition;
     private Vector2 vecGravity;
@@ -37,9 +39,8 @@ public class CharacterMovement : MonoBehaviour
     private bool inWater = false;
 
     private Rigidbody2D rb;
-    [SerializeField] private float speed = 5f;
     private bool facingRight = true;
-    private bool isGrounded;
+    private bool jumpAnimation = false;
 
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
         movementDirection.x = Input.GetAxisRaw("Horizontal");
+        ManagePlayerAnimations();
     }
 
     private void FixedUpdate()
@@ -103,11 +105,13 @@ public class CharacterMovement : MonoBehaviour
             if (collider.gameObject.layer == 6) //gorund layer
             {
                 isGrounded = true;
+                jumpAnimation = false;
                 lastJumpPosition = transform.position;
             }
             else if (collider.gameObject.layer == 7) //obstacles
             { 
                 isGrounded = true;
+                jumpAnimation = false;
                 if (collider.gameObject.GetComponent<ObstacleEffectLogic>().getCurrentColorType() != ColorType.Elastic)
                     lastJumpPosition = transform.position;
             }
@@ -126,7 +130,7 @@ public class CharacterMovement : MonoBehaviour
     }
 
     private void PlayerJump() {
-
+        jumpAnimation = true;
         if (isGrounded && !inWater)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -136,6 +140,19 @@ public class CharacterMovement : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForceInWater);
         }
     }
+
+    private void ManagePlayerAnimations() {
+        Debug.Log(movementDirection.x);
+
+        if (jumpAnimation) //jump
+            PlayerAnimations.Instance.ChangeAnimation(PlayerAnim.Jump);
+        else if (movementDirection.x != 0 && isGrounded) //walk
+            PlayerAnimations.Instance.ChangeAnimation(PlayerAnim.Walk);
+        else if (movementDirection.x == 0 && isGrounded)
+            PlayerAnimations.Instance.ChangeAnimation(PlayerAnim.Idle);
+    }
+
+
 
     private void CanNotFlip() {
         canFlip = false;
