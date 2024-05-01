@@ -52,7 +52,8 @@ MonoBehaviour:
   - {fileID: 0}
   pauseUIPrefab: {fileID: 8824907898654072053, guid: cc4789fd4ed10b142a666382cff0df64, type: 3}
   sceneTransitionPrefab: {fileID: 1778716886080463245, guid: f8ef003bf964fc844a21e3ab6d1969cd, type: 3}
-  deathTime: 0
+  deathTime: 1
+  deathPartciles: {fileID: 0}
 --- !u!114 &1419596924599824962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +70,7 @@ MonoBehaviour:
   elasticColor: {r: 0.26663578, g: 0.82641506, b: 0.2839933, a: 1}
   strechColor: {r: 0.82641506, g: 0.8215438, b: 0.19802772, a: 1}
   elasticMinImpulse: 2.5
-  elasticHeightMultiplier: 7.2
+  elasticHeightMultiplier: 8
   stretchMultiplier: 0.04
   strechLayerMask:
     serializedVersion: 2
