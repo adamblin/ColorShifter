@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5055766113401271286}
   - component: {fileID: 5055766113401271287}
   - component: {fileID: 5055766113401271280}
+  - component: {fileID: 519796376511989919}
   - component: {fileID: 5055766113401271285}
   m_Layer: 0
   m_Name: Spike
@@ -114,6 +115,25 @@ PolygonCollider2D:
     - - {x: 0, y: 0.3}
       - {x: -0.3, y: -0.28866667}
       - {x: 0.3, y: -0.28866667}
+--- !u!114 &519796376511989919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5055766113401271282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba333b6a18619d44afe336c60fe986f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleSprites:
+  - {fileID: 5862355509481439359, guid: fcbb9dc0da958084982f2e6d57e80236, type: 3}
+  - {fileID: -269883314801718715, guid: fcbb9dc0da958084982f2e6d57e80236, type: 3}
+  - {fileID: -7246628956874486248, guid: fcbb9dc0da958084982f2e6d57e80236, type: 3}
+  - {fileID: 1197568108766681739, guid: fcbb9dc0da958084982f2e6d57e80236, type: 3}
+  - {fileID: 5668821949009374980, guid: fcbb9dc0da958084982f2e6d57e80236, type: 3}
+  - {fileID: 5948420599703335021, guid: fcbb9dc0da958084982f2e6d57e80236, type: 3}
 --- !u!114 &5055766113401271285
 MonoBehaviour:
   m_ObjectHideFlags: 0
