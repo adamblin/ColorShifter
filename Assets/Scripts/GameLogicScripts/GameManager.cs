@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
 
     public event Action<ColorType> onPlayerDeath;
 
-    [SerializeField] private GameObject pauseUIPrefab;
     private GameObject pauseUIInstance;
     private bool gamePaused = false;
     
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        pauseUIInstance = Instantiate(pauseUIPrefab);
+        pauseUIInstance = GameObject.Find("GamePauseUI");
     }
 
     private void Update()
@@ -59,10 +58,11 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitForRevive()
     {
-         GameObject player = GameObject.Find("Player");
+        yield return new WaitForSeconds(deathTime);
+        GameObject player = GameObject.Find("Player");
         player.transform.position = checkPoints[currentIndex].transform.position;
         onPlayerDeath.Invoke(ColorType.Default);
-        yield return new WaitForSeconds(deathTime);
+        
        
     }
 
