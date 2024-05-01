@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,12 +25,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseUIPrefab;
     private GameObject pauseUIInstance;
     private bool gamePaused = false;
-    
-    [SerializeField]
-    private float deathTime;
 
-    [SerializeField] 
+    [SerializeField] private GameObject sceneTransitionPrefab;
     private Animator animator;
+
+
+    [SerializeField] private float deathTime;
+
 
     //[SerializeField] 
     //private ParticleSystem deathPartciles;
@@ -37,8 +39,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         pauseUIInstance = Instantiate(pauseUIPrefab);
-        
 
+        GameObject prefabInstance = Instantiate(sceneTransitionPrefab);
+        animator = prefabInstance.GetComponent<Animator>();
     }
 
     private void Update()
@@ -71,12 +74,10 @@ public class GameManager : MonoBehaviour
       
         //deathPartciles.Play();
         animator.SetTrigger("End");
-        GameObject player = GameObject.Find("Player");
-        player.transform.position = checkPoints[currentIndex].transform.position;
-        onPlayerDeath.Invoke(ColorType.Default);
         yield return new WaitForSeconds(deathTime);
-
-
+        CharacterMovement.Instance.SetPlayerPosition(checkPoints[currentIndex].transform.position);
+        onPlayerDeath.Invoke(ColorType.Default);
+        animator.SetTrigger("Start");
     }
 
     private void nextCheckPoint(GameObject checkPoint) {
