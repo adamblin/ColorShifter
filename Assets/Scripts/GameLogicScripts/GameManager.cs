@@ -21,32 +21,40 @@ public class GameManager : MonoBehaviour
 
     public event Action<ColorType> onPlayerDeath;
 
+    [SerializeField] private GameObject pauseUIPrefab;
     private GameObject pauseUIInstance;
     private bool gamePaused = false;
     
     [SerializeField]
-    private float deathTime; 
+    private float deathTime;
+
+    [SerializeField] 
+    private Animator animator;
+
+    private const String normalState = "transition";
 
     private void Start()
     {
-        pauseUIInstance = GameObject.Find("GamePauseUI");
+        pauseUIInstance = Instantiate(pauseUIPrefab);
+
     }
 
     private void Update()
     {
         ManagePauseGame();    
     }
-
     private void ManagePauseGame() {
         Debug.Log(pauseUIInstance + " " + gamePaused);
 
-        if (gamePaused) {
+        if (gamePaused)
+        {
             pauseUIInstance.SetActive(true);
             Time.timeScale = 0f;
         }
-        else {
+        else
+        {
             pauseUIInstance.SetActive(false);
-            Time.timeScale = 1f;  
+            Time.timeScale = 1f;
         }
     }
 
@@ -58,6 +66,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitForRevive()
     {
+      
+        animator.SetTrigger("End");
         yield return new WaitForSeconds(deathTime);
         GameObject player = GameObject.Find("Player");
         player.transform.position = checkPoints[currentIndex].transform.position;
