@@ -31,11 +31,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] 
     private Animator animator;
 
-    private const String normalState = "transition";
+    [SerializeField] 
+    private ParticleSystem deathPartciles;
 
     private void Start()
     {
         pauseUIInstance = Instantiate(pauseUIPrefab);
+        
 
     }
 
@@ -67,13 +69,14 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitForRevive()
     {
       
+        deathPartciles.Play();
         animator.SetTrigger("End");
-        yield return new WaitForSeconds(deathTime);
         GameObject player = GameObject.Find("Player");
         player.transform.position = checkPoints[currentIndex].transform.position;
         onPlayerDeath.Invoke(ColorType.Default);
-        
-       
+        yield return new WaitForSeconds(deathTime);
+
+
     }
 
     private void nextCheckPoint(GameObject checkPoint) {
