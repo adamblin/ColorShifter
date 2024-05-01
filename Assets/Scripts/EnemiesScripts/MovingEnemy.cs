@@ -3,6 +3,9 @@ using UnityEngine;
 public class MovingEnemy : MonoBehaviour
 {
     [SerializeField] private EnemyType enemyType;
+    [SerializeField] private GameObject spriteHolder;
+    [SerializeField] private Sprite snakeSprite;
+    [SerializeField] private Sprite eagleSprite;
     [SerializeField] private float enemySpeed;
     [SerializeField] private Transform pointA, pointB;
 
@@ -17,11 +20,13 @@ public class MovingEnemy : MonoBehaviour
         {
             pointA.position = new Vector2(pointA.position.x, transform.position.y);
             pointB.position = new Vector2(pointB.position.x, transform.position.y);
+            spriteHolder.GetComponent<SpriteRenderer>().sprite = snakeSprite;
         }
         else 
         {
             pointA.position = new Vector2(transform.position.x, pointA.position.y);
             pointB.position = new Vector2(transform.position.x, pointB.position.y);
+            spriteHolder.GetComponent<SpriteRenderer>().sprite = eagleSprite;
         }
 
         finalPositionA = pointA.position;
