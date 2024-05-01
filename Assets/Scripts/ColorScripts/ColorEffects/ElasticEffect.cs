@@ -42,7 +42,7 @@ public class ElasticEffect : IElasticEffect
         
         if (totalForce >= 150)
         {
-            totalForce = totalForce / 2f;
+            totalForce = 70;
         }
         
         rb.velocity = player.transform.up * totalForce;

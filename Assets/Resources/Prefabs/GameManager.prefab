@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6348649749849883701}
   - component: {fileID: 1560776995438566935}
   - component: {fileID: 1419596924599824962}
+  - component: {fileID: -6885249382805150738}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -49,6 +50,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  pauseUIPrefab: {fileID: 8824907898654072053, guid: cc4789fd4ed10b142a666382cff0df64, type: 3}
+  deathTime: 1.5
 --- !u!114 &1419596924599824962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,3 +73,15 @@ MonoBehaviour:
   strechLayerMask:
     serializedVersion: 2
     m_Bits: 448
+--- !u!114 &-6885249382805150738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9002447815711592131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021e44538149d994ca5eadf7de9d7e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

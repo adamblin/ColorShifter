@@ -16,6 +16,7 @@ public class PlayerInputs : MonoBehaviour
     }
 
     [Header("CONTROLES")]
+    [SerializeField] private KeyCode pauseGame;
     [SerializeField] private KeyCode shootKey;
     [SerializeField] private KeyCode jumpKey;
 
@@ -30,6 +31,9 @@ public class PlayerInputs : MonoBehaviour
     //Cambiar Colores
     public event Action onSwapColor;
 
+    //Pausar Juego
+    public event Action onPauseGame;
+
 
     private void Update()
     {
@@ -42,5 +46,8 @@ public class PlayerInputs : MonoBehaviour
         //COLORS
         if(Input.GetKeyDown(swapColor))
             onSwapColor?.Invoke();
+
+        if(Input.GetKeyDown(pauseGame))
+            onPauseGame?.Invoke();
     }
 }
